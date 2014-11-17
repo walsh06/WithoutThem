@@ -37,10 +37,10 @@ private:
     int productCount;
 
 public slots:
-
     void makeProduct();
 
     void addProduct();
+
 private slots:
 
 
