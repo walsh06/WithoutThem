@@ -6,6 +6,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
+    Product *product = new Product("Uniform", "Textile", 10, 6000);
+    Factory factory(product);
+
+
+    factory.calcStats();
+    factory.addProduct();
+
+
+
 }
 
 MainWindow::~MainWindow()
