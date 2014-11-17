@@ -13,8 +13,20 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    Factory.cpp \
+    Worker.cpp \
+    Product.cpp \
+    StatsList.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    Factory.h \
+    Worker.h \
+    Product.h \
+    StatsList.h
+
+CONFIG += c++11
+
+
 
 FORMS    += mainwindow.ui
