@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     Worker.cpp \
     Product.cpp \
     StatsList.cpp \
-    Car.cpp
+    Car.cpp \
+    WorkStation.cpp
     WorkStation.cpp
 
 HEADERS  += mainwindow.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     Product.h \
     StatsList.h \
     Car.h \
-    SkillTypeEnums.h
+    SkillTypeEnums.h \
+    WorkStation.h
     WorkStation.h
 
 CONFIG += c++11

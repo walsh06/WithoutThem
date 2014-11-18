@@ -4,6 +4,9 @@ StatsList::StatsList()
 {
     this->machinery = 1;
     this->textile = 1;
+    this->farming = 0;
+    this->building = 0;
+    this->carpentry = 0;
 }
 
 int StatsList::getMachinerySkill()
@@ -14,6 +17,21 @@ int StatsList::getMachinerySkill()
 int StatsList::getTextileSkill()
 {
     return this->textile;
+}
+
+int StatsList::getFarmingSkill()
+{
+    return this->farming;
+}
+
+int StatsList::getCarpentrySkill()
+{
+    return this->carpentry;
+}
+
+int StatsList::getBuildingSkill()
+{
+    return this->building;
 }
 
 StatsList StatsList::operator+(const StatsList& stats)
