@@ -4,12 +4,10 @@ Factory::Factory(Product *product)
 {
     this->product = product;
     this->productCount = 0;
-<<<<<<< HEAD
     this->money = 10;
-=======
+
     this->calcStats();
     this->makeProduct();
->>>>>>> master
 }
 
 StatsList Factory::getStats()
