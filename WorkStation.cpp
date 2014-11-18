@@ -15,7 +15,7 @@ void WorkStation::makeProduct()
 
 }
 
-int getDailyCount()
+int WorkStation::getDailyCount()
 {
     return dailyCount;
 }

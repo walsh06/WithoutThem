@@ -13,11 +13,9 @@ class WorkStation
 public:
     WorkStation(Product* p);
 
-    int makeProduct();
+    void makeProduct();
     void assignWorker(Worker* worker);
     void removeWorker(Worker* worker);
-
-    get
 
     int calcTime();
 private:
