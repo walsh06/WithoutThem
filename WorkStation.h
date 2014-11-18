@@ -16,6 +16,7 @@ public:
     void makeProduct();
     void assignWorker(Worker* worker);
     void removeWorker(Worker* worker);
+    int getDailyCount();
 
     int calcTime();
 private:
