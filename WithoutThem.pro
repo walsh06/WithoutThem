@@ -19,12 +19,15 @@ SOURCES += main.cpp\
     Product.cpp \
     StatsList.cpp \
     WorkStation.cpp
+    WorkStation.cpp
 
 HEADERS  += mainwindow.h \
     Factory.h \
     Worker.h \
     Product.h \
     StatsList.h \
+    SkillTypeEnums.h \
+    WorkStation.h
     WorkStation.h
 
 CONFIG += c++11

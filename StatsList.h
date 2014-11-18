@@ -14,12 +14,18 @@ public:
 
     int getTextileSkill();
     int getMachinerySkill();
+    int getFarmingSkill();
+    int getCarpentrySkill();
+    int getBuildingSkill();
     StatsList operator+(const StatsList& stats);
     //add more stats
 
 private:
      int machinery;
      int textile;
+     int building;
+     int carpentry;
+     int farming;
 };
 
 #endif // STATSLIST_H

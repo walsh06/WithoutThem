@@ -2,16 +2,19 @@
 #define PRODUCT_H
 
 #include <string>
+#include "SkillTypeEnums.h"
 
 using namespace std;
 
 class Product
 {
 public:
-    Product(string name, string type, int materialCost, int timeCost, int value);
+    Product(string name, skills::skillsType skill, int materialCost,
+            int timeCost, string materialNeeded, int value);
 
     string getName();
-    string getType();
+    skills::skillsType getSkillType();
+    string getMaterialNeeded();
     int getMaterialCost();
     int getTimeCost();
 
@@ -20,7 +23,8 @@ public:
 private:
 
     string name;
-    string type;
+    skills::skillsType skill;
+    string materialNeeded;
     int materialCost;
     int timeCost;
 
