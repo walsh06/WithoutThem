@@ -8,11 +8,8 @@ Product::Product(string name, skills::skillsType skill, int materialCost,
     this->skill = skill;
     this->materialCost = materialCost ;
     this->timeCost = timeCost;
-<<<<<<< HEAD
     this->xp = 1;
-=======
     this->materialNeeded = materialNeeded;
->>>>>>> master
 }
 
 string Product::getName()
