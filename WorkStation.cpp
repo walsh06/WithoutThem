@@ -5,13 +5,19 @@ WorkStation::WorkStation(Product* p)
     this->product = p;
     numWorkers = 0;
     maxWorkers = 4;
+    dailyCount = 0;
     srand(time(0));
 }
 
-int WorkStation::makeProduct()
+void WorkStation::makeProduct()
 {
+    dailyCount++;
 
-    return 0;
+}
+
+int getDailyCount()
+{
+    return dailyCount;
 }
 
 void WorkStation::assignWorker(Worker* worker)

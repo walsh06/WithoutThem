@@ -17,11 +17,14 @@ public:
     void assignWorker(Worker* worker);
     void removeWorker(Worker* worker);
 
+    get
+
     int calcTime();
 private:
     vector<Worker*> workers;
     Product *product;
 
+    int dailyCount;
     int maxWorkers;
     int numWorkers;
 
