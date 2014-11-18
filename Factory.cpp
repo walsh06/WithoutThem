@@ -4,6 +4,8 @@ Factory::Factory(Product *product)
 {
     this->product = product;
     this->productCount = 0;
+    this->money = 10;
+
     this->calcStats();
     this->makeProduct();
 }
@@ -17,7 +19,7 @@ void Factory::calcStats()
 {
     for (auto &worker : workers) // access by reference to avoid copying
     {
-        this->stats = this->stats + worker.getStats();
+        this->stats = this->stats + worker->getStats();
     }
 }
 

@@ -1,13 +1,15 @@
 #ifndef FACTORY_H
 #define FACTORY_H
 
-#include <vector>
-#include "Worker.h"
-#include "StatsList.h"
-#include "Product.h"
 #include <QTimer>
 #include <iostream>
 #include <QtCore/QObject>
+#include <vector>
+
+#include "Worker.h"
+#include "StatsList.h"
+#include "Product.h"
+#include "WorkStation.h"
 
 using namespace std;
 class Factory : public QObject
@@ -32,10 +34,10 @@ private:
 
     //TO DO:
     //Add Worker List
-    vector<Worker> workers;
+    vector<Worker *> workers;
     StatsList stats;
-    int productCount;
-
+    int productCount, money;
+    vector<WorkStation *> stations;
 public slots:
     void makeProduct();
 

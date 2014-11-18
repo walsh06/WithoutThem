@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     Factory.cpp \
     Worker.cpp \
     Product.cpp \
-    StatsList.cpp
+    StatsList.cpp \
+    WorkStation.cpp
 
 HEADERS  += mainwindow.h \
     Factory.h \
     Worker.h \
     Product.h \
-    StatsList.h
+    StatsList.h \
+    WorkStation.h
 
 CONFIG += c++11
 
