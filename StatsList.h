@@ -14,6 +14,10 @@ public:
 
     int getTextileSkill();
     int getMachinerySkill();
+
+    void setTextileSkill(int n);
+    void setMachinerySkill(int n);
+
     StatsList operator+(const StatsList& stats);
     //add more stats
 

@@ -16,6 +16,16 @@ int StatsList::getTextileSkill()
     return this->textile;
 }
 
+void StatsList::setTextileSkill(int n)
+{
+    this->textile = n;
+}
+
+void StatsList::setMachinerySkill(int n)
+{
+    this->machinery = n;
+}
+
 StatsList StatsList::operator+(const StatsList& stats)
 {
     StatsList newstats;

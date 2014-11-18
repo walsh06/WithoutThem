@@ -17,8 +17,7 @@ public:
     StatsList getStats();
     //int getAge();
     void levelUp();
-
-
+    void gainXP(int xp);
 
 private:
     string name;

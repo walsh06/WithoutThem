@@ -20,8 +20,14 @@ StatsList Worker::getStats()
 
 void Worker::levelUp()
 {
-    int statIncrease = rand() % 3;
+    stats.setMachinerySkill(stats.getMachinerySkill() + rand() % 3);
+    stats.setTextileSkill(stats.getTextileSkill() + rand() % 3);
 
     nextLevel = nextLevel * 2;
     xp = 0;
+}
+
+void Worker::gainXP(int xp)
+{
+    this->xp += xp;
 }

@@ -6,6 +6,7 @@ Product::Product(string name, string type, int materialCost, int timeCost)
     this->type = type;
     this->materialCost = materialCost ;
     this->timeCost = timeCost;
+    this->xp = 1;
 }
 
 string Product::getName()
@@ -16,6 +17,11 @@ string Product::getName()
 string Product::getType()
 {
     return this->type;
+}
+
+int Product::getXP()
+{
+    return xp;
 }
 
 int Product::getMaterialCost()

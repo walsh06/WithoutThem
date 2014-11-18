@@ -14,6 +14,7 @@ public:
     string getType();
     int getMaterialCost();
     int getTimeCost();
+    int getXP();
 
 private:
 
@@ -21,6 +22,7 @@ private:
     string type;
     int materialCost;
     int timeCost;
+    int xp;
     //TO DO:
     //          - Time cost should be standard
     //          - it could be 3 minutes but this would be with one worker, with stat 1/100
