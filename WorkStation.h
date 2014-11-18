@@ -12,6 +12,10 @@
 #include "Worker.h"
 #include "Product.h"
 
+#include <iostream>
+
+using namespace std;
+
 class WorkStation : public QObject
 {
     Q_OBJECT

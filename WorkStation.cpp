@@ -10,8 +10,11 @@ WorkStation::WorkStation(Product* p)
     maxWorkers = 4;
     dailyCount = 0;
     srand(time(0));
+    remainingTime = 0;
 
     this->timer = new QTimer(this);
+
+    connect(timer, SIGNAL(timeout()), this, SLOT(addProduct()));
 }
 
 
@@ -62,6 +65,7 @@ int WorkStation::calcTime()
 
 void WorkStation::makeProduct()
 {
+
     int time = 0;
     if(remainingTime > 0){
         time = remainingTime;
@@ -70,7 +74,6 @@ void WorkStation::makeProduct()
         time = calcTime();
 
     //Creates product every 1/6th of a second
-    connect(timer, SIGNAL(timeout()), this, SLOT(addProduct()));
     timer->start(time);
 }
 
@@ -90,6 +93,7 @@ void WorkStation::addProduct()
 {
     //add 1 to product
     dailyCount++;
+
     //TO DO: Factor in materials etc.
 
     //call makeProduct again

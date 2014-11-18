@@ -9,6 +9,7 @@
 #include "Product.h"
 #include "WorkStation.h"
 #include "QTimer"
+#include <iomanip>
 
 using namespace std;
 class Factory : public QObject
@@ -21,10 +22,10 @@ public:
     void addStation(WorkStation* station);
     void removeStation(WorkStation* station);
 
-    int getMoney();
-    int calcGrossIncome();
-    int calcWages();
-    int calcNetIncome();
+    double getMoney();
+    double calcGrossIncome();
+    double calcWages();
+    double calcNetIncome();
 
 private:
     //TO DO:
@@ -35,12 +36,15 @@ private:
     //TO DO:
     //Add Worker List
     vector<Worker *> workers;
-    int money;
+    double money;
     vector<WorkStation *> stations;
     QTimer *timer;
 
-private slots:
+public slots:
+
     void startDay();
+
+private slots:
 
     void endDay();
 

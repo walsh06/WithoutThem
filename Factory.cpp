@@ -2,23 +2,24 @@
 
 Factory::Factory()
 {
-    this->money = 1000;
+    this->money = 1000.00;
 
 
     this->timer = new QTimer(this);
-    startDay();
+
+    connect(timer, SIGNAL(timeout()), this, SLOT(endDay()));
 
 }
 
 void Factory::startDay()
 {
+    cout << "Start of day" << endl;
     for(auto &station : stations)
     {
         station->start();
     }
 
-    connect(timer, SIGNAL(timeout()), this, SLOT(endDay()));
-    timer->start(100000);
+    timer->start(6000);
 }
 
 void Factory::endDay()
@@ -30,39 +31,45 @@ void Factory::endDay()
 
     money += calcNetIncome();
 
+    cout << "End of day" << endl;
 
-    cout << "TEMP - Testing - restart day - should be done on button click or something";
+
+   //"TEMP - Testing - restart day - should be done on button click or something" << endl;
+    timer->stop();
     startDay();
 }
 
-int Factory::getMoney()
+double Factory::getMoney()
 {
     return money;
 }
 
-int Factory::calcGrossIncome()
+double Factory::calcGrossIncome()
 {
-    int dailyIncome;
+    double dailyIncome = 0.00;
     for(auto &station : stations)
     {
         dailyIncome += (station->getProduct()->getValue() * station->getDailyCount());
     }
+
+
     return dailyIncome;
 }
 
-int Factory::calcWages()
+double Factory::calcWages()
 {
-    int dailyWages;
+    double dailyWages = 0.00;
     for(auto &worker : workers)
     {
         dailyWages += worker->getWagePerDay();
     }
+
     return dailyWages;
 }
 
-int Factory::calcNetIncome()
+double Factory::calcNetIncome()
 {
-    int net = calcGrossIncome() - calcWages();
+    double net = calcGrossIncome() - calcWages();
     return net;
 }
 
