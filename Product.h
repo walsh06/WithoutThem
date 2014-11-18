@@ -8,12 +8,14 @@ using namespace std;
 class Product
 {
 public:
-    Product(string name, string type, int materialCost, int timeCost);
+    Product(string name, string type, int materialCost, int timeCost, int value);
 
     string getName();
     string getType();
     int getMaterialCost();
     int getTimeCost();
+
+    int getValue();
 
 private:
 
@@ -21,6 +23,8 @@ private:
     string type;
     int materialCost;
     int timeCost;
+
+    int value;
     //TO DO:
     //          - Time cost should be standard
     //          - it could be 3 minutes but this would be with one worker, with stat 1/100

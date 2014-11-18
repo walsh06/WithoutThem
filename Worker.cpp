@@ -6,6 +6,7 @@ Worker::Worker(string name)
     nextLevel = 10;
     xp = 0;
     srand(time(0));
+    wagePerDay = 6.50;
 }
 
 string Worker::getName()
@@ -16,6 +17,16 @@ string Worker::getName()
 StatsList Worker::getStats()
 {
     return this->stats;
+}
+
+double Worker::getWagePerDay()
+{
+    return wagePerDay;
+}
+
+void Worker::setWagePerDay(double wage)
+{
+    wagePerDay = wage;
 }
 
 void Worker::levelUp()

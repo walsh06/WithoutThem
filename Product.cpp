@@ -1,11 +1,12 @@
 #include "Product.h"
 
-Product::Product(string name, string type, int materialCost, int timeCost)
+Product::Product(string name, string type, int materialCost, int timeCost, int value)
 {
     this->name = name;
     this->type = type;
     this->materialCost = materialCost ;
     this->timeCost = timeCost;
+    this->value = value;
 }
 
 string Product::getName()
@@ -25,5 +26,10 @@ int Product::getMaterialCost()
 
 int Product::getTimeCost()
 {
-    return this->getTimeCost();
+    return this->timeCost;
+}
+
+int Product::getValue()
+{
+    return this->value;
 }

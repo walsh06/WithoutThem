@@ -5,27 +5,49 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include <QTimer>
+
+#include <QtCore/QObject>
+
 #include "Worker.h"
 #include "Product.h"
 
-class WorkStation
+class WorkStation : public QObject
 {
+    Q_OBJECT
+
 public:
     WorkStation(Product* p);
 
-    void makeProduct();
     void assignWorker(Worker* worker);
     void removeWorker(Worker* worker);
     int getDailyCount();
 
+    Product* getProduct();
+
     int calcTime();
+
+    void start();
+    void stop();
+
+
 private:
     vector<Worker*> workers;
     Product *product;
+    QTimer *timer;
 
     int dailyCount;
     int maxWorkers;
     int numWorkers;
+
+    int remainingTime;
+
+public slots:
+
+    void makeProduct();
+
+    void addProduct();
+
 
 };
 

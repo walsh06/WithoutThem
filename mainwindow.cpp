@@ -10,8 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-    Product *product = new Product("Uniform", "Textile", 10, 6000);
-    Factory *factory = new Factory(product);
+    Product *product = new Product("Uniform", "Textile", 10, 6000, 15);
+    Factory *factory = new Factory();
 
 
 

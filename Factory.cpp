@@ -1,53 +1,78 @@
 #include "Factory.h"
 
-Factory::Factory(Product *product)
+Factory::Factory()
 {
-    this->product = product;
-    this->productCount = 0;
-    this->money = 10;
+    this->money = 1000;
 
-    this->calcStats();
-    this->makeProduct();
+
+    this->timer = new QTimer(this);
+    startDay();
+
 }
 
-StatsList Factory::getStats()
+void Factory::startDay()
 {
-    return this->stats;
-}
-
-void Factory::calcStats()
-{
-    for (auto &worker : workers) // access by reference to avoid copying
+    for(auto &station : stations)
     {
-        this->stats = this->stats + worker->getStats();
+        station->start();
     }
+
+    connect(timer, SIGNAL(timeout()), this, SLOT(endDay()));
+    timer->start(100000);
 }
 
-Product* Factory::getProduct()
+void Factory::endDay()
 {
-    return this->product;
+    for(auto &station : stations)
+    {
+        station->stop();
+    }
+
+    money += calcNetIncome();
+
+
+    cout << "TEMP - Testing - restart day - should be done on button click or something";
+    startDay();
 }
 
-void Factory::setProduct(Product* product)
+int Factory::getMoney()
 {
-   this->product = product;
+    return money;
 }
 
-void Factory::makeProduct()
+int Factory::calcGrossIncome()
 {
-
-    cout << productCount << endl;
-    //Creates product every 1/6th of a second
-    QTimer::singleShot(1000, this, SLOT(addProduct()));
-
+    int dailyIncome;
+    for(auto &station : stations)
+    {
+        dailyIncome += (station->getProduct()->getValue() * station->getDailyCount());
+    }
+    return dailyIncome;
 }
 
-void Factory::addProduct()
+int Factory::calcWages()
 {
-    //add 1 to product
-    productCount++;
-    //TO DO: Factor in materials etc.
+    int dailyWages;
+    for(auto &worker : workers)
+    {
+        dailyWages += worker->getWagePerDay();
+    }
+    return dailyWages;
+}
 
-    //call makeProduct again
-    makeProduct();
+int Factory::calcNetIncome()
+{
+    int net = calcGrossIncome() - calcWages();
+    return net;
+}
+
+void Factory::addStation(WorkStation* station)
+{
+    stations.push_back(station);
+}
+
+void Factory::removeStation(WorkStation* station)
+{
+    //Moves station to the end, erases last station
+    stations.erase(std::remove(stations.begin(), stations.end(), station), stations.end());
 }
