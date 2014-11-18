@@ -1,8 +1,12 @@
 #include "Worker.h"
+#include "SkillTypeEnums.h"
 
-Worker::Worker(string name)
+using namespace skills;
+
+Worker::Worker(string name, skillsType type)
 {
     this->name = name;
+    this->type = type;
     nextLevel = 10;
     xp = 0;
     srand(time(0));
@@ -30,4 +34,29 @@ void Worker::levelUp()
 void Worker::gainXP(int xp)
 {
     this->xp += xp;
+}
+
+int Worker::getSkill(skillsType type)
+{
+    if(type == skillsType::MECHANIC){
+
+        return this->stats.getMachinerySkill();
+
+    }else if(type == skillsType::BUILDER){
+
+        return this->stats.getBuildingSkill();
+
+    }else if(type == skillsType::SEAMSTRESS){
+
+        return this->stats.getTextileSkill();
+
+    }else if(type == skillsType::CARPENTER){
+
+        return this->stats.getCarpentrySkill();
+
+    }else if(type == skillsType::FARMER){
+
+        return this->stats.getFarmingSkill();
+
+    }
 }

@@ -1,4 +1,7 @@
 #include "WorkStation.h"
+#include "SkillTypeEnums.h"
+
+using namespace skills;
 
 WorkStation::WorkStation(Product* p)
 {
@@ -48,11 +51,12 @@ void WorkStation::removeWorker(Worker* worker)
 int WorkStation::calcTime()
 {
     int time = product->getTimeCost();
-    //int type = product->getType();
+
+    skillsType type = product->getSkillType();
     int workerSkill = 0;
     for(auto &worker : workers)
     {
-        //workerSkill += worker->getSkill(type);
+        workerSkill += worker->getSkill(type);
     }
 
     time = time - workerSkill + (rand() % 10);

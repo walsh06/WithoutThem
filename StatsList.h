@@ -14,6 +14,9 @@ public:
 
     int getTextileSkill();
     int getMachinerySkill();
+    int getFarmingSkill();
+    int getCarpentrySkill();
+    int getBuildingSkill();
 
     void setTextileSkill(int n);
     void setMachinerySkill(int n);
@@ -24,6 +27,9 @@ public:
 private:
      int machinery;
      int textile;
+     int building;
+     int carpentry;
+     int farming;
 };
 
 #endif // STATSLIST_H
