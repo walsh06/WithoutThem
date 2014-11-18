@@ -18,7 +18,6 @@ SOURCES += main.cpp\
     Worker.cpp \
     Product.cpp \
     StatsList.cpp \
-    Car.cpp \
     WorkStation.cpp
     WorkStation.cpp
 
@@ -27,7 +26,6 @@ HEADERS  += mainwindow.h \
     Worker.h \
     Product.h \
     StatsList.h \
-    Car.h \
     SkillTypeEnums.h \
     WorkStation.h
     WorkStation.h
