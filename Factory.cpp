@@ -4,6 +4,10 @@ Factory::Factory(Product *product)
 {
     this->product = product;
     this->productCount = 0;
+    this->money = 10;
+
+    this->calcStats();
+    this->makeProduct();
 }
 
 StatsList Factory::getStats()
@@ -15,7 +19,7 @@ void Factory::calcStats()
 {
     for (auto &worker : workers) // access by reference to avoid copying
     {
-        this->stats = this->stats + worker.getStats();
+        this->stats = this->stats + worker->getStats();
     }
 }
 
@@ -32,20 +36,18 @@ void Factory::setProduct(Product* product)
 void Factory::makeProduct()
 {
 
-
-
-
+    cout << productCount << endl;
+    //Creates product every 1/6th of a second
+    QTimer::singleShot(1000, this, SLOT(addProduct()));
 
 }
 
 void Factory::addProduct()
 {
-
-
-    cout << "START" << endl;
-
-    QTimer::singleShot(6000, this, SLOT(addProduct()));
-    cout << "AFTER" << endl;
+    //add 1 to product
     productCount++;
-    cout << productCount << endl;
+    //TO DO: Factor in materials etc.
+
+    //call makeProduct again
+    makeProduct();
 }
