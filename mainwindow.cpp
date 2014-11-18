@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "SkillTypeEnums.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -8,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-    Product *product = new Product("Uniform", "Textile", 10, 6000);
+    Product *product = new Product("Uniform", skills::BUILDER, 10, 6000,"Cotton");
     Factory factory(product);
 
 
