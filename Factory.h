@@ -39,10 +39,10 @@ private:
     int productCount, money;
     vector<WorkStation *> stations;
 public slots:
-
     void makeProduct();
 
     void addProduct();
+
 private slots:
 
 
