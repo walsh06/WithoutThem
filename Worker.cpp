@@ -13,6 +13,7 @@ Worker::Worker(string name, skillsType type)
     xp = 0;
     srand(time(0));
     wagePerDay = 6.50;
+    moral = 1;
 }
 
 string Worker::getName()
@@ -33,6 +34,23 @@ double Worker::getWagePerDay()
 void Worker::setWagePerDay(double wage)
 {
     wagePerDay = wage;
+}
+
+int getMoral()
+{
+    return moral;
+}
+
+void setMoral(int m)
+{
+    if(m = 0)
+    {
+        this->moral = 1;
+    }
+    else
+    {
+        this->moral = m;
+    }
 }
 
 void Worker::levelUp()

@@ -19,6 +19,8 @@ public:
     void setWagePerDay(double wage);
     string getName();
     StatsList getStats();
+    int getMoral();
+    void setMoral(int m);
     //int getAge();
     void levelUp();
     void gainXP(int xp);
@@ -28,6 +30,7 @@ public:
 private:
     void printWorker();
 
+    int moral;
     skillsType type;
     string name;
     //TO DO: int age; Age may need to factor in time and birthdays,
