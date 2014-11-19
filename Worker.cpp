@@ -36,12 +36,12 @@ void Worker::setWagePerDay(double wage)
     wagePerDay = wage;
 }
 
-int getMoral()
+int Worker::getMoral()
 {
     return moral;
 }
 
-void setMoral(int m)
+void Worker::setMoral(int m)
 {
     if(m = 0)
     {

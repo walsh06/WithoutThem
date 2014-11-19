@@ -57,7 +57,7 @@ int WorkStation::calcTime()
     int workerSkill = 0;
     for(auto &worker : workers)
     {
-        workerSkill += (worker->getSkill(type) * worker.getMoral());
+        workerSkill += (worker->getSkill(type) * worker->getMoral());
     }
 
     time = time - workerSkill + (rand() % 10);
