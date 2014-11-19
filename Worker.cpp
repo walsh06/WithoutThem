@@ -1,13 +1,15 @@
 #include "Worker.h"
 #include "SkillTypeEnums.h"
 
+#include <iostream>
+
 using namespace skills;
 
 Worker::Worker(string name, skillsType type)
 {
     this->name = name;
     this->type = type;
-    nextLevel = 10;
+    nextLevel = 5;
     xp = 0;
     srand(time(0));
     wagePerDay = 6.50;
@@ -35,16 +37,24 @@ void Worker::setWagePerDay(double wage)
 
 void Worker::levelUp()
 {
+    std::cout << "LEVEL UP" << std::endl;
     stats.setMachinerySkill(stats.getMachinerySkill() + rand() % 3);
     stats.setTextileSkill(stats.getTextileSkill() + rand() % 3);
-
+    stats.setFarmingSkill(stats.getFarmingSkill() + rand() % 3);
+    stats.setCarpentrySkill(stats.getCarpentrySkill() + rand() % 3);
+    stats.setBuildingSkill(stats.getFarmingSkill() + rand() % 3);
+    xp = xp - nextLevel;
     nextLevel = nextLevel * 2;
-    xp = 0;
+
 }
 
 void Worker::gainXP(int xp)
 {
     this->xp += xp;
+    if(this->xp >= nextLevel)
+    {
+        levelUp();
+    }
 }
 
 int Worker::getSkill(skillsType type)
@@ -70,4 +80,11 @@ int Worker::getSkill(skillsType type)
         return this->stats.getFarmingSkill();
 
     }
+}
+
+void Worker::printWorker()
+{
+    cout << "Name: " << name << " XP:" << xp<< " Mec:" << stats.getMachinerySkill();;
+    cout << " Farm:" << stats.getFarmingSkill() <<" Seam:" << stats.getTextileSkill();
+    cout << " Build:" << stats.getBuildingSkill() << " Car: "<< stats.getCarpentrySkill() << endl;
 }

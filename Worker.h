@@ -26,6 +26,8 @@ public:
     int getSkill(skillsType type);
 
 private:
+    void printWorker();
+
     skillsType type;
     string name;
     //TO DO: int age; Age may need to factor in time and birthdays,
