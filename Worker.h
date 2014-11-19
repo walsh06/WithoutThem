@@ -15,6 +15,8 @@ class Worker
 public:
     Worker(string name,skillsType type);
 
+    double getWagePerDay();
+    void setWagePerDay(double wage);
     string getName();
     StatsList getStats();
     //int getAge();
@@ -29,6 +31,7 @@ private:
     //TO DO: int age; Age may need to factor in time and birthdays,
     StatsList stats;
     int xp, nextLevel;
+    double wagePerDay;
 };
 
 #endif // WORKER_H

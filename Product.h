@@ -10,7 +10,7 @@ class Product
 {
 public:
     Product(string name, skills::skillsType skill, int materialCost,
-            int timeCost, string materialNeeded);
+            int timeCost, string materialNeeded, double value);
 
     string getName();
     skills::skillsType getSkillType();
@@ -18,6 +18,8 @@ public:
     int getMaterialCost();
     int getTimeCost();
     int getXP();
+
+    double getValue();
 
 private:
 
@@ -27,6 +29,8 @@ private:
     int materialCost;
     int timeCost;
     int xp;
+    double value;
+
     //TO DO:
     //          - Time cost should be standard
     //          - it could be 3 minutes but this would be with one worker, with stat 1/100

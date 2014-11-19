@@ -2,13 +2,14 @@
 #include "SkillTypeEnums.h"
 
 Product::Product(string name, skills::skillsType skill, int materialCost,
-                 int timeCost, string materialNeeded)
+                 int timeCost, string materialNeeded, double value)
 {
     this->name = name;
     this->skill = skill;
     this->materialCost = materialCost ;
     this->timeCost = timeCost;
     this->xp = 1;
+    this->value = value;
     this->materialNeeded = materialNeeded;
 }
 
@@ -34,7 +35,12 @@ int Product::getMaterialCost()
 
 int Product::getTimeCost()
 {
-    return this->getTimeCost();
+    return this->timeCost;
+}
+
+double Product::getValue()
+{
+    return this->value;
 }
 
 string Product::getMaterialNeeded()

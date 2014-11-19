@@ -1,53 +1,85 @@
 #include "Factory.h"
 
-Factory::Factory(Product *product)
+Factory::Factory()
 {
-    this->product = product;
-    this->productCount = 0;
-    this->money = 10;
+    this->money = 1000.00;
 
-    this->calcStats();
-    this->makeProduct();
+
+    this->timer = new QTimer(this);
+
+    connect(timer, SIGNAL(timeout()), this, SLOT(endDay()));
+
 }
 
-StatsList Factory::getStats()
+void Factory::startDay()
 {
-    return this->stats;
-}
-
-void Factory::calcStats()
-{
-    for (auto &worker : workers) // access by reference to avoid copying
+    cout << "Start of day" << endl;
+    for(auto &station : stations)
     {
-        this->stats = this->stats + worker->getStats();
+        station->start();
     }
+
+    timer->start(6000);
 }
 
-Product* Factory::getProduct()
+void Factory::endDay()
 {
-    return this->product;
+    for(auto &station : stations)
+    {
+        station->stop();
+    }
+
+    money += calcNetIncome();
+
+    cout << "End of day" << endl;
+
+
+   //"TEMP - Testing - restart day - should be done on button click or something" << endl;
+    timer->stop();
+    startDay();
 }
 
-void Factory::setProduct(Product* product)
+double Factory::getMoney()
 {
-   this->product = product;
+    return money;
 }
 
-void Factory::makeProduct()
+double Factory::calcGrossIncome()
 {
+    double dailyIncome = 0.00;
+    for(auto &station : stations)
+    {
+        dailyIncome += (station->getProduct()->getValue() * station->getDailyCount());
+    }
 
-    cout << productCount << endl;
-    //Creates product every 1/6th of a second
-    QTimer::singleShot(1000, this, SLOT(addProduct()));
 
+    return dailyIncome;
 }
 
-void Factory::addProduct()
+double Factory::calcWages()
 {
-    //add 1 to product
-    productCount++;
-    //TO DO: Factor in materials etc.
+    double dailyWages = 0.00;
+    for(auto &worker : workers)
+    {
+        dailyWages += worker->getWagePerDay();
+    }
 
-    //call makeProduct again
-    makeProduct();
+    return dailyWages;
+}
+
+double Factory::calcNetIncome()
+{
+    double net = calcGrossIncome() - calcWages();
+    return net;
+}
+
+void Factory::addStation(WorkStation* station)
+{
+    stations.push_back(station);
+}
+
+void Factory::removeStation(WorkStation* station)
+{
+    //Moves station to the end, erases last station
+    stations.erase(std::remove(stations.begin(), stations.end(), station), stations.end());
 }
