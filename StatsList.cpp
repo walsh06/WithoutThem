@@ -19,6 +19,7 @@ int StatsList::getTextileSkill()
     return this->textile;
 }
 
+
 int StatsList::getFarmingSkill()
 {
     return this->farming;
@@ -32,6 +33,31 @@ int StatsList::getCarpentrySkill()
 int StatsList::getBuildingSkill()
 {
     return this->building;
+}
+
+void StatsList::setTextileSkill(int n)
+{
+    this->textile = n;
+}
+
+void StatsList::setMachinerySkill(int n)
+{
+    this->machinery = n;
+}
+
+void StatsList::setFarmingSkill(int n)
+{
+    this->farming = n;
+}
+
+void StatsList::setCarpentrySkill(int n)
+{
+    this->carpentry = n;
+}
+
+void StatsList::setBuildingSkill(int n)
+{
+    this->building = n;
 }
 
 StatsList StatsList::operator+(const StatsList& stats)

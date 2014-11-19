@@ -52,11 +52,12 @@ void WorkStation::removeWorker(Worker* worker)
 int WorkStation::calcTime()
 {
     int time = product->getTimeCost();
+
     skillsType type = product->getSkillType();
     int workerSkill = 0;
     for(auto &worker : workers)
     {
-        workerSkill += worker->getSkill(type);
+        workerSkill += (worker->getSkill(type) * worker.getMoral());
     }
 
     time = time - workerSkill + (rand() % 10);
@@ -93,6 +94,11 @@ void WorkStation::addProduct()
 {
     //add 1 to product
     dailyCount++;
+
+    for(auto &worker: workers)
+    {
+        worker->gainXP(product->getXP());
+    }
 
     //TO DO: Factor in materials etc.
 

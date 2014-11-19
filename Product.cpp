@@ -8,6 +8,7 @@ Product::Product(string name, skills::skillsType skill, int materialCost,
     this->skill = skill;
     this->materialCost = materialCost ;
     this->timeCost = timeCost;
+    this->xp = 1;
     this->value = value;
     this->materialNeeded = materialNeeded;
 }
@@ -20,6 +21,11 @@ string Product::getName()
 skills::skillsType Product::getSkillType()
 {
     return this->skill;
+}
+
+int Product::getXP()
+{
+    return xp;
 }
 
 int Product::getMaterialCost()
