@@ -1,5 +1,5 @@
 #include "Factory.h"
-
+#include "EventSystem.h"
 Factory::Factory()
 {
     this->money = 1000.00;
@@ -8,12 +8,16 @@ Factory::Factory()
     this->timer = new QTimer(this);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(endDay()));
-
+    eventSystem = new EventSystem();
+    dayCount = 0;
 }
 
 void Factory::startDay()
 {
+    dayCount++;
     cout << "Start of day" << endl;
+    eventSystem->update(this);
+
     for(auto &station : stations)
     {
         station->start();
@@ -42,6 +46,11 @@ void Factory::endDay()
 double Factory::getMoney()
 {
     return money;
+}
+
+void Factory::setMoney(double money)
+{
+    this->money = money;
 }
 
 double Factory::calcGrossIncome()
@@ -82,4 +91,9 @@ void Factory::removeStation(WorkStation* station)
 {
     //Moves station to the end, erases last station
     stations.erase(std::remove(stations.begin(), stations.end(), station), stations.end());
+}
+
+int Factory::getDayCount()
+{
+    return dayCount;
 }

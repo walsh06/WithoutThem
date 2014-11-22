@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 
+//#include "EventSystem.h"
 #include "Worker.h"
 #include "StatsList.h"
 #include "Product.h"
@@ -11,6 +12,7 @@
 #include "QTimer"
 #include <iomanip>
 
+class EventSystem;
 using namespace std;
 class Factory : public QObject
 {
@@ -23,9 +25,11 @@ public:
     void removeStation(WorkStation* station);
 
     double getMoney();
+    void setMoney(double money);
     double calcGrossIncome();
     double calcWages();
     double calcNetIncome();
+    int getDayCount();
 
 private:
     //TO DO:
@@ -39,7 +43,8 @@ private:
     double money;
     vector<WorkStation *> stations;
     QTimer *timer;
-
+    EventSystem* eventSystem;
+    int dayCount;
 public slots:
 
     void startDay();

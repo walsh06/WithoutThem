@@ -18,7 +18,11 @@ SOURCES += main.cpp\
     Worker.cpp \
     Product.cpp \
     StatsList.cpp \
-    WorkStation.cpp
+    WorkStation.cpp \
+    EventSystem.cpp \
+    MoneyEvent.cpp \
+    MoralEvent.cpp \
+    DeathEvent.cpp
     WorkStation.cpp
 
 HEADERS  += mainwindow.h \
@@ -27,7 +31,12 @@ HEADERS  += mainwindow.h \
     Product.h \
     StatsList.h \
     SkillTypeEnums.h \
-    WorkStation.h
+    WorkStation.h \
+    GameEvent.h \
+    EventSystem.h \
+    MoneyEvent.h \
+    MoralEvent.h \
+    DeathEvent.h
     WorkStation.h
 
 CONFIG += c++11
