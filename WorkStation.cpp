@@ -17,6 +17,21 @@ WorkStation::WorkStation(Product* p)
     connect(timer, SIGNAL(timeout()), this, SLOT(addProduct()));
 }
 
+WorkStation::WorkStation(string s)
+{
+    this->product = db.getProduct(s);
+    numWorkers = 0;
+    maxWorkers = 4;
+    dailyCount = 0;
+    srand(time(0));
+    remainingTime = 0;
+
+    this->timer = new QTimer(this);
+
+    connect(timer, SIGNAL(timeout()), this, SLOT(addProduct()));
+}
+
+
 
 int WorkStation::getDailyCount()
 {

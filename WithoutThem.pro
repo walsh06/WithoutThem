@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,13 +12,16 @@ TARGET = WithoutThem
 TEMPLATE = app
 
 
+QT       += sql
+
 SOURCES += main.cpp\
         mainwindow.cpp \
     Factory.cpp \
     Worker.cpp \
     Product.cpp \
     StatsList.cpp \
-    WorkStation.cpp
+    WorkStation.cpp \
+    DatabaseManipulator.cpp
     WorkStation.cpp
 
 HEADERS  += mainwindow.h \
@@ -27,7 +30,8 @@ HEADERS  += mainwindow.h \
     Product.h \
     StatsList.h \
     SkillTypeEnums.h \
-    WorkStation.h
+    WorkStation.h \
+    DatabaseManipulator.h
     WorkStation.h
 
 CONFIG += c++11
@@ -35,3 +39,8 @@ CONFIG += c++11
 
 
 FORMS    += mainwindow.ui
+
+OTHER_FILES += \
+    without_them_db
+
+RESOURCES +=

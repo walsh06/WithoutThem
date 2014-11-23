@@ -19,6 +19,7 @@ void Factory::startDay()
         station->start();
     }
 
+    cout << money << endl;
     timer->start(6000);
 }
 
