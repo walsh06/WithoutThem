@@ -11,7 +11,7 @@ WorkStation::WorkStation(Product* p)
     dailyCount = 0;
     srand(time(0));
     remainingTime = 0;
-
+    working = true;
     this->timer = new QTimer(this);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(addProduct()));
@@ -57,7 +57,10 @@ int WorkStation::calcTime()
     int workerSkill = 0;
     for(auto &worker : workers)
     {
-        workerSkill += (worker->getSkill(type) * worker->getMoral());
+        if(worker->isWorking())
+        {
+            workerSkill += (worker->getSkill(type) * worker->getMoral());
+        }
     }
 
     time = time - workerSkill + (rand() % 10);
@@ -66,16 +69,18 @@ int WorkStation::calcTime()
 
 void WorkStation::makeProduct()
 {
+    if(working)
+    {
+        int time = 0;
+        if(remainingTime > 0){
+            time = remainingTime;
+            remainingTime = 0;
+        }else
+            time = calcTime();
 
-    int time = 0;
-    if(remainingTime > 0){
-        time = remainingTime;
-        remainingTime = 0;
-    }else
-        time = calcTime();
-
-    //Creates product every 1/6th of a second
-    timer->start(time);
+        //Creates product every 1/6th of a second
+        timer->start(time);
+    }
 }
 
 
@@ -104,6 +109,16 @@ void WorkStation::addProduct()
 
     //call makeProduct again
     makeProduct();
+}
+
+bool WorkStation::isWorking()
+{
+    return working;
+}
+
+void WorkStation::setWorking(bool working)
+{
+    this->working=working;
 }
 
 

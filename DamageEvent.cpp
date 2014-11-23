@@ -17,7 +17,7 @@ void DamageEvent::update(Factory* factory)
 
 void DamageEvent::trigger(Factory* factory)
 {
-
+    factory->stopWorkstation();
     triggerFactor = startingTriggerFactor;
     startDayCount = factory->getDayCount();
 }

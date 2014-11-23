@@ -18,6 +18,7 @@ void MoralEvent::update(Factory* factory)
 
 void MoralEvent::trigger(Factory* factory)
 {
+    factory->changeWorkerMoral(moralChange);
     triggerFactor = startingTriggerFactor;
     startDayCount = factory->getDayCount();
 }

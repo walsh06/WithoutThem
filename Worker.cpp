@@ -14,6 +14,7 @@ Worker::Worker(string name, skillsType type)
     srand(time(0));
     wagePerDay = 6.50;
     moral = 1;
+    working = true;
 }
 
 string Worker::getName()
@@ -105,6 +106,16 @@ int Worker::getSkill(skillsType type)
         return this->stats.getFarmingSkill();
 
     }
+}
+
+bool Worker::isWorking()
+{
+    return working;
+}
+
+void Worker::setWorking(bool working)
+{
+    this->working=working;
 }
 
 void Worker::printWorker()

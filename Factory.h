@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
+#include <time.h>
 
 //#include "EventSystem.h"
 #include "Worker.h"
@@ -32,6 +34,9 @@ public:
     int getDayCount();
     int changeWorkerMoral();
 
+    int changeWorkerMoral(int moral);
+    int stopWorkstation();
+    int killWorker();
 
 private:
     //TO DO:

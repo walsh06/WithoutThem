@@ -10,6 +10,8 @@ Factory::Factory()
     connect(timer, SIGNAL(timeout()), this, SLOT(endDay()));
     eventSystem = new EventSystem();
     dayCount = 0;
+    srand(time(0));
+
 }
 
 void Factory::startDay()
@@ -41,6 +43,11 @@ void Factory::endDay()
    //"TEMP - Testing - restart day - should be done on button click or something" << endl;
     timer->stop();
     startDay();
+
+    for(auto &worker : workers)
+    {
+        worker->setWorking(true);
+    }
 }
 
 double Factory::getMoney()
@@ -98,7 +105,23 @@ int Factory::getDayCount()
     return dayCount;
 }
 
-int Factory::changeWorkerMoral()
+int Factory::changeWorkerMoral(int moral)
 {
+    int randWorker = rand() % workers.size();
 
+    workers[randWorker]->setMoral(moral);
+}
+
+int Factory::stopWorkstation()
+{
+    int randStation = rand() % stations.size();
+
+    stations[randStation]->setWorking(false);
+}
+
+int Factory::killWorker()
+{
+    int randWorker = rand() % workers.size();
+
+    workers.erase(std::remove(workers.begin(), workers.end(),  workers[randWorker]), workers.end());
 }

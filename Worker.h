@@ -26,10 +26,11 @@ public:
     void gainXP(int xp);
 
     int getSkill(skillsType type);
-
+    bool isWorking();
+    void setWorking(bool working);
 private:
     void printWorker();
-
+    bool working;
     int moral;
     skillsType type;
     string name;

@@ -34,6 +34,8 @@ public:
     void start();
     void stop();
 
+    bool isWorking();
+    void setWorking(bool working);
 
 private:
     vector<Worker*> workers;
@@ -45,6 +47,8 @@ private:
     int numWorkers;
 
     int remainingTime;
+
+    bool working;
 
 public slots:
 

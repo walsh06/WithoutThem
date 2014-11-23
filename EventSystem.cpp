@@ -5,14 +5,7 @@ EventSystem::EventSystem()
 {
 
     readXML();
-
     srand(time(0));
-    //addEvent(new MoneyEvent("Received money from government", 20, 100.00));
-    //addEvent(new MoneyEvent("Shipment destroyed", 50, -100.00));
-    //addEvent(new MoneyEvent("Repairs in factory", 30, -50.00));
-    //addEvent(new MoralEvent("Son died at war", 10, -3));
-    //addEvent(new DeathEvent("Worker died in air raid", 5));
-    //addEvent(new MoralEvent("Air raid last night", 20, -1));
 }
 
 
@@ -64,12 +57,6 @@ void EventSystem::readXML()
 {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file("events.xml");
-    std::cout << "Load result: " << result.description() << ", mesh name: " << doc.child("events").child("event").attribute("trigger").value() << std::endl;
-
-    //for (pugi::xml_node tool = doc.child("events").child("event"); tool; tool = doc.next_sibling("events").child("event"))
-    //{
-      //  std::cout << "type " << tool.attribute("type").value() << std::endl;
-    //}
 
     for (pugi::xml_node event: doc.child("events"))
     {

@@ -18,6 +18,7 @@ void DeathEvent::update(Factory* factory)
 
 void DeathEvent::trigger(Factory* factory)
 {
+    factory->killWorker();
     triggerFactor = startingTriggerFactor;
     startDayCount = factory->getDayCount();
 }
