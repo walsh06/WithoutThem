@@ -97,3 +97,8 @@ int Factory::getDayCount()
 {
     return dayCount;
 }
+
+int Factory::changeWorkerMoral()
+{
+
+}

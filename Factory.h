@@ -30,6 +30,8 @@ public:
     double calcWages();
     double calcNetIncome();
     int getDayCount();
+    int changeWorkerMoral();
+
 
 private:
     //TO DO:

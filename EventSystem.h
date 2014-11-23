@@ -22,7 +22,9 @@ public:
     void addEvent(GameEvent* event);
     void removeEvent(GameEvent* event);
 private:
+    void readXML();
     std::vector<GameEvent *> events;
+    GameEvent* createEvent(std::map<string, string> event);
 };
 
 #endif // EVENTSYSTEM_H

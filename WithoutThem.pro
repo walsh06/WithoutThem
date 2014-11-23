@@ -22,7 +22,10 @@ SOURCES += main.cpp\
     EventSystem.cpp \
     MoneyEvent.cpp \
     MoralEvent.cpp \
-    DeathEvent.cpp
+    DeathEvent.cpp \
+    DamageEvent.cpp \
+    pugixml.cpp \
+    DayStrategy.cpp
     WorkStation.cpp
 
 HEADERS  += mainwindow.h \
@@ -36,7 +39,12 @@ HEADERS  += mainwindow.h \
     EventSystem.h \
     MoneyEvent.h \
     MoralEvent.h \
-    DeathEvent.h
+    DeathEvent.h \
+    DamageEvent.h \
+    pugixml.hpp \
+    pugiconfig.hpp \
+    EventStrategy.h \
+    DayStrategy.h
     WorkStation.h
 
 CONFIG += c++11
