@@ -14,6 +14,7 @@ Worker::Worker(string name, skillsType type)
     srand(time(0));
     wagePerDay = 6.50;
     moral = 1;
+    working = true;
 }
 
 string Worker::getName()
@@ -47,6 +48,14 @@ void Worker::setMoral(int m)
     {
         this->moral = 1;
     }
+    else if(m > 3)
+    {
+        this->moral = 3;
+    }
+    else if(m < -3)
+    {
+        this->moral = -3;
+    }
     else
     {
         this->moral = m;
@@ -55,7 +64,6 @@ void Worker::setMoral(int m)
 
 void Worker::levelUp()
 {
-    std::cout << "LEVEL UP" << std::endl;
     stats.setMachinerySkill(stats.getMachinerySkill() + rand() % 3);
     stats.setTextileSkill(stats.getTextileSkill() + rand() % 3);
     stats.setFarmingSkill(stats.getFarmingSkill() + rand() % 3);
@@ -98,6 +106,16 @@ int Worker::getSkill(skillsType type)
         return this->stats.getFarmingSkill();
 
     }
+}
+
+bool Worker::isWorking()
+{
+    return working;
+}
+
+void Worker::setWorking(bool working)
+{
+    this->working=working;
 }
 
 void Worker::printWorker()
