@@ -3,6 +3,7 @@
 
 #include "Factory.h"
 #include <string>
+#include "Printer.h"
 
 class Factory;
 

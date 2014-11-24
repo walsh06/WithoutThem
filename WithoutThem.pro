@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     DeathEvent.cpp \
     DamageEvent.cpp \
     pugixml.cpp \
-    DayStrategy.cpp
+    DayStrategy.cpp \
+    Printer.cpp
     WorkStation.cpp
 
 HEADERS  += mainwindow.h \
@@ -44,7 +45,8 @@ HEADERS  += mainwindow.h \
     pugixml.hpp \
     pugiconfig.hpp \
     EventStrategy.h \
-    DayStrategy.h
+    DayStrategy.h \
+    Printer.h
     WorkStation.h
 
 CONFIG += c++11

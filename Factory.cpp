@@ -107,21 +107,29 @@ int Factory::getDayCount()
 
 int Factory::changeWorkerMoral(int moral)
 {
-    int randWorker = rand() % workers.size();
+    if(workers.size())
+    {
+        int randWorker = rand() % workers.size();
 
-    workers[randWorker]->setMoral(moral);
+        workers[randWorker]->setMoral(moral);
+    }
 }
 
 int Factory::stopWorkstation()
 {
-    int randStation = rand() % stations.size();
+    if(stations.size())
+    {
+        int randStation = rand() % stations.size();
 
-    stations[randStation]->setWorking(false);
+        stations[randStation]->setWorking(false);
+    }
 }
 
 int Factory::killWorker()
 {
+    if(workers.size())
+    {
     int randWorker = rand() % workers.size();
-
     workers.erase(std::remove(workers.begin(), workers.end(),  workers[randWorker]), workers.end());
+    }
 }

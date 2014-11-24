@@ -24,7 +24,7 @@ void MoneyEvent::update(Factory* factory)
 
 void MoneyEvent::trigger(Factory* factory)
 {
-    cout << description << endl;
+    Printer::printEvent(description);
     factory->setMoney(factory->getMoney() + moneyChange);
 }
 
