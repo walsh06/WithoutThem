@@ -2,21 +2,6 @@
 #include "SkillTypeEnums.h"
 
 using namespace skills;
-
-WorkStation::WorkStation(Product* p)
-{
-    this->product = p;
-    numWorkers = 0;
-    maxWorkers = 4;
-    dailyCount = 0;
-    srand(time(0));
-    remainingTime = 0;
-
-    this->timer = new QTimer(this);
-
-    connect(timer, SIGNAL(timeout()), this, SLOT(addProduct()));
-}
-
 WorkStation::WorkStation(string s)
 {
     this->product = db.getProduct(s);
@@ -67,11 +52,15 @@ void WorkStation::removeWorker(Worker* worker)
 int WorkStation::calcTime()
 {
     int time = product->getTimeCost();
+
     skillsType type = product->getSkillType();
     int workerSkill = 0;
     for(auto &worker : workers)
     {
-        workerSkill += worker->getSkill(type);
+        if(worker->isWorking())
+        {
+            workerSkill += (worker->getSkill(type) * worker->getMoral());
+        }
     }
 
     time = time - workerSkill + (rand() % 10);
@@ -80,16 +69,18 @@ int WorkStation::calcTime()
 
 void WorkStation::makeProduct()
 {
+    if(working)
+    {
+        int time = 0;
+        if(remainingTime > 0){
+            time = remainingTime;
+            remainingTime = 0;
+        }else
+            time = calcTime();
 
-    int time = 0;
-    if(remainingTime > 0){
-        time = remainingTime;
-        remainingTime = 0;
-    }else
-        time = calcTime();
-
-    //Creates product every 1/6th of a second
-    timer->start(time);
+        //Creates product every 1/6th of a second
+        timer->start(time);
+    }
 }
 
 
@@ -109,10 +100,25 @@ void WorkStation::addProduct()
     //add 1 to product
     dailyCount++;
 
+    for(auto &worker: workers)
+    {
+        worker->gainXP(product->getXP());
+    }
+
     //TO DO: Factor in materials etc.
 
     //call makeProduct again
     makeProduct();
+}
+
+bool WorkStation::isWorking()
+{
+    return working;
+}
+
+void WorkStation::setWorking(bool working)
+{
+    this->working=working;
 }
 
 

@@ -22,8 +22,15 @@ SOURCES += main.cpp\
     Worker.cpp \
     Product.cpp \
     StatsList.cpp \
-    WorkStation.cpp \
-    DatabaseManipulator.cpp
+    DatabaseManipulator.cpp \
+    EventSystem.cpp \
+    MoneyEvent.cpp \
+    MoralEvent.cpp \
+    DeathEvent.cpp \
+    DamageEvent.cpp \
+    pugixml.cpp \
+    DayStrategy.cpp \
+    Printer.cpp \
     WorkStation.cpp
 
 HEADERS  += mainwindow.h \
@@ -33,7 +40,18 @@ HEADERS  += mainwindow.h \
     StatsList.h \
     SkillTypeEnums.h \
     WorkStation.h \
-    DatabaseManipulator.h
+    DatabaseManipulator.h \
+    GameEvent.h \
+    EventSystem.h \
+    MoneyEvent.h \
+    MoralEvent.h \
+    DeathEvent.h \
+    DamageEvent.h \
+    pugixml.hpp \
+    pugiconfig.hpp \
+    EventStrategy.h \
+    DayStrategy.h \
+    Printer.h \
     WorkStation.h
 
 CONFIG += c++11

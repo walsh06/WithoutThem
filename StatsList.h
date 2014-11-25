@@ -17,6 +17,12 @@ public:
     int getFarmingSkill();
     int getCarpentrySkill();
     int getBuildingSkill();
+
+    void setTextileSkill(int n);
+    void setMachinerySkill(int n);
+    void setFarmingSkill(int n);
+    void setCarpentrySkill(int n);
+    void setBuildingSkill(int n);
     StatsList operator+(const StatsList& stats);
     //add more stats
 
