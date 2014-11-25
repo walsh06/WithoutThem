@@ -8,11 +8,13 @@
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+
 TARGET = WithoutThem
 TEMPLATE = app
 
 
 QT       += sql
+QT       += core gui
 
 SOURCES += main.cpp\
         mainwindow.cpp \

@@ -14,6 +14,7 @@ Factory::Factory()
 void Factory::startDay()
 {
     cout << "Start of day" << endl;
+
     for(auto &station : stations)
     {
         station->start();
@@ -48,6 +49,7 @@ double Factory::getMoney()
 double Factory::calcGrossIncome()
 {
     double dailyIncome = 0.00;
+
     for(auto &station : stations)
     {
         dailyIncome += (station->getProduct()->getValue() * station->getDailyCount());
