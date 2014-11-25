@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='us-ascii'?>
+<events>
+	<event  type="Death" trigger="5" description="Worker died in air raid">
+	</event>
+
+	<event  type="Money" trigger="50" changeTrigger="dayCount" description="Repairs in factory" change="-50.0">
+	</event>
+
+	<event  type="Moral" trigger="10" description="Son died at war" change="-3">
+	</event>
+	<event  type="Moral" trigger="20" description="Air raid last night" change="-1">
+	</event>
+
+	<event type="Money" trigger="50" description="Shipment destroyed" change="-100.0">
+	</event>
+	<event type="Money" trigger="20" description="Received money from government" change="100.0">
+	</event>
+
+	<event type="Money" trigger="10" triggerChange="moral" description="Refunds given after bad shipment of products" change="-200.0" > </event>
+</events>

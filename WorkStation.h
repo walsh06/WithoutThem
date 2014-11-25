@@ -39,6 +39,8 @@ public:
     void start();
     void stop();
 
+    bool isWorking();
+    void setWorking(bool working);
 
 private:
     vector<Worker*> workers;
@@ -51,6 +53,8 @@ private:
 
     int remainingTime;
     DatabaseManipulator db;
+
+    bool working;
 
 public slots:
 
