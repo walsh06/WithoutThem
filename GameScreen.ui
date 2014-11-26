@@ -22,6 +22,9 @@
      <height>561</height>
     </rect>
    </property>
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
    <widget class="QWidget" name="Factory">
     <attribute name="title">
      <string>Factory</string>
@@ -30,7 +33,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>40</y>
        <width>67</width>
        <height>17</height>
       </rect>
@@ -42,8 +45,8 @@
     <widget class="QLabel" name="money">
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>30</y>
+       <x>90</x>
+       <y>40</y>
        <width>67</width>
        <height>17</height>
       </rect>
@@ -52,11 +55,102 @@
       <string>0</string>
      </property>
     </widget>
+    <widget class="QLabel" name="dayLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>41</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Day:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="days">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>10</y>
+       <width>67</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="workersLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>67</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Workers:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="workerCount">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>70</y>
+       <width>67</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QDoubleSpinBox" name="setWageBox">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>130</y>
+       <width>69</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="singleStep">
+      <double>0.010000000000000</double>
+     </property>
+     <property name="value">
+      <double>6.500000000000000</double>
+     </property>
+    </widget>
+    <widget class="QLabel" name="wageLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>67</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Wage:</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QWidget" name="tab_2">
+   <widget class="QWidget" name="WorkerTab">
     <attribute name="title">
-     <string>Tab 2</string>
+     <string>Workers</string>
     </attribute>
+    <widget class="QListWidget" name="workerList">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>11</y>
+       <width>171</width>
+       <height>311</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>

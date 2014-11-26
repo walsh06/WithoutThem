@@ -13,17 +13,17 @@ Factory::Factory(GameScreen* gameScreen)
     dayCount = 0;
     srand(time(0));
     this->gameScreen = gameScreen;
-
+    connect(gameScreen, SIGNAL(updateWage(double)), this, SLOT(setWage(double)));
 }
 
 void Factory::startDay()
 {
     dayCount++;
     cout << "Start of day" << endl;
-
-    gameScreen->updateMoney(money);
-
     eventSystem->update(this);
+    gameScreen->updateFactory(dayCount, money, workers.size());
+    gameScreen->updateWorkers(workers);
+
 
     for(auto &station : stations)
     {
@@ -55,6 +55,7 @@ void Factory::endDay()
     {
         worker->setWorking(true);
     }
+
 }
 
 double Factory::getMoney()
@@ -76,7 +77,7 @@ double Factory::calcGrossIncome()
         dailyIncome += (station->getProduct()->getValue() * station->getDailyCount());
     }
 
-
+    cout << "Income: " << dailyIncome << endl;
     return dailyIncome;
 }
 
@@ -87,6 +88,7 @@ double Factory::calcWages()
     {
         dailyWages += worker->getWagePerDay();
     }
+    cout << "Wages: " << dailyWages << endl;
 
     return dailyWages;
 }
@@ -94,6 +96,8 @@ double Factory::calcWages()
 double Factory::calcNetIncome()
 {
     double net = calcGrossIncome() - calcWages();
+    cout << "net: " << net << endl;
+
     return net;
 }
 
@@ -106,6 +110,16 @@ void Factory::removeStation(WorkStation* station)
 {
     //Moves station to the end, erases last station
     stations.erase(std::remove(stations.begin(), stations.end(), station), stations.end());
+}
+
+void Factory::addWorker(Worker* worker)
+{
+    workers.push_back(worker);
+}
+
+void Factory::removeWorker(Worker* worker)
+{
+    workers.erase(std::remove(workers.begin(), workers.end(), worker), workers.end());
 }
 
 int Factory::getDayCount()
@@ -139,5 +153,13 @@ int Factory::killWorker()
     {
     int randWorker = rand() % workers.size();
     workers.erase(std::remove(workers.begin(), workers.end(),  workers[randWorker]), workers.end());
+    }
+}
+
+void Factory::setWage(double wage)
+{
+    for(auto &worker : workers)
+    {
+        worker->setWagePerDay(wage);
     }
 }
