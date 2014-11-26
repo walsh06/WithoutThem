@@ -4,13 +4,17 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
 
 TARGET = WithoutThem
 TEMPLATE = app
 
+
+QT       += sql
+QT       += core gui
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -18,7 +22,7 @@ SOURCES += main.cpp\
     Worker.cpp \
     Product.cpp \
     StatsList.cpp \
-    WorkStation.cpp \
+    DatabaseManipulator.cpp \
     EventSystem.cpp \
     MoneyEvent.cpp \
     MoralEvent.cpp \
@@ -27,7 +31,7 @@ SOURCES += main.cpp\
     pugixml.cpp \
     DayStrategy.cpp \
     Printer.cpp \
-    GenerateWorker.cpp
+    GenerateWorker.cpp \
     WorkStation.cpp
 
 HEADERS  += mainwindow.h \
@@ -37,6 +41,7 @@ HEADERS  += mainwindow.h \
     StatsList.h \
     SkillTypeEnums.h \
     WorkStation.h \
+    DatabaseManipulator.h \
     GameEvent.h \
     EventSystem.h \
     MoneyEvent.h \
@@ -48,11 +53,13 @@ HEADERS  += mainwindow.h \
     EventStrategy.h \
     DayStrategy.h \
     Printer.h \
-    GenerateWorker.h
+    GenerateWorker.h \
     WorkStation.h
 
 CONFIG += c++11
 
 
-
 FORMS    += mainwindow.ui
+
+RESOURCES +=
+    events.xml

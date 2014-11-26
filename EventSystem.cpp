@@ -56,7 +56,7 @@ void EventSystem::removeEvent(GameEvent* event)
 void EventSystem::readXML()
 {
     pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file("events.xml");
+    pugi::xml_parse_result result = doc.load_file("../WithoutThem/events.xml");
 
     for (pugi::xml_node event: doc.child("events"))
     {

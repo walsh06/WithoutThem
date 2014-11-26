@@ -14,7 +14,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    Product *product = new Product("Uniform", skills::BUILDER, 10, 1000,"Cotton", 15.00);
     Factory *factory = new Factory();
 
     Worker *worker1 = new Worker("Cathal", skills::SEAMSTRESS);
@@ -30,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     worker4->printWorker();
 
 
-    WorkStation *ws = new WorkStation(product);
+    WorkStation *ws = new WorkStation("Uniform");
 
     ws->assignWorker(worker1);
 
