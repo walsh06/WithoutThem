@@ -2,20 +2,20 @@
 #include "SkillTypeEnums.h"
 
 using namespace skills;
-
-WorkStation::WorkStation(Product* p)
+WorkStation::WorkStation(string s)
 {
-    this->product = p;
+    this->product = db.getProduct(s);
     numWorkers = 0;
     maxWorkers = 4;
     dailyCount = 0;
     srand(time(0));
     remainingTime = 0;
-    working = true;
+
     this->timer = new QTimer(this);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(addProduct()));
 }
+
 
 
 int WorkStation::getDailyCount()

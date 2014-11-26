@@ -12,6 +12,8 @@
 #include "Worker.h"
 #include "Product.h"
 
+#include "DatabaseManipulator.h"
+
 #include <iostream>
 
 using namespace std;
@@ -22,6 +24,9 @@ class WorkStation : public QObject
 
 public:
     WorkStation(Product* p);
+
+    WorkStation(string s);
+
 
     void assignWorker(Worker* worker);
     void removeWorker(Worker* worker);
@@ -47,6 +52,7 @@ private:
     int numWorkers;
 
     int remainingTime;
+    DatabaseManipulator db;
 
     bool working;
 
