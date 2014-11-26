@@ -54,3 +54,6 @@ CONFIG += c++11
 
 
 FORMS    += mainwindow.ui
+
+OTHER_FILES += \
+    events.xml
