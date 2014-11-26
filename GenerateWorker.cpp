@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "GenerateWorker.h"
+#include "WorkerBackground.h"
 #include "Worker.h"
 #include "StatsList.h"
 #include "SkillTypeEnums.h"
@@ -26,11 +27,12 @@ void GenerateWorker::generateWorker()
     int random = 0;
     string name;
 
-    name = getFirstname();
-    name = name + getSurename();
+    name = generateAttribute("firstname");
+    name = name + generateAttribute("surename");
     random = rand() % skillsType::SIZE_OF_SKILLS;
     skillsType workerSkill = (skillsType)random;
     Worker *worker = new Worker(name, workerSkill);
+
     worker->setMoral(rand() % 4);
 
     double wage = (rand() % (19-7))+7;
@@ -66,7 +68,7 @@ void GenerateWorker::generateWorker()
     this->worker = worker;
 }
 
-string GenerateWorker::getFirstname()
+string GenerateWorker::generateAttribute(string filename)
 {
     ifstream readFile;
     int pos;
@@ -74,7 +76,8 @@ string GenerateWorker::getFirstname()
     string name, line;
 
     i = 0;
-    readFile.open("../WithoutThem/firstname.txt");
+    filename = "../WithoutThem/"+ filename + ".txt";
+    readFile.open(filename);
     if (readFile.good())
       {
         getline(readFile, name);
@@ -97,42 +100,4 @@ string GenerateWorker::getFirstname()
         readFile.close();
     }
     return name;
-}
-
-string GenerateWorker::getSurename()
-{
-    ifstream readFile;
-    int pos;
-    int i = 0;
-    string name, line;
-
-    i = 0;
-    readFile.open("../WithoutThem/surename.txt");
-    if (readFile.good())
-      {
-        getline(readFile, name);
-      }
-    int count = atoi(name.c_str());
-    pos = (rand() % count) + 1;
-    if(readFile.is_open() ){
-        while(getline (readFile,line)){
-            if( i == pos){
-                name = line;
-                break;
-            }
-            i++;
-        }
-        name  = line;
-    }
-    readFile.close();
-
-    if (readFile.is_open()){
-        readFile.close();
-    }
-    return name;
-}
-
-string GenerateWorker::generateBackground()
-{
-
 }

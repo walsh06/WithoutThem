@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     DayStrategy.cpp \
     Printer.cpp \
     GenerateWorker.cpp \
-    WorkStation.cpp
+    WorkStation.cpp \
+    WorkerBackground.cpp
 
 HEADERS  += mainwindow.h \
     Factory.h \
@@ -54,7 +55,8 @@ HEADERS  += mainwindow.h \
     DayStrategy.h \
     Printer.h \
     GenerateWorker.h \
-    WorkStation.h
+    WorkStation.h \
+    WorkerBackground.h
 
 CONFIG += c++11
 

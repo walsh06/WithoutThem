@@ -1,4 +1,5 @@
 #include "Worker.h"
+#include "WorkerBackground.h"
 #include "SkillTypeEnums.h"
 
 #include <iostream>
@@ -15,6 +16,7 @@ Worker::Worker(string name, skillsType type)
     wagePerDay = 6.50;
     moral = 1;
     working = true;
+    WorkerBackground background();
 }
 
 string Worker::getName()
@@ -65,6 +67,16 @@ void Worker::setMoral(int m)
     {
         this->moral = m;
     }
+}
+
+void Worker::setBackground(WorkerBackground background)
+{
+    this->background = background;
+}
+
+WorkerBackground Worker::getBackground()
+{
+    return this->background;
 }
 
 void Worker::levelUp()
@@ -126,7 +138,11 @@ void Worker::setWorking(bool working)
 
 void Worker::printWorker()
 {
-    cout << "Name: " << name << " XP:" << xp<< " Wage per day: " << getWagePerDay() ;
+    cout << "Name: " << name << " Age: " << background.getAge();
+    cout << " Number of children:" << background.getNumChildren();
+    cout << " Husband: " << background.hasHusband();
+    cout << " Number of siblings:" << background.getNumSiblings();
+    cout << " XP:" << xp<< " Wage per day: " << getWagePerDay();
     cout << " Mec:" << stats.getMachinerySkill();
     cout << " Farm:" << stats.getFarmingSkill() <<" Seam:" << stats.getTextileSkill();
     cout << " Build:" << stats.getBuildingSkill() << " Car: "<< stats.getCarpentrySkill() << endl;

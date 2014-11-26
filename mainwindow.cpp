@@ -22,11 +22,14 @@ MainWindow::MainWindow(QWidget *parent) :
     GenerateWorker* gw = new GenerateWorker();
     gw->generateWorker();
     Worker *worker4 = gw->getWorker();
+    gw->generateWorker();
+    Worker *worker5 = gw->getWorker();
 
     worker1->printWorker();
     worker2->printWorker();
     worker3->printWorker();
     worker4->printWorker();
+    worker5->printWorker();
 
 
     WorkStation *ws = new WorkStation("Uniform");

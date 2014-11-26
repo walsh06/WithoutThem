@@ -8,10 +8,8 @@ public:
     GenerateWorker();
     Worker* getWorker();
     void generateWorker();
-    string generateBackground();
+    string generateAttribute(string filename);
 private:
-    string getFirstname();
-    string getSurename();
     Worker* worker;
 };
 
