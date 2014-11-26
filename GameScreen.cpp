@@ -12,3 +12,8 @@ GameScreen::~GameScreen()
 {
     delete ui;
 }
+
+void GameScreen::updateMoney(double money)
+{
+    ui->money->setText(QString::number(money));
+}

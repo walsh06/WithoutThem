@@ -14,6 +14,8 @@ class GameScreen : public QWidget
 public:
     explicit GameScreen(QWidget *parent = 0);
     ~GameScreen();
+    void updateMoney(double money);
+
 
 private:
     Ui::GameScreen *ui;

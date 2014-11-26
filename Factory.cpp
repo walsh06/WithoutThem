@@ -1,6 +1,6 @@
 #include "Factory.h"
 #include "EventSystem.h"
-Factory::Factory()
+Factory::Factory(GameScreen* gameScreen)
 {
     this->money = 1000.00;
 
@@ -11,6 +11,7 @@ Factory::Factory()
     eventSystem = new EventSystem();
     dayCount = 0;
     srand(time(0));
+    this->gameScreen = gameScreen;
 
 }
 
@@ -18,6 +19,8 @@ void Factory::startDay()
 {
     dayCount++;
     cout << "Start of day" << endl;
+
+    gameScreen->updateMoney(money);
     eventSystem->update(this);
 
     for(auto &station : stations)

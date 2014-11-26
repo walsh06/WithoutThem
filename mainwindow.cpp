@@ -13,8 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+
     Product *product = new Product("Uniform", skills::BUILDER, 10, 1000,"Cotton", 15.00);
-    Factory *factory = new Factory();
+    Factory *factory = new Factory(ui->gameScreen);
 
     Worker *worker1 = new Worker("Cathal", skills::SEAMSTRESS);
     Worker *worker2 = new Worker("Liam", skills::CARPENTER);
