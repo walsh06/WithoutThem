@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     DamageEvent.cpp \
     pugixml.cpp \
     DayStrategy.cpp \
-    Printer.cpp
+    Printer.cpp \
+    GameScreen.cpp
     WorkStation.cpp
 
 HEADERS  += mainwindow.h \
@@ -46,11 +47,13 @@ HEADERS  += mainwindow.h \
     pugiconfig.hpp \
     EventStrategy.h \
     DayStrategy.h \
-    Printer.h
+    Printer.h \
+    GameScreen.h
     WorkStation.h
 
 CONFIG += c++11
 
 
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    GameScreen.ui
