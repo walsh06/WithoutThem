@@ -19,6 +19,7 @@ public:
     void setWagePerDay(double wage);
     string getName();
     StatsList getStats();
+    void setStatsList(StatsList stats);
     int getMoral();
     void setMoral(int m);
     //int getAge();
@@ -28,8 +29,8 @@ public:
     int getSkill(skillsType type);
     bool isWorking();
     void setWorking(bool working);
-private:
     void printWorker();
+private:
     bool working;
     int moral;
     skillsType type;

@@ -5,6 +5,7 @@
 
 #include "WorkStation.h"
 #include "Worker.h"
+#include "GenerateWorker.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,6 +20,15 @@ MainWindow::MainWindow(QWidget *parent) :
     Worker *worker1 = new Worker("Cathal", skills::SEAMSTRESS);
     Worker *worker2 = new Worker("Liam", skills::CARPENTER);
     Worker *worker3 = new Worker("Killian", skills::FARMER);
+    GenerateWorker* gw = new GenerateWorker();
+    gw->generateWorker();
+    Worker *worker4 = gw->getWorker();
+
+    worker1->printWorker();
+    worker2->printWorker();
+    worker3->printWorker();
+    worker4->printWorker();
+
 
     WorkStation *ws = new WorkStation(product);
 

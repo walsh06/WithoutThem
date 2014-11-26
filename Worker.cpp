@@ -27,6 +27,11 @@ StatsList Worker::getStats()
     return this->stats;
 }
 
+void Worker::setStatsList(StatsList stats)
+{
+    this->stats = stats;
+}
+
 double Worker::getWagePerDay()
 {
     return wagePerDay;
@@ -106,6 +111,7 @@ int Worker::getSkill(skillsType type)
         return this->stats.getFarmingSkill();
 
     }
+    return -1;
 }
 
 bool Worker::isWorking()
@@ -120,7 +126,8 @@ void Worker::setWorking(bool working)
 
 void Worker::printWorker()
 {
-    cout << "Name: " << name << " XP:" << xp<< " Mec:" << stats.getMachinerySkill();;
+    cout << "Name: " << name << " XP:" << xp<< " Wage per day: " << getWagePerDay() ;
+    cout << " Mec:" << stats.getMachinerySkill();
     cout << " Farm:" << stats.getFarmingSkill() <<" Seam:" << stats.getTextileSkill();
     cout << " Build:" << stats.getBuildingSkill() << " Car: "<< stats.getCarpentrySkill() << endl;
 }
