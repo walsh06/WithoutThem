@@ -131,3 +131,8 @@ string GenerateWorker::getSurename()
     }
     return name;
 }
+
+string GenerateWorker::generateBackground()
+{
+
+}

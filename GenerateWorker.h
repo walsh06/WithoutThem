@@ -8,6 +8,7 @@ public:
     GenerateWorker();
     Worker* getWorker();
     void generateWorker();
+    string generateBackground();
 private:
     string getFirstname();
     string getSurename();
