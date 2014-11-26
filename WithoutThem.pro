@@ -59,7 +59,5 @@ CONFIG += c++11
 
 FORMS    += mainwindow.ui
 
-OTHER_FILES += \
-    without_them_db
-
 RESOURCES +=
+    events.xml
