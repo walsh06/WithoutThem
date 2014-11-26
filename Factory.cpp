@@ -7,6 +7,7 @@ Factory::Factory()
 
     this->timer = new QTimer(this);
 
+
     connect(timer, SIGNAL(timeout()), this, SLOT(endDay()));
     eventSystem = new EventSystem();
     dayCount = 0;
@@ -18,6 +19,7 @@ void Factory::startDay()
 {
     dayCount++;
     cout << "Start of day" << endl;
+
 
     eventSystem->update(this);
 
@@ -46,6 +48,7 @@ void Factory::endDay()
     timer->stop();
     startDay();
 
+    // Possibly move to startDay()
     for(auto &worker : workers)
     {
         worker->setWorking(true);
