@@ -10,7 +10,7 @@ class Product
 {
 public:
     Product(string name, skills::skillsType skill, int materialCost,
-            int timeCost, string materialNeeded, double value);
+            int timeCost, string materialNeeded, double value, double upgradeCost);
 
     string getName();
     skills::skillsType getSkillType();
@@ -21,6 +21,11 @@ public:
 
     double getValue();
 
+    double getUpgradeCost();
+
+    void setUpgradeCost(double cost);
+
+
 private:
 
     string name;
@@ -28,6 +33,7 @@ private:
     string materialNeeded;
     int materialCost;
     int timeCost;
+    double upgradeCost;
     int xp;
     double value;
 

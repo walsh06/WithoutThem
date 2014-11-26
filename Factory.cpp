@@ -7,6 +7,7 @@ Factory::Factory(GameScreen* gameScreen)
 
     this->timer = new QTimer(this);
 
+
     connect(timer, SIGNAL(timeout()), this, SLOT(endDay()));
     eventSystem = new EventSystem();
     dayCount = 0;
@@ -21,6 +22,7 @@ void Factory::startDay()
     cout << "Start of day" << endl;
 
     gameScreen->updateMoney(money);
+
     eventSystem->update(this);
 
     for(auto &station : stations)
@@ -28,6 +30,7 @@ void Factory::startDay()
         station->start();
     }
 
+    cout << money << endl;
     timer->start(6000);
 }
 
@@ -47,6 +50,7 @@ void Factory::endDay()
     timer->stop();
     startDay();
 
+    // Possibly move to startDay()
     for(auto &worker : workers)
     {
         worker->setWorking(true);
@@ -66,6 +70,7 @@ void Factory::setMoney(double money)
 double Factory::calcGrossIncome()
 {
     double dailyIncome = 0.00;
+
     for(auto &station : stations)
     {
         dailyIncome += (station->getProduct()->getValue() * station->getDailyCount());

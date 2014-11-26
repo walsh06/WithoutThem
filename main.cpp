@@ -2,6 +2,12 @@
 #include "Factory.h"
 #include "Product.h"
 #include <QApplication>
+#include "DatabaseManipulator.h"
+
+#include <QCoreApplication>
+#include <QApplication>
+
+
 
 int main(int argc, char *argv[])
 {
@@ -9,6 +15,15 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
+    /*DatabaseManipulator *db = new DatabaseManipulator();
+    //
+    db->getProduct("Uniform");
+    db->getProductNames();
+    db->upgradeProduct("Uniform");
+    */
+
     return a.exec();
 
-}
+ }
+
+
