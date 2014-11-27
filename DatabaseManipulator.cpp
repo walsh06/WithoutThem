@@ -61,6 +61,22 @@ vector<string> DatabaseManipulator::getProductNames()
     return list;
 }
 
+vector<string> DatabaseManipulator::getProductNames(int level)
+{
+    QSqlQuery query(*db);
+    string query_string =
+            "SELECT name FROM products WHERE upgraded_level <= " + std::to_string(level) ;
+    query.exec(QString::fromStdString(query_string));
+
+    vector<string> list ;
+
+    while(query.next())
+    {
+        list.push_back(query.value(0).toString().toStdString());
+    }
+
+    return list;
+}
 
 void DatabaseManipulator::upgradeProduct(string productName)
 {

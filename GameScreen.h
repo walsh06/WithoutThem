@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "Worker.h"
+#include "DatabaseManipulator.h"
 
 
 using namespace std;
@@ -35,7 +36,10 @@ private slots:
 
     void on_pushButton_clicked();
 
-    void updateWSView(int num);
+    void updateWSView();
+
+    void updateCurrentWS(int num);
+
 
     void updateTimer();
 
@@ -53,6 +57,11 @@ private:
     Ui::GameScreen *ui;
     QButtonGroup* wsButtons;
     void initWSButtons();
+    DatabaseManipulator *db;
+    int currentWS = 0;
+
+    vector<WorkStation*> stations;
+
 };
 
 #endif // GAMESCREEN_H

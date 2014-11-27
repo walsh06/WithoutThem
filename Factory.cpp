@@ -21,7 +21,6 @@ void Factory::startDay()
 {
     dayCount++;
 
-    cout << "Start of day" << endl;
     eventSystem->update(this);
     gameScreen->updateFactory(dayCount, money, workers.size());
     gameScreen->updateWorkers(workers);
@@ -76,7 +75,6 @@ double Factory::calcGrossIncome()
         dailyIncome += (station->getProduct()->getValue() * station->getDailyCount());
     }
 
-    cout << "Income: " << dailyIncome << endl;
     return dailyIncome;
 }
 
@@ -87,7 +85,7 @@ double Factory::calcWages()
     {
         dailyWages += worker->getWagePerDay();
     }
-    cout << "Wages: " << dailyWages << endl;
+
 
     return dailyWages;
 }
@@ -95,14 +93,15 @@ double Factory::calcWages()
 double Factory::calcNetIncome()
 {
     double net = calcGrossIncome() - calcWages();
-    cout << "net: " << net << endl;
 
     return net;
 }
 
 void Factory::addStation(WorkStation* station)
 {
+    connect(station, SIGNAL(updateWS()), gameScreen, SLOT(updateWSView()));
     stations.push_back(station);
+
 
     this->gameScreen->setStations(stations);
 }

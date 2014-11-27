@@ -184,7 +184,7 @@
     <bool>false</bool>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="floor_1">
     <widget class="QPushButton" name="ws_1">
@@ -645,9 +645,26 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_2">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="product_label">
+          <property name="text">
+           <string>Manufacturing : </string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="productList"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="stationWorkerCount">
         <property name="text">
-         <string>Manufacturing: Product</string>
+         <string>No. of Workers: 0</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -655,22 +672,12 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Worker Count: 0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="prodcount">
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
-         <string>Products Generated: 0</string>
+         <string>Products Generated Today: 0</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

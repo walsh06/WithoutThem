@@ -24,6 +24,12 @@ int WorkStation::getDailyCount()
     return dailyCount;
 }
 
+
+int WorkStation::getNumWorkers()
+{
+    return this->numWorkers;
+}
+
 Product* WorkStation::getProduct()
 {
     return product;
@@ -100,6 +106,7 @@ void WorkStation::addProduct()
 {
     //add 1 to product
     dailyCount++;
+    emit updateWS();
 
     for(auto &worker: workers)
     {
