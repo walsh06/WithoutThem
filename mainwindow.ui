@@ -26,15 +26,42 @@
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
    </property>
-   <widget class="GameScreen" name="gameScreen" native="true">
+   <widget class="QStackedWidget" name="menuStack">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
-      <width>800</width>
-      <height>600</height>
+      <y>-1</y>
+      <width>801</width>
+      <height>601</height>
      </rect>
     </property>
+    <widget class="QWidget" name="gamePage">
+     <widget class="GameScreen" name="gameScreen" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>801</width>
+        <height>601</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="mainPage">
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>360</y>
+        <width>161</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>New Game</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
  </widget>

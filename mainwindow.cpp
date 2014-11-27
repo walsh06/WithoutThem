@@ -12,9 +12,23 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
+    ui->menuStack->setCurrentIndex(1);
 
+}
 
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
 
+void MainWindow::on_pushButton_clicked()
+{
+    startGame();
+    ui->menuStack->setCurrentIndex(0);
+}
+
+void MainWindow::startGame()
+{
     Factory *factory = new Factory(ui->gameScreen);
 
     Worker *worker1 = new Worker("Cathal", skills::SEAMSTRESS);
@@ -29,9 +43,4 @@ MainWindow::MainWindow(QWidget *parent) :
     factory->addStation(ws);
 
     factory->startDay();
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
 }
