@@ -38,6 +38,8 @@ private slots:
     void updateWSView(int num);
 
     void updateTimer();
+
+public slots:
     void updateFactory(int dayCount, double money, int workerCount);
     void updateWorkers(std::vector<Worker*> workers);
 

@@ -20,7 +20,6 @@ Factory::Factory(GameScreen* gameScreen)
 void Factory::startDay()
 {
     dayCount++;
-    gameScreen->updateMoney(money);
 
     cout << "Start of day" << endl;
     eventSystem->update(this);
