@@ -14,7 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    Factory *factory = new Factory();
+
+    Factory *factory = new Factory(ui->gameScreen);
 
     Worker *worker1 = new Worker("Cathal", skills::SEAMSTRESS);
     Worker *worker2 = new Worker("Liam", skills::CARPENTER);
@@ -36,6 +37,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ws->assignWorker(worker1);
 
+    factory->addWorker(worker1);
+    factory->addWorker(worker2);
+    factory->addWorker(worker3);
 
     factory->addStation(ws);
 

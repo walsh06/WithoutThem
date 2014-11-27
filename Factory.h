@@ -13,6 +13,8 @@
 #include "WorkStation.h"
 #include "QTimer"
 #include <iomanip>
+#include "GameScreen.h"
+
 
 class EventSystem;
 using namespace std;
@@ -21,10 +23,12 @@ class Factory : public QObject
     Q_OBJECT
 
 public:
-    Factory(); //TO DO find out why this won't work as not pointer
+    Factory(GameScreen* gameScreen); //TO DO find out why this won't work as not pointer
 
     void addStation(WorkStation* station);
     void removeStation(WorkStation* station);
+    void addWorker(Worker* worker);
+    void removeWorker(Worker* worker);
 
     double getMoney();
     void setMoney(double money);
@@ -52,9 +56,12 @@ private:
     QTimer *timer;
     EventSystem* eventSystem;
     int dayCount;
+
+    GameScreen* gameScreen;
 public slots:
 
     void startDay();
+    void setWage(double wage);
 
 private slots:
 

@@ -14,6 +14,7 @@ WorkStation::WorkStation(string s)
     this->timer = new QTimer(this);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(addProduct()));
+    working = true;
 }
 
 
