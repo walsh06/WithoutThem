@@ -6,7 +6,6 @@ GameScreen::GameScreen(QWidget *parent) :
 {
     ui->setupUi(this);
     initWSButtons();
-    db = new DatabaseManipulator();
 }
 
 GameScreen::~GameScreen()
@@ -19,6 +18,15 @@ void GameScreen::updateFactory(int dayCount, double money, int workerCount)
     ui->days->setText(QString::number(dayCount));
     ui->money->setText(QString::number(money));
     ui->workerCount->setText((QString::number(workerCount)));
+}
+
+void GameScreen::updateProductList(vector<string> list)
+{
+    for(auto &s : list)
+    {
+        ui->productList->addItem(QString::fromStdString(s));
+    }
+    ui->productList->setCurrentIndex(-1);
 }
 
 void GameScreen::on_setWageBox_valueChanged(double arg1)
@@ -105,4 +113,42 @@ void GameScreen::updateTimer()
 void GameScreen::setStations(vector<WorkStation*>  &stations)
 {
     this->stations = stations;
+}
+
+void GameScreen::eventPopup(string event)
+{
+    QMessageBox::information(
+        this,
+        tr("Event"),
+        QString::fromStdString(event));
+}
+
+void GameScreen::endDayPopup(double wages, double gross, double money)
+{
+    this->wages = wages;
+    this->gross = gross;
+    this->money = money;
+    this->income = gross - wages;
+
+    ui->gross->setText(QString::number(gross));
+    ui->wages->setText(QString::number(wages));
+    ui->net->setText(QString::number(income));
+
+    QMessageBox::information(
+        this,
+        tr("End of Day"),
+        QString::fromStdString("Gross Income: ") + QString::number(gross) +
+        QString::fromStdString("\n Wages: ") + QString::number(wages) +
+        QString::fromStdString("\n-----------------") +
+        QString::fromStdString("\n Net Income: ") + QString::number(income) +
+        QString::fromStdString("\n Money: ") + QString::number(money)
+                );
+    /*QMessageBox box;
+    box.setText(QString::fromStdString("Gross Income: ") + QString::number(gross) +
+                QString::fromStdString("\n Wages: ") + QString::number(wages) +
+                QString::fromStdString("\n-----------------") +
+                QString::fromStdString("\n Net Income: ") + QString::number(income) +
+                QString::fromStdString("\n Money: ") + QString::number(money));
+    box.setWindowTitle("End Of Day");
+    box.exec();*/
 }

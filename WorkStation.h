@@ -54,7 +54,6 @@ private:
     int numWorkers;
 
     int remainingTime;
-    DatabaseManipulator db;
 
     bool working;
 

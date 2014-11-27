@@ -25,6 +25,9 @@ class Factory : public QObject
 public:
     Factory(GameScreen* gameScreen); //TO DO find out why this won't work as not pointer
 
+
+    static DatabaseManipulator db;
+
     void addStation(WorkStation* station);
     void removeStation(WorkStation* station);
     void addWorker(Worker* worker);
@@ -36,12 +39,12 @@ public:
     double calcWages();
     double calcNetIncome();
     int getDayCount();
-    int changeWorkerMoral();
+    void changeWorkerMoral();
 
-    int changeWorkerMoral(int moral);
-    int stopWorkstation();
-    int killWorker();
-
+    void changeWorkerMoral(int moral);
+    void stopWorkstation();
+    void killWorker();
+    GameScreen* getGameScreen();
 private:
     //TO DO:
     //Add Current Product
@@ -56,6 +59,7 @@ private:
     QTimer *timer;
     EventSystem* eventSystem;
     int dayCount;
+
 
     GameScreen* gameScreen;
 public slots:

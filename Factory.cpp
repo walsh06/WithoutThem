@@ -1,7 +1,10 @@
 #include "Factory.h"
 #include "EventSystem.h"
+
+DatabaseManipulator Factory::db;
 Factory::Factory(GameScreen* gameScreen)
 {
+
     this->money = 1000.00;
 
 
@@ -15,13 +18,20 @@ Factory::Factory(GameScreen* gameScreen)
     this->gameScreen = gameScreen;
     this->gameScreen->setStations(stations);
     connect(gameScreen, SIGNAL(updateWage(double)), this, SLOT(setWage(double)));
+
+
+    //TEMP
+    this->gameScreen->updateProductList(Factory::db.getProductNames());
 }
 
 void Factory::startDay()
 {
     dayCount++;
-
-    eventSystem->update(this);
+    cout << "Start of day" << endl;
+    if(dayCount > 5)
+    {
+        eventSystem->update(this);
+    }
     gameScreen->updateFactory(dayCount, money, workers.size());
     gameScreen->updateWorkers(workers);
 
@@ -46,14 +56,14 @@ void Factory::endDay()
 
    //"TEMP - Testing - restart day - should be done on button click or something" << endl;
     timer->stop();
-    startDay();
-
+    gameScreen->endDayPopup(calcWages(), calcGrossIncome(), money);
     // Possibly move to startDay()
     for(auto &worker : workers)
     {
         worker->setWorking(true);
     }
 
+    startDay();
 }
 
 double Factory::getMoney()
@@ -85,7 +95,6 @@ double Factory::calcWages()
     {
         dailyWages += worker->getWagePerDay();
     }
-
 
     return dailyWages;
 }
@@ -129,7 +138,7 @@ int Factory::getDayCount()
     return dayCount;
 }
 
-int Factory::changeWorkerMoral(int moral)
+void Factory::changeWorkerMoral(int moral)
 {
     if(workers.size())
     {
@@ -139,7 +148,7 @@ int Factory::changeWorkerMoral(int moral)
     }
 }
 
-int Factory::stopWorkstation()
+void Factory::stopWorkstation()
 {
     if(stations.size())
     {
@@ -149,7 +158,7 @@ int Factory::stopWorkstation()
     }
 }
 
-int Factory::killWorker()
+void Factory::killWorker()
 {
     if(workers.size())
     {
@@ -165,4 +174,9 @@ void Factory::setWage(double wage)
     {
         worker->setWagePerDay(wage);
     }
+}
+
+GameScreen* Factory::getGameScreen()
+{
+    return gameScreen;
 }
