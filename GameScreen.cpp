@@ -68,7 +68,7 @@ void GameScreen::initWSButtons()
     wsButtons->addButton(ui->ws_14, 13);
     wsButtons->addButton(ui->ws_15, 14);
     connect(wsButtons, SIGNAL(buttonClicked(int)),
-            this, SLOT( WSView(int)));
+            this, SLOT( updateWSView(int)));
 }
 
 void GameScreen::updateWSView(int num)
