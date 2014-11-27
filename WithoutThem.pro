@@ -31,14 +31,10 @@ SOURCES += main.cpp\
     pugixml.cpp \
     DayStrategy.cpp \
     Printer.cpp \
-<<<<<<< HEAD
     GenerateWorker.cpp \
-    WorkStation.cpp \
-    WorkerBackground.cpp
-=======
+    WorkerBackground.cpp \
     GameScreen.cpp \
     WorkStation.cpp
->>>>>>> 88e99f700d96b9a66c3f6f37d1e0094069c062bd
 
 HEADERS  += mainwindow.h \
     Factory.h \
@@ -58,14 +54,10 @@ HEADERS  += mainwindow.h \
     EventStrategy.h \
     DayStrategy.h \
     Printer.h \
-<<<<<<< HEAD
     GenerateWorker.h \
-    WorkStation.h \
-    WorkerBackground.h
-=======
+    WorkerBackground.h \
     GameScreen.h \
     WorkStation.h
->>>>>>> 88e99f700d96b9a66c3f6f37d1e0094069c062bd
 
 CONFIG += c++11
 
