@@ -18,6 +18,7 @@ void DamageEvent::update(Factory* factory)
 void DamageEvent::trigger(Factory* factory)
 {
     Printer::printEvent(description);
+    factory->getGameScreen()->eventPopup(description);
     //factory->stopWorkstation();
     triggerFactor = startingTriggerFactor;
     startDayCount = factory->getDayCount();

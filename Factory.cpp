@@ -22,7 +22,10 @@ void Factory::startDay()
     dayCount++;
 
     cout << "Start of day" << endl;
-    eventSystem->update(this);
+    if(dayCount > 5)
+    {
+        eventSystem->update(this);
+    }
     gameScreen->updateFactory(dayCount, money, workers.size());
     gameScreen->updateWorkers(workers);
 
@@ -47,14 +50,14 @@ void Factory::endDay()
 
    //"TEMP - Testing - restart day - should be done on button click or something" << endl;
     timer->stop();
-    startDay();
-
+    gameScreen->endDayPopup(calcWages(), calcGrossIncome(), money);
     // Possibly move to startDay()
     for(auto &worker : workers)
     {
         worker->setWorking(true);
     }
 
+    startDay();
 }
 
 double Factory::getMoney()
@@ -76,7 +79,6 @@ double Factory::calcGrossIncome()
         dailyIncome += (station->getProduct()->getValue() * station->getDailyCount());
     }
 
-    cout << "Income: " << dailyIncome << endl;
     return dailyIncome;
 }
 
@@ -87,7 +89,6 @@ double Factory::calcWages()
     {
         dailyWages += worker->getWagePerDay();
     }
-    cout << "Wages: " << dailyWages << endl;
 
     return dailyWages;
 }
@@ -95,7 +96,6 @@ double Factory::calcWages()
 double Factory::calcNetIncome()
 {
     double net = calcGrossIncome() - calcWages();
-    cout << "net: " << net << endl;
 
     return net;
 }
@@ -130,7 +130,7 @@ int Factory::getDayCount()
     return dayCount;
 }
 
-int Factory::changeWorkerMoral(int moral)
+void Factory::changeWorkerMoral(int moral)
 {
     if(workers.size())
     {
@@ -140,7 +140,7 @@ int Factory::changeWorkerMoral(int moral)
     }
 }
 
-int Factory::stopWorkstation()
+void Factory::stopWorkstation()
 {
     if(stations.size())
     {
@@ -150,7 +150,7 @@ int Factory::stopWorkstation()
     }
 }
 
-int Factory::killWorker()
+void Factory::killWorker()
 {
     if(workers.size())
     {
@@ -166,4 +166,9 @@ void Factory::setWage(double wage)
     {
         worker->setWagePerDay(wage);
     }
+}
+
+GameScreen* Factory::getGameScreen()
+{
+    return gameScreen;
 }

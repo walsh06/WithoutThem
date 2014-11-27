@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QGridLayout>
+#include <QMessageBox>
 
 #include <iostream>
 #include <functional>
@@ -29,6 +30,8 @@ public:
     ~GameScreen();
     void updateMoney(double money);
     void setStations(vector<WorkStation*> &stations);
+    void endDayPopup(double wages, double gross, double money);
+    void eventPopup(string event);
 
 private slots:
     void on_pushButton_2_clicked();
@@ -53,6 +56,7 @@ private:
     Ui::GameScreen *ui;
     QButtonGroup* wsButtons;
     void initWSButtons();
+    int money, wages, gross, income;
 };
 
 #endif // GAMESCREEN_H

@@ -25,6 +25,7 @@ void MoneyEvent::update(Factory* factory)
 void MoneyEvent::trigger(Factory* factory)
 {
     Printer::printEvent(description);
+    factory->getGameScreen()->eventPopup(description);
     factory->setMoney(factory->getMoney() + moneyChange);
 }
 

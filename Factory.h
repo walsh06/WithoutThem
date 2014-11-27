@@ -36,12 +36,12 @@ public:
     double calcWages();
     double calcNetIncome();
     int getDayCount();
-    int changeWorkerMoral();
+    void changeWorkerMoral();
 
-    int changeWorkerMoral(int moral);
-    int stopWorkstation();
-    int killWorker();
-
+    void changeWorkerMoral(int moral);
+    void stopWorkstation();
+    void killWorker();
+    GameScreen* getGameScreen();
 private:
     //TO DO:
     //Add Current Product

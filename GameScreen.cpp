@@ -90,3 +90,41 @@ void GameScreen::setStations(vector<WorkStation*>  &stations)
     }
 
 }
+
+void GameScreen::eventPopup(string event)
+{
+    QMessageBox::information(
+        this,
+        tr("Event"),
+        QString::fromStdString(event));
+}
+
+void GameScreen::endDayPopup(double wages, double gross, double money)
+{
+    this->wages = wages;
+    this->gross = gross;
+    this->money = money;
+    this->income = gross - wages;
+
+    ui->gross->setText(QString::number(gross));
+    ui->wages->setText(QString::number(wages));
+    ui->net->setText(QString::number(income));
+
+    QMessageBox::information(
+        this,
+        tr("End of Day"),
+        QString::fromStdString("Gross Income: ") + QString::number(gross) +
+        QString::fromStdString("\n Wages: ") + QString::number(wages) +
+        QString::fromStdString("\n-----------------") +
+        QString::fromStdString("\n Net Income: ") + QString::number(income) +
+        QString::fromStdString("\n Money: ") + QString::number(money)
+                );
+    /*QMessageBox box;
+    box.setText(QString::fromStdString("Gross Income: ") + QString::number(gross) +
+                QString::fromStdString("\n Wages: ") + QString::number(wages) +
+                QString::fromStdString("\n-----------------") +
+                QString::fromStdString("\n Net Income: ") + QString::number(income) +
+                QString::fromStdString("\n Money: ") + QString::number(money));
+    box.setWindowTitle("End Of Day");
+    box.exec();*/
+}

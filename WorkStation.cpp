@@ -87,6 +87,7 @@ void WorkStation::makeProduct()
 
 void WorkStation::start()
 {
+    dailyCount = 0;
     makeProduct();
 }
 

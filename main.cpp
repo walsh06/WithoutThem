@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QFile styleFile("darkorange.stylesheet.txt");
+    QFile styleFile("../WithoutThem/darkorange.stylesheet.txt");
     styleFile.open(QFile::ReadOnly);
     QByteArray bytes = styleFile.readAll();
     QApplication *app = (QApplication*)QApplication::instance();
