@@ -13,12 +13,14 @@ Factory::Factory(GameScreen* gameScreen)
     dayCount = 0;
     srand(time(0));
     this->gameScreen = gameScreen;
+    this->gameScreen->setStations(stations);
     connect(gameScreen, SIGNAL(updateWage(double)), this, SLOT(setWage(double)));
 }
 
 void Factory::startDay()
 {
     dayCount++;
+
     cout << "Start of day" << endl;
     eventSystem->update(this);
     gameScreen->updateFactory(dayCount, money, workers.size());
@@ -30,7 +32,6 @@ void Factory::startDay()
         station->start();
     }
 
-    cout << money << endl;
     timer->start(6000);
 }
 
@@ -42,8 +43,6 @@ void Factory::endDay()
     }
 
     money += calcNetIncome();
-
-    cout << "End of day" << endl;
 
 
    //"TEMP - Testing - restart day - should be done on button click or something" << endl;
@@ -104,12 +103,16 @@ double Factory::calcNetIncome()
 void Factory::addStation(WorkStation* station)
 {
     stations.push_back(station);
+
+    this->gameScreen->setStations(stations);
 }
 
 void Factory::removeStation(WorkStation* station)
 {
     //Moves station to the end, erases last station
     stations.erase(std::remove(stations.begin(), stations.end(), station), stations.end());
+
+    this->gameScreen->setStations(stations);
 }
 
 void Factory::addWorker(Worker* worker)
@@ -154,6 +157,7 @@ int Factory::killWorker()
     int randWorker = rand() % workers.size();
     workers.erase(std::remove(workers.begin(), workers.end(),  workers[randWorker]), workers.end());
     }
+
 }
 
 void Factory::setWage(double wage)

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/ws">
+        <file>ws_1.png</file>
+        <file>ws_empty.png</file>
+    </qresource>
+</RCC>

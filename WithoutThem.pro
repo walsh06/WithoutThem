@@ -66,5 +66,6 @@ FORMS    += mainwindow.ui \
     GameScreen.ui
 
 
-RESOURCES +=
+RESOURCES += \
+    images.qrc
     events.xml
