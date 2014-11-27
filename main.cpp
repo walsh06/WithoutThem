@@ -6,13 +6,21 @@
 
 #include <QCoreApplication>
 #include <QApplication>
-
+#include <QFile>
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    QFile styleFile("darkorange.stylesheet.txt");
+    styleFile.open(QFile::ReadOnly);
+    QByteArray bytes = styleFile.readAll();
+    QApplication *app = (QApplication*)QApplication::instance();
+    app->setStyleSheet(bytes);
+
     MainWindow w;
+    w.setFixedSize(w.width(),w.height());
     w.show();
 
     /*DatabaseManipulator *db = new DatabaseManipulator();

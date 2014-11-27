@@ -42,10 +42,11 @@ public:
     bool isWorking();
     void setWorking(bool working);
 
+    QTimer *timer;
+
 private:
     vector<Worker*> workers;
     Product *product;
-    QTimer *timer;
 
     int dailyCount;
     int maxWorkers;
