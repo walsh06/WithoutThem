@@ -27,6 +27,8 @@ public:
 
     void addStation(WorkStation* station);
     void removeStation(WorkStation* station);
+    void addWorker(Worker* worker);
+    void removeWorker(Worker* worker);
 
     double getMoney();
     void setMoney(double money);
@@ -59,6 +61,7 @@ private:
 public slots:
 
     void startDay();
+    void setWage(double wage);
 
 private slots:
 

@@ -12,9 +12,10 @@
 #include <WorkStation.h>
 #include <vector>
 
+#include "Worker.h"
+
 
 using namespace std;
-
 namespace Ui {
 class GameScreen;
 }
@@ -37,7 +38,14 @@ private slots:
     void updateWSView(int num);
 
     void updateTimer();
+    void updateFactory(int dayCount, double money, int workerCount);
+    void updateWorkers(std::vector<Worker*> workers);
 
+signals:
+   void updateWage(double wage);
+
+private slots:
+    void on_setWageBox_valueChanged(double arg1);
 
 private:
     Ui::GameScreen *ui;

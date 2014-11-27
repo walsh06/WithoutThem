@@ -23,6 +23,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ws->assignWorker(worker1);
 
+
+    factory->addWorker(worker1);
+    factory->addWorker(worker2);
+    factory->addWorker(worker3);
+
     factory->addStation(ws);
 
     factory->startDay();
