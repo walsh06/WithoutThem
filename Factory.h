@@ -10,10 +10,12 @@
 #include "Worker.h"
 #include "StatsList.h"
 #include "Product.h"
+#include "GenerateWorker.h"
 #include "WorkStation.h"
 #include "QTimer"
 #include <iomanip>
 #include "GameScreen.h"
+#include "Popup.h"
 
 
 class EventSystem;
@@ -50,19 +52,22 @@ private:
 
     //TO DO:
     //Add Worker List
+    Popup* popup;
     vector<Worker *> workers;
+    vector<Worker *> nw;
     double money;
     vector<WorkStation *> stations;
     QTimer *timer;
     EventSystem* eventSystem;
     int dayCount;
+    GenerateWorker* gw;
 
     GameScreen* gameScreen;
 public slots:
-
+    void hireNewEmps();
     void startDay();
     void setWage(double wage);
-
+    void addNewHire(Worker* w);
 private slots:
 
     void endDay();

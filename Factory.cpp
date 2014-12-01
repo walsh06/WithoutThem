@@ -1,5 +1,9 @@
 #include "Factory.h"
+#include "iostream"
+#include "GenerateWorker.h"
 #include "EventSystem.h"
+#include "Popup.h"
+
 Factory::Factory(GameScreen* gameScreen)
 {
     this->money = 1000.00;
@@ -14,7 +18,9 @@ Factory::Factory(GameScreen* gameScreen)
     srand(time(0));
     this->gameScreen = gameScreen;
     this->gameScreen->setStations(stations);
+    gw = new GenerateWorker();
     connect(gameScreen, SIGNAL(updateWage(double)), this, SLOT(setWage(double)));
+    connect(gameScreen,SIGNAL(hireEmps()), this, SLOT(hireNewEmps()));
 }
 
 void Factory::startDay()
@@ -166,4 +172,28 @@ void Factory::setWage(double wage)
     {
         worker->setWagePerDay(wage);
     }
+}
+
+
+void Factory::hireNewEmps()
+{
+    int i, num = (rand() % 3) + 2;
+    vector<Worker* > nw;
+    for(vector<Worker*>::size_type i = 0; i < num; i++){
+        nw.push_back(gw->generateWorker());
+    }
+
+    popup = new Popup();
+
+    connect(popup,SIGNAL(addNewWorker(Worker*)),this, SLOT(addNewHire(Worker*)));
+    popup->addWorkers(nw, num);
+    popup->exec();
+}
+
+void Factory::addNewHire(Worker *w)
+{
+    addWorker(w);
+    cout << workers.size() << endl;
+    gameScreen->updateWorkers(workers);
+
 }

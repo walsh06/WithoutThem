@@ -169,6 +169,19 @@
       </rect>
      </property>
     </widget>
+    <widget class="QPushButton" name="generateWorker">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>500</y>
+       <width>131</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string> Find New Workers</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QStackedWidget" name="stackedWidget">

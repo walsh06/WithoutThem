@@ -21,17 +21,10 @@ MainWindow::MainWindow(QWidget *parent) :
     Worker *worker1 = new Worker("Cathal", skills::SEAMSTRESS);
     Worker *worker2 = new Worker("Liam", skills::CARPENTER);
     Worker *worker3 = new Worker("Killian", skills::FARMER);
-    GenerateWorker* gw = new GenerateWorker();
-    gw->generateWorker();
-    Worker *worker4 = gw->getWorker();
-    gw->generateWorker();
-    Worker *worker5 = gw->getWorker();
 
-    worker1->printWorker();
-    worker2->printWorker();
-    worker3->printWorker();
-    worker4->printWorker();
-    worker5->printWorker();
+    std::cout<< worker1->printWorker() << std::endl;
+    std::cout<< worker2->printWorker() << std::endl;
+    std::cout<< worker3->printWorker() << std::endl;
 
     WorkStation *ws = new WorkStation("Uniform");
 

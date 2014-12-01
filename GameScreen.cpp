@@ -1,5 +1,7 @@
 #include "GameScreen.h"
 #include "ui_GameScreen.h"
+#include "Factory.h"
+
 GameScreen::GameScreen(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GameScreen)
@@ -89,4 +91,9 @@ void GameScreen::setStations(vector<WorkStation*>  &stations)
         cout << station->getDailyCount() << endl;
     }
 
+}
+
+void GameScreen::on_generateWorker_clicked()
+{
+    emit hireEmps();
 }

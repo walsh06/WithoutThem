@@ -2,6 +2,10 @@
 #define WORKERBACKGROUND_H
 
 #include <string>
+#include <math.h>
+#include <stdlib.h>
+#include <ctime>
+#include <cstdlib>
 
 class WorkerBackground
 {

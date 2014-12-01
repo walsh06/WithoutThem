@@ -29,9 +29,9 @@ public:
     int getSkill(skillsType type);
     bool isWorking();
     void setWorking(bool working);
-    void printWorker();
-    void setBackground(WorkerBackground background);
+    string printWorker();
     WorkerBackground getBackground();
+    void setBackground(WorkerBackground background);
 private:
     WorkerBackground background;
     bool working;

@@ -6,11 +6,9 @@ class GenerateWorker
 {
 public:
     GenerateWorker();
-    Worker* getWorker();
-    void generateWorker();
+    Worker* generateWorker();
     string generateAttribute(string filename);
 private:
-    Worker* worker;
 };
 
 #endif // GENERATEWORKER_H

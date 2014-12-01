@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     GenerateWorker.cpp \
     WorkerBackground.cpp \
     GameScreen.cpp \
-    WorkStation.cpp
+    WorkStation.cpp \
+    Popup.cpp
 
 HEADERS  += mainwindow.h \
     Factory.h \
@@ -57,13 +58,15 @@ HEADERS  += mainwindow.h \
     GenerateWorker.h \
     WorkerBackground.h \
     GameScreen.h \
-    WorkStation.h
+    WorkStation.h \
+    Popup.h
 
 CONFIG += c++11
 
 
 FORMS    += mainwindow.ui \
-    GameScreen.ui
+    GameScreen.ui \
+    popup.ui
 
 
 RESOURCES += \

@@ -16,7 +16,6 @@ Worker::Worker(string name, skillsType type)
     wagePerDay = 6.50;
     moral = 1;
     working = true;
-    WorkerBackground background();
 }
 
 string Worker::getName()
@@ -136,14 +135,24 @@ void Worker::setWorking(bool working)
     this->working=working;
 }
 
-void Worker::printWorker()
+string Worker::printWorker()
 {
-    cout << "Name: " << name << " Age: " << background.getAge();
-    cout << " Number of children:" << background.getNumChildren();
-    cout << " Husband: " << background.hasHusband();
-    cout << " Number of siblings:" << background.getNumSiblings();
-    cout << " XP:" << xp<< " Wage per day: " << getWagePerDay();
-    cout << " Mec:" << stats.getMachinerySkill();
-    cout << " Farm:" << stats.getFarmingSkill() <<" Seam:" << stats.getTextileSkill();
-    cout << " Build:" << stats.getBuildingSkill() << " Car: "<< stats.getCarpentrySkill() << endl;
+    string emp;
+    string names = "Name: " + name + "\n Age: " + to_string(background.getAge()) + "\n";
+    string child = " Number of children:" + to_string(background.getNumChildren()) + "\n";
+    string hus;
+    if(background.hasHusband()){
+        hus = " Husband: true\n";
+    }else{
+        hus = " Husband: false\n";
+    }
+    string sibs = " Number of siblings:" + to_string(background.getNumSiblings()) + "\n";
+    string exp = " XP:" + to_string(xp) + "\n" + " Wage per day: "
+                 + to_string(getWagePerDay()) + "\n";
+    string mec = " Mec:" + to_string(stats.getMachinerySkill()) + "\n";
+    string farm = " Farm:" + to_string(stats.getFarmingSkill()) + "\n"
+                + " Seam:" + to_string(stats.getTextileSkill()) + "\n";
+    string build = " Build:" + to_string(stats.getBuildingSkill()) + "\n"
+                   + " Car: " + to_string(stats.getCarpentrySkill()) + "\n";
+    return emp = names + child + hus + sibs + exp + mec + farm + build;
 }

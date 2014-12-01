@@ -45,9 +45,12 @@ public slots:
 
 signals:
    void updateWage(double wage);
+   void hireEmps();
 
 private slots:
     void on_setWageBox_valueChanged(double arg1);
+
+    void on_generateWorker_clicked();
 
 private:
     Ui::GameScreen *ui;

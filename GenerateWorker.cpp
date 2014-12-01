@@ -3,6 +3,8 @@
 #include <string>
 #include <stdlib.h>
 #include <math.h>
+#include <ctime>
+#include <cstdlib>
 #include "GenerateWorker.h"
 #include "WorkerBackground.h"
 #include "Worker.h"
@@ -15,14 +17,10 @@ using namespace skills;
 GenerateWorker::GenerateWorker()
 {
     //constructor
+    srand(time(0));
 }
 
-Worker* GenerateWorker::getWorker()
-{
-    return this->worker;
-}
-
-void GenerateWorker::generateWorker()
+Worker* GenerateWorker::generateWorker()
 {
     int random = 0;
     string name;
@@ -32,7 +30,8 @@ void GenerateWorker::generateWorker()
     random = rand() % skillsType::SIZE_OF_SKILLS;
     skillsType workerSkill = (skillsType)random;
     Worker *worker = new Worker(name, workerSkill);
-
+    WorkerBackground gb;
+    worker->setBackground(gb);
     worker->setMoral(rand() % 4);
 
     double wage = (rand() % (19-7))+7;
@@ -65,7 +64,7 @@ void GenerateWorker::generateWorker()
         stats.setBuildingSkill(skill2);
     }
     worker->setStatsList(stats);
-    this->worker = worker;
+    return worker;
 }
 
 string GenerateWorker::generateAttribute(string filename)
