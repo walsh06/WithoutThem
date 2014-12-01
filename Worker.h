@@ -14,7 +14,7 @@ using namespace std;
 class Worker
 {
 public:
-    Worker(string name,skillsType type);
+    Worker(string name);
 
     double getWagePerDay();
     void setWagePerDay(double wage);
@@ -36,7 +36,6 @@ private:
     WorkerBackground background;
     bool working;
     int moral;
-    skillsType type;
     string name;
     //TO DO: int age; Age may need to factor in time and birthdays,
     StatsList stats;

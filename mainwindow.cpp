@@ -18,9 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     Factory *factory = new Factory(ui->gameScreen);
 
-    Worker *worker1 = new Worker("Cathal", skills::SEAMSTRESS);
-    Worker *worker2 = new Worker("Liam", skills::CARPENTER);
-    Worker *worker3 = new Worker("Killian", skills::FARMER);
+    Worker *worker1 = new Worker("Cathal");
+    Worker *worker2 = new Worker("Liam");
+    Worker *worker3 = new Worker("Killian");
 
     std::cout<< worker1->printWorker() << std::endl;
     std::cout<< worker2->printWorker() << std::endl;

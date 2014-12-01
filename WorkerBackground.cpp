@@ -2,7 +2,6 @@
 
 WorkerBackground::WorkerBackground()
 {
-    srand(time(0));
     this->numChildren = rand() % 6;
     this->age = (rand() % 25) + 25;
     this->numSiblings = rand() % 3;

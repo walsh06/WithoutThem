@@ -18,7 +18,6 @@ Factory::Factory(GameScreen* gameScreen)
     srand(time(0));
     this->gameScreen = gameScreen;
     this->gameScreen->setStations(stations);
-    gw = new GenerateWorker();
     connect(gameScreen, SIGNAL(updateWage(double)), this, SLOT(setWage(double)));
     connect(gameScreen,SIGNAL(hireEmps()), this, SLOT(hireNewEmps()));
 }
@@ -180,7 +179,7 @@ void Factory::hireNewEmps()
     int i, num = (rand() % 3) + 2;
     vector<Worker* > nw;
     for(vector<Worker*>::size_type i = 0; i < num; i++){
-        nw.push_back(gw->generateWorker());
+        nw.push_back(generateW::generateWorker());
     }
 
     popup = new Popup();

@@ -32,7 +32,11 @@ void Popup::addWorkers(vector<Worker*> nw, int num)
     if(num > 2){
         activateSlots(num);
     }
-    /*
+    /*Worker* w1 = new Worker("Killian");
+    Worker* w2 = new Worker("Kan");
+    Worker* w3 = new Worker("Ian");
+    Worker* w4 = new Worker("Kill");
+
     std::vector<int>::size_type i = 0;
     for(auto &w: nw){
         populateCells(w, listWidgets[i]);
@@ -75,4 +79,22 @@ void Popup::on_pushButton_clicked()
 {
     this->close();
     emit addNewWorker(nw[0]);
+}
+
+void Popup::on_pushButton_2_clicked()
+{
+    this->close();
+    emit addNewWorker(nw[1]);
+}
+
+void Popup::on_pushButton_3_clicked()
+{
+    this->close();
+    emit addNewWorker(nw[2]);
+}
+
+void Popup::on_pushButton_4_clicked()
+{
+    this->close();
+    emit addNewWorker(nw[3]);
 }

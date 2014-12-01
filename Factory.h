@@ -60,7 +60,6 @@ private:
     QTimer *timer;
     EventSystem* eventSystem;
     int dayCount;
-    GenerateWorker* gw;
 
     GameScreen* gameScreen;
 public slots:

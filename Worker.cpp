@@ -6,13 +6,11 @@
 
 using namespace skills;
 
-Worker::Worker(string name, skillsType type)
+Worker::Worker(string name)
 {
     this->name = name;
-    this->type = type;
     nextLevel = 5;
     xp = 0;
-    srand(time(0));
     wagePerDay = 6.50;
     moral = 1;
     working = true;
