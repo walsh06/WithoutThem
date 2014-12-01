@@ -64,6 +64,7 @@ private:
     GameScreen* gameScreen;
 public slots:
     void hireNewEmps();
+    void assignNewWorker(const QString& s);
     void startDay();
     void setWage(double wage);
     void addNewHire(Worker* w);

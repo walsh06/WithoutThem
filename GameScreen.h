@@ -46,11 +46,14 @@ public slots:
 signals:
    void updateWage(double wage);
    void hireEmps();
+   void timeToAssign(const QString& s);
 
 private slots:
     void on_setWageBox_valueChanged(double arg1);
 
     void on_generateWorker_clicked();
+
+    void on_assignWorkerButton_clicked();
 
 private:
     Ui::GameScreen *ui;

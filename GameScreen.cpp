@@ -40,6 +40,7 @@ void GameScreen::updateWorkers(std::vector<Worker*> workers)
     }
 }
 
+
 void GameScreen::on_pushButton_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(ui->stackedWidget->currentIndex() + 1);
@@ -96,4 +97,15 @@ void GameScreen::setStations(vector<WorkStation*>  &stations)
 void GameScreen::on_generateWorker_clicked()
 {
     emit hireEmps();
+}
+
+void GameScreen::on_assignWorkerButton_clicked()
+{
+    for(int i = 0; i < ui->workerList->count(); i++){
+        if(ui->workerList->item(i)->isSelected()){
+            const QString& s = ui->workerList->currentItem()->text();
+            emit timeToAssign(s);
+            break;
+        }
+    }
 }
