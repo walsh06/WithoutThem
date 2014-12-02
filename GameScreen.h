@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QGridLayout>
+#include <QMessageBox>
 
 #include <iostream>
 #include <functional>
@@ -30,13 +31,17 @@ public:
     void updateMoney(double money);
     void setStations(vector<WorkStation*> &stations);
     void displayWorkerDetails(Worker* w);
+    void endDayPopup(double wages, double gross, double money);
+    void eventPopup(string event);
 
 private slots:
     void on_pushButton_2_clicked();
 
     void on_pushButton_clicked();
 
-    void updateWSView(int num);
+    void updateWSView();
+
+    void updateCurrentWS(int num);
 
     void updateTimer();
 
@@ -44,6 +49,7 @@ private slots:
 public slots:
     void updateFactory(int dayCount, double money, int workerCount);
     void updateWorkers(std::vector<Worker*> workers);
+    void updateProductList(vector<string> list);
 
 signals:
    void updateWage(double wage);
@@ -64,6 +70,11 @@ private:
     Ui::GameScreen *ui;
     QButtonGroup* wsButtons;
     void initWSButtons();
+    int currentWS = 0;
+
+    vector<WorkStation*> stations;
+
+    int money, wages, gross, income;
 };
 
 #endif // GAMESCREEN_H

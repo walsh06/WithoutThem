@@ -19,7 +19,7 @@ void MoralEvent::update(Factory* factory)
 void MoralEvent::trigger(Factory* factory)
 {
     Printer::printEvent(description);
-
+    factory->getGameScreen()->eventPopup(description);
     factory->changeWorkerMoral(moralChange);
     triggerFactor = startingTriggerFactor;
     startDayCount = factory->getDayCount();

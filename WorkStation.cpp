@@ -1,10 +1,11 @@
 #include "WorkStation.h"
 #include "SkillTypeEnums.h"
+#include "Factory.h"
 
 using namespace skills;
 WorkStation::WorkStation(string s)
 {
-    this->product = db.getProduct(s);
+    this->product = Factory::db.getProduct(s);
     numWorkers = 0;
     maxWorkers = 4;
     dailyCount = 0;
@@ -22,6 +23,12 @@ WorkStation::WorkStation(string s)
 int WorkStation::getDailyCount()
 {
     return dailyCount;
+}
+
+
+int WorkStation::getNumWorkers()
+{
+    return this->numWorkers;
 }
 
 Product* WorkStation::getProduct()
@@ -87,6 +94,7 @@ void WorkStation::makeProduct()
 
 void WorkStation::start()
 {
+    dailyCount = 0;
     makeProduct();
 }
 
@@ -100,6 +108,7 @@ void WorkStation::addProduct()
 {
     //add 1 to product
     dailyCount++;
+    emit updateWS();
 
     for(auto &worker: workers)
     {

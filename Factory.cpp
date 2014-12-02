@@ -4,8 +4,11 @@
 #include "EventSystem.h"
 #include "Popup.h"
 
+
+DatabaseManipulator Factory::db;
 Factory::Factory(GameScreen* gameScreen)
 {
+
     this->money = 1000.00;
 
 
@@ -22,14 +25,19 @@ Factory::Factory(GameScreen* gameScreen)
     connect(gameScreen,SIGNAL(hireEmps()), this, SLOT(hireNewEmps()));
     connect(gameScreen,SIGNAL(checkExistingWorkerDetails(const QString&)), this, SLOT(checkWorkerDetails(const QString&)));
     connect(gameScreen,SIGNAL(fireWorker(const QString&)),this,SLOT(firingWorker(const QString&)));
+
+    //TEMP
+    this->gameScreen->updateProductList(Factory::db.getProductNames());
 }
 
 void Factory::startDay()
 {
     dayCount++;
-
     cout << "Start of day" << endl;
-    eventSystem->update(this);
+    if(dayCount > 5)
+    {
+        eventSystem->update(this);
+    }
     gameScreen->updateFactory(dayCount, money, workers.size());
     gameScreen->updateWorkers(workers);
 
@@ -54,14 +62,14 @@ void Factory::endDay()
 
    //"TEMP - Testing - restart day - should be done on button click or something" << endl;
     timer->stop();
-    startDay();
-
+    gameScreen->endDayPopup(calcWages(), calcGrossIncome(), money);
     // Possibly move to startDay()
     for(auto &worker : workers)
     {
         worker->setWorking(true);
     }
 
+    startDay();
 }
 
 double Factory::getMoney()
@@ -83,7 +91,6 @@ double Factory::calcGrossIncome()
         dailyIncome += (station->getProduct()->getValue() * station->getDailyCount());
     }
 
-    cout << "Income: " << dailyIncome << endl;
     return dailyIncome;
 }
 
@@ -94,7 +101,6 @@ double Factory::calcWages()
     {
         dailyWages += worker->getWagePerDay();
     }
-    cout << "Wages: " << dailyWages << endl;
 
     return dailyWages;
 }
@@ -102,14 +108,15 @@ double Factory::calcWages()
 double Factory::calcNetIncome()
 {
     double net = calcGrossIncome() - calcWages();
-    cout << "net: " << net << endl;
 
     return net;
 }
 
 void Factory::addStation(WorkStation* station)
 {
+    connect(station, SIGNAL(updateWS()), gameScreen, SLOT(updateWSView()));
     stations.push_back(station);
+
 
     this->gameScreen->setStations(stations);
 }
@@ -137,7 +144,7 @@ int Factory::getDayCount()
     return dayCount;
 }
 
-int Factory::changeWorkerMoral(int moral)
+void Factory::changeWorkerMoral(int moral)
 {
     if(workers.size())
     {
@@ -147,7 +154,7 @@ int Factory::changeWorkerMoral(int moral)
     }
 }
 
-int Factory::stopWorkstation()
+void Factory::stopWorkstation()
 {
     if(stations.size())
     {
@@ -157,7 +164,7 @@ int Factory::stopWorkstation()
     }
 }
 
-int Factory::killWorker()
+void Factory::killWorker()
 {
     if(workers.size())
     {
@@ -174,7 +181,6 @@ void Factory::setWage(double wage)
         worker->setWagePerDay(wage);
     }
 }
-
 
 void Factory::hireNewEmps()
 {
@@ -223,4 +229,9 @@ void Factory::firingWorker(const QString& s)
     }
     removeWorker(workers.at(i));
     gameScreen->updateWorkers(workers);
+}
+
+GameScreen* Factory::getGameScreen()
+{
+    return gameScreen;
 }
