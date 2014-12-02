@@ -140,9 +140,9 @@ string Worker::printWorker()
     string child = " Number of children:" + to_string(background.getNumChildren()) + "\n";
     string hus;
     if(background.hasHusband()){
-        hus = " Husband: true\n";
+        hus = " Spouse: true\n";
     }else{
-        hus = " Husband: false\n";
+        hus = " Spouse: false\n";
     }
     string sibs = " Number of siblings:" + to_string(background.getNumSiblings()) + "\n";
     string exp = " XP:" + to_string(xp) + "\n" + " Wage per day: "

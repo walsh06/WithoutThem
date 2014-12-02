@@ -96,15 +96,59 @@ void GameScreen::setStations(vector<WorkStation*>  &stations)
 
 void GameScreen::on_generateWorker_clicked()
 {
+    ui->workerDetails->clear();
     emit hireEmps();
 }
 
-void GameScreen::on_assignWorkerButton_clicked()
+void GameScreen::on_workerDetailsButton_clicked()
 {
+    ui->workerDetails->clear();
     for(int i = 0; i < ui->workerList->count(); i++){
         if(ui->workerList->item(i)->isSelected()){
             const QString& s = ui->workerList->currentItem()->text();
-            emit timeToAssign(s);
+            emit checkExistingWorkerDetails(s);
+            break;
+        }
+    }
+}
+
+void GameScreen::displayWorkerDetails(Worker* w)
+{
+    ui->workerDetails->addItem(QString::fromStdString("Name: " + w->getName()));
+    ui->workerDetails->addItem(QString::fromStdString("Age: "
+                               + std::to_string(w->getBackground().getAge())));
+    if(w->getBackground().hasHusband()){
+        ui->workerDetails->addItem(QString::fromStdString("Spouse: true"));
+    }else{
+        ui->workerDetails->addItem(QString::fromStdString("Spouse: false"));
+    }
+    ui->workerDetails->addItem(QString::fromStdString("Daily Wage: "
+                               + std::to_string(w->getWagePerDay())));
+    ui->workerDetails->addItem(QString::fromStdString("Worker Moral: "
+                               + std::to_string(w->getMoral())));
+    ui->workerDetails->addItem(QString::fromStdString("Build skill: "
+                               + std::to_string(w->getStats().getBuildingSkill())));
+    ui->workerDetails->addItem(QString::fromStdString("Carpentry skill: "
+                               + std::to_string(w->getStats().getCarpentrySkill())));
+    ui->workerDetails->addItem(QString::fromStdString("Machine skill: "
+                               + std::to_string(w->getStats().getMachinerySkill())));
+    ui->workerDetails->addItem(QString::fromStdString("Farm skill: "
+                               + std::to_string(w->getStats().getFarmingSkill())));
+    ui->workerDetails->addItem(QString::fromStdString("Textile skill: "
+                               + std::to_string(w->getStats().getTextileSkill())));
+    ui->workerDetails->addItem(QString::fromStdString("Childern: "
+                               + std::to_string(w->getBackground().getNumChildren())));
+    ui->workerDetails->addItem(QString::fromStdString("Siblings: "
+                               + std::to_string(w->getBackground().getNumSiblings())));
+}
+
+void GameScreen::on_fireWorker_clicked()
+{
+    ui->workerDetails->clear();
+    for(int i = 0; i < ui->workerList->count(); i++){
+        if(ui->workerList->item(i)->isSelected()){
+            const QString& s = ui->workerList->currentItem()->text();
+            emit fireWorker(s);
             break;
         }
     }

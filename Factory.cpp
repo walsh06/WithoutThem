@@ -20,7 +20,8 @@ Factory::Factory(GameScreen* gameScreen)
     this->gameScreen->setStations(stations);
     connect(gameScreen, SIGNAL(updateWage(double)), this, SLOT(setWage(double)));
     connect(gameScreen,SIGNAL(hireEmps()), this, SLOT(hireNewEmps()));
-    connect(gameScreen,SIGNAL(timeToAssign(const QString&)), this, SLOT(assignNewWorker(const QString&)));
+    connect(gameScreen,SIGNAL(checkExistingWorkerDetails(const QString&)), this, SLOT(checkWorkerDetails(const QString&)));
+    connect(gameScreen,SIGNAL(fireWorker(const QString&)),this,SLOT(firingWorker(const QString&)));
 }
 
 void Factory::startDay()
@@ -193,22 +194,33 @@ void Factory::hireNewEmps()
 void Factory::addNewHire(Worker *w)
 {
     addWorker(w);
-    cout << workers.size() << endl;
     gameScreen->updateWorkers(workers);
+    gameScreen->displayWorkerDetails(w);
 
 }
 
 
-
-
-
-//NEED TO FINISH THIS OFF.
-void Factory::assignNewWorker(const QString& s)
+void Factory::checkWorkerDetails(const QString& s)
 {
-    for(int i = 0; i < this->workers.size(); i ++){
+    int i = 0;
+    for(i = 0; i < this->workers.size(); i ++){
         if(s.toStdString() == workers.at(i)->getName()){
-            std::cout<< "Found the hired worker" << std::endl;
             break;
         }
     }
+    Worker* w = workers.at(i);
+    gameScreen->displayWorkerDetails(w);
+
+}
+
+void Factory::firingWorker(const QString& s)
+{
+    int i = 0;
+    for(i = 0; i < this->workers.size(); i ++){
+        if(s.toStdString() == workers.at(i)->getName()){
+            break;
+        }
+    }
+    removeWorker(workers.at(i));
+    gameScreen->updateWorkers(workers);
 }

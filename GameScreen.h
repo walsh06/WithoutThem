@@ -29,6 +29,7 @@ public:
     ~GameScreen();
     void updateMoney(double money);
     void setStations(vector<WorkStation*> &stations);
+    void displayWorkerDetails(Worker* w);
 
 private slots:
     void on_pushButton_2_clicked();
@@ -39,6 +40,7 @@ private slots:
 
     void updateTimer();
 
+
 public slots:
     void updateFactory(int dayCount, double money, int workerCount);
     void updateWorkers(std::vector<Worker*> workers);
@@ -46,14 +48,17 @@ public slots:
 signals:
    void updateWage(double wage);
    void hireEmps();
-   void timeToAssign(const QString& s);
+   void checkExistingWorkerDetails(const QString& s);
+   void fireWorker(const QString& s);
 
 private slots:
     void on_setWageBox_valueChanged(double arg1);
 
     void on_generateWorker_clicked();
 
-    void on_assignWorkerButton_clicked();
+    void on_workerDetailsButton_clicked();
+
+    void on_fireWorker_clicked();
 
 private:
     Ui::GameScreen *ui;
