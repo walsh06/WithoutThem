@@ -33,7 +33,7 @@ void MainWindow::startGame()
 
     Worker *worker1 = new Worker("Cathal", skills::SEAMSTRESS);
 
-    WorkStation *ws = new WorkStation("Uniform");
+    WorkStation *ws = new WorkStation("Helmet");
 
     ws->assignWorker(worker1);
 

@@ -27,7 +27,6 @@ Factory::Factory(GameScreen* gameScreen)
 void Factory::startDay()
 {
     dayCount++;
-    cout << "Start of day" << endl;
     if(dayCount > 5)
     {
         eventSystem->update(this);

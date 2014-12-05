@@ -13,7 +13,6 @@ WorkStation::WorkStation(string s)
     remainingTime = 0;
 
     this->timer = new QTimer(this);
-
     connect(timer, SIGNAL(timeout()), this, SLOT(addProduct()));
     working = true;
 }
@@ -34,6 +33,13 @@ int WorkStation::getNumWorkers()
 Product* WorkStation::getProduct()
 {
     return product;
+}
+
+void WorkStation::setProduct(string product)
+{
+    this->product = Factory::db.getProduct(product);
+    this->timer->stop();
+    this->makeProduct();
 }
 
 void WorkStation::assignWorker(Worker* worker)
@@ -130,6 +136,7 @@ void WorkStation::setWorking(bool working)
 {
     this->working=working;
 }
+
 
 
 

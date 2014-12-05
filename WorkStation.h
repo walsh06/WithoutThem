@@ -34,6 +34,7 @@ public:
     int getNumWorkers();
 
     Product* getProduct();
+    void setProduct(string product);
 
     int calcTime();
 
@@ -56,6 +57,7 @@ private:
     int remainingTime;
 
     bool working;
+
 
 public slots:
 

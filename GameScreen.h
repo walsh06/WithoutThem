@@ -42,18 +42,23 @@ private slots:
 
     void updateCurrentWS(int num);
 
-    void updateTimer();
 
 public slots:
     void updateFactory(int dayCount, double money, int workerCount);
     void updateWorkers(std::vector<Worker*> workers);
     void updateProductList(vector<string> list);
 
+    void updateTimer();
+
 signals:
    void updateWage(double wage);
 
 private slots:
     void on_setWageBox_valueChanged(double arg1);
+
+    void on_manufactureButton_clicked();
+
+    void on_hireButton_clicked();
 
 private:
     Ui::GameScreen *ui;

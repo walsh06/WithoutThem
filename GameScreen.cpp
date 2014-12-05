@@ -6,6 +6,9 @@ GameScreen::GameScreen(QWidget *parent) :
 {
     ui->setupUi(this);
     initWSButtons();
+
+
+
 }
 
 GameScreen::~GameScreen()
@@ -22,12 +25,14 @@ void GameScreen::updateFactory(int dayCount, double money, int workerCount)
 
 void GameScreen::updateProductList(vector<string> list)
 {
+    ui->productList->clear();
+    ui->productList->addItem("Choose Product");
     for(auto &s : list)
     {
         ui->productList->addItem(QString::fromStdString(s));
     }
-    ui->productList->setCurrentIndex(-1);
 }
+
 
 void GameScreen::on_setWageBox_valueChanged(double arg1)
 {
@@ -36,15 +41,23 @@ void GameScreen::on_setWageBox_valueChanged(double arg1)
 
 void GameScreen::updateWorkers(std::vector<Worker*> workers)
 {
+
+
     while(ui->workerList->count()>0)
     {
       ui->workerList->takeItem(0);//handle the item if you don't
                               //have a pointer to it elsewhere
     }
+
+
+    ui->hireList->clear();
+    ui->hireList->addItem("Choose Worker");
     for(auto &worker: workers)
     {
         new QListWidgetItem(QString::fromStdString(worker->getName()), ui->workerList);
+        ui->hireList->addItem(QString::fromStdString(worker->getName()));
     }
+
 }
 
 void GameScreen::on_pushButton_2_clicked()
@@ -99,15 +112,35 @@ void GameScreen::updateWSView()
         int daily = stations[currentWS]->getDailyCount();
         this->ui->prodcount->setText(QString::fromStdString("Products Generated Today: " +
                                                               to_string(daily)));
+
+        string item = "Manufacturing : " + stations[currentWS]->getProduct()->getName();
+        ui->manufactureLabel->setText(QString::fromStdString(item));
+
+        updateTimer();
+
+
     } else {
         this->ui->stationWorkerCount->setText(QString::fromStdString("No. of Workers: N/A"));
         this->ui->prodcount->setText(QString::fromStdString("Products Generated Today: N/A"));
+        ui->manufactureLabel->setText(QString::fromStdString("Manufacturing : N/A"));
     }
 }
 
 void GameScreen::updateTimer()
 {
 
+    QTime time(0,0,0);
+    if(currentWS < stations.size())
+    {
+       time = QTime(stations[currentWS]->timer->remainingTime() / 60000,
+                   stations[currentWS]->timer->remainingTime() / 1000,
+                   0);
+    }
+        this->ui->timeEdit->setTime(time);
+
+
+
+    QTimer::singleShot(100, this, SLOT(updateTimer()));
 }
 
 void GameScreen::setStations(vector<WorkStation*>  &stations)
@@ -151,4 +184,19 @@ void GameScreen::endDayPopup(double wages, double gross, double money)
                 QString::fromStdString("\n Money: ") + QString::number(money));
     box.setWindowTitle("End Of Day");
     box.exec();*/
+}
+
+
+    //Breaks.
+    //stations[currentWS]->setProduct(ui->productList->currentText().toStdString());
+
+void GameScreen::on_manufactureButton_clicked()
+{
+    if(ui->productList->currentIndex() > 0)
+        stations[currentWS]->setProduct(ui->productList->currentText().toStdString());
+}
+
+void GameScreen::on_hireButton_clicked()
+{
+
 }
