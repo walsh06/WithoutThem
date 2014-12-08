@@ -21,7 +21,6 @@ void ReHireWindow::on_rehireButton_clicked()
     for(int i = 0; i < ui->firedList->count(); i++){
         if(ui->firedList->item(i)->isSelected()){
             const QString& s = ui->firedList->currentItem()->text();
-            std::cout<<"name = " + s.toStdString() << std::endl;
             emit rehiring(s);
             break;
         }
@@ -30,17 +29,32 @@ void ReHireWindow::on_rehireButton_clicked()
 
 void ReHireWindow::on_compareWorkers_clicked()
 {
+    QString s1, s2;
+    ui->compareWindow->clear();
+    for(int i = 0; i < ui->firedList->count(); i++){
+        if(ui->firedList->item(i)->isSelected()){
+            s1 = ui->firedList->currentItem()->text();
+            break;
+        }
+    }
+    for(int j = 0; j < ui->employeesList->count(); j++){
+        if(ui->employeesList->item(j)->isSelected()){
+            s2 = ui->employeesList->currentItem()->text();
+            break;
+        }
+    }
 
+    const QString& str1 = s1;
+    const QString& str2 = s2;
+    emit compareWorkers(str1, str2);
 }
 
-//Fix this and start the rest.
 void ReHireWindow::on_workerDetailsButton_clicked()
 {
     ui->compareWindow->clear();
-    ui->employeesList->clear();
     for(int i = 0; i < ui->firedList->count(); i++){
-        if(ui->employeesList->item(i)->isSelected()){
-            const QString& s = ui->employeesList->currentItem()->text();
+        if(ui->firedList->item(i)->isSelected()){
+            const QString& s = ui->firedList->currentItem()->text();
             emit checkFiredWorkerDetails(s);
             break;
         }
@@ -77,7 +91,12 @@ void ReHireWindow::updateDetailsView(Worker* w)
                                + std::to_string(w->getBackground().getNumSiblings())));
 }
 
-void ReHireWindow::updateWorkers(vector<Worker *> firedWorkers)
+void ReHireWindow::updateComparedWorkersWindow(QString s)
+{
+    ui->compareWindow->addItem(s);
+}
+
+void ReHireWindow::updateFiredWorkers(vector<Worker *> firedWorkers)
 {
     while(ui->firedList->count()>0)
     {
@@ -88,5 +107,19 @@ void ReHireWindow::updateWorkers(vector<Worker *> firedWorkers)
     for(auto &worker: firedWorkers)
     {
         new QListWidgetItem(QString::fromStdString(worker->getName()), ui->firedList);
+    }
+}
+
+void ReHireWindow::updateEmployees(vector<Worker*> emps)
+{
+    while(ui->employeesList->count()>0)
+    {
+      ui->employeesList->takeItem(0);//handle the item if you don't
+                              //have a pointer to it elsewhere
+    }
+
+    for(auto &worker: emps)
+    {
+        new QListWidgetItem(QString::fromStdString(worker->getName()), ui->employeesList);
     }
 }

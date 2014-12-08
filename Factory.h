@@ -65,12 +65,14 @@ private:
     QTimer *timer;
     EventSystem* eventSystem;
     int dayCount;
+    int findWorkerByName(vector<Worker*> list, const QString& s);
     int factoryLevel;
     double factoryUpgradeCost;
 
 
     GameScreen* gameScreen;
 public slots:
+    void comparingWorkers(const QString& s1, const QString& s2);
     void findFiredWorker(const QString& s);
     void hireNewEmps();
     void hiringOldEmps();

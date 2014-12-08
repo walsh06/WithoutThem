@@ -133,6 +133,24 @@ void Worker::setWorking(bool working)
     this->working=working;
 }
 
+string Worker::compareWorkers(Worker* w)
+{
+   string compared;
+   compared = "   " + this->name + " | " + w->getName() + "\n";
+   compared += "Mec skills:   " + to_string(stats.getMachinerySkill()) +  "       |       "
+              + to_string(w->getStats().getMachinerySkill()) + "\n";
+   compared += "Farm skills:  " + to_string(stats.getFarmingSkill()) +  "       |       "
+           + to_string(w->getStats().getFarmingSkill()) + "\n";
+   compared += "Seam skills: " + to_string(stats.getTextileSkill()) +  "       |       "
+           + to_string(w->getStats().getTextileSkill()) + "\n";
+   compared += "Build skills:  " + to_string(stats.getBuildingSkill()) +  "       |       "
+           + to_string(w->getStats().getBuildingSkill()) + "\n";
+   compared += "Car skills:     " + to_string(stats.getCarpentrySkill()) +  "       |       "
+           + to_string(w->getStats().getCarpentrySkill()) + "\n";
+   return compared;
+
+}
+
 string Worker::printWorker()
 {
     string emp;
