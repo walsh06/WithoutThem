@@ -14,7 +14,7 @@ WorkStation::WorkStation(string s)
 
     this->timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(addProduct()));
-    working = true;
+    working = false;
 }
 
 
@@ -49,6 +49,12 @@ void WorkStation::assignWorker(Worker* worker)
         workers.push_back(worker);
         numWorkers++;
     }
+
+    if(numWorkers == 1)
+    {
+        working = true;
+        makeProduct();
+    }
 }
 
 void WorkStation::removeWorker(Worker* worker)
@@ -60,6 +66,11 @@ void WorkStation::removeWorker(Worker* worker)
             workers.erase(workers.begin() + i);
             numWorkers--;
         }
+    }
+
+    if(numWorkers < 1)
+    {
+        working = false;
     }
 }
 
@@ -79,6 +90,7 @@ int WorkStation::calcTime()
 
     time = time - workerSkill + (rand() % 10);
     return time < 1? 1 : time ;
+
 }
 
 void WorkStation::makeProduct()
