@@ -12,24 +12,35 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
+    ui->menuStack->setCurrentIndex(1);
 
-    Factory *factory = new Factory();
-
-    Worker *worker1 = new Worker("Cathal", skills::SEAMSTRESS);
-    Worker *worker2 = new Worker("Liam", skills::CARPENTER);
-    Worker *worker3 = new Worker("Killian", skills::FARMER);
-
-    WorkStation *ws = new WorkStation("Uniform");
-
-    ws->assignWorker(worker1);
-
-
-    factory->addStation(ws);
-
-    factory->startDay();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    startGame();
+    ui->menuStack->setCurrentIndex(0);
+}
+
+void MainWindow::startGame()
+{
+    Factory *factory = new Factory(ui->gameScreen);
+
+    Worker *worker1 = new Worker("Cathal", skills::SEAMSTRESS);
+
+    WorkStation *ws = new WorkStation("Helmet");
+
+    ws->assignWorker(worker1);
+
+
+    factory->addWorker(worker1);
+
+    factory->addStation(ws);
+
+    factory->startDay();
 }

@@ -31,8 +31,10 @@ public:
     void assignWorker(Worker* worker);
     void removeWorker(Worker* worker);
     int getDailyCount();
+    int getNumWorkers();
 
     Product* getProduct();
+    void setProduct(string product);
 
     int calcTime();
 
@@ -42,25 +44,30 @@ public:
     bool isWorking();
     void setWorking(bool working);
 
+    QTimer *timer;
+
 private:
     vector<Worker*> workers;
     Product *product;
-    QTimer *timer;
 
     int dailyCount;
     int maxWorkers;
     int numWorkers;
 
     int remainingTime;
-    DatabaseManipulator db;
 
     bool working;
+
 
 public slots:
 
     void makeProduct();
 
     void addProduct();
+
+signals:
+    void updateWS();
+
 
 
 };

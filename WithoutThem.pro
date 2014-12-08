@@ -31,6 +31,7 @@ SOURCES += main.cpp\
     pugixml.cpp \
     DayStrategy.cpp \
     Printer.cpp \
+    GameScreen.cpp \
     WorkStation.cpp
 
 HEADERS  += mainwindow.h \
@@ -39,7 +40,6 @@ HEADERS  += mainwindow.h \
     Product.h \
     StatsList.h \
     SkillTypeEnums.h \
-    WorkStation.h \
     DatabaseManipulator.h \
     GameEvent.h \
     EventSystem.h \
@@ -52,12 +52,16 @@ HEADERS  += mainwindow.h \
     EventStrategy.h \
     DayStrategy.h \
     Printer.h \
+    GameScreen.h \
     WorkStation.h
 
 CONFIG += c++11
 
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    GameScreen.ui
 
-RESOURCES +=
+
+RESOURCES += \
+    images.qrc
     events.xml

@@ -25,6 +25,8 @@ public:
     Product* getProduct(string name);
     Product* getProduct(string table, int level);
     vector<string> getProductNames();
+    vector<string> getProductNames(int level);
+
 
     void upgradeProduct(string name);
 
