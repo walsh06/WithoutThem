@@ -70,6 +70,7 @@ private:
 
     GameScreen* gameScreen;
 public slots:
+    void findFiredWorker(const QString& s);
     void hireNewEmps();
     void hiringOldEmps();
     void checkWorkerDetails(const QString& s);
@@ -77,6 +78,7 @@ public slots:
     void startDay();
     void setWage(double wage);
     void addNewHire(Worker* w);
+    void addingOldWorker(const QString& s);
 private slots:
 
     void endDay();

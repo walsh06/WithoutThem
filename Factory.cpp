@@ -197,7 +197,20 @@ void Factory::hireNewEmps()
     popup->exec();
 }
 
-void Factory::addNewHire(Worker *w)
+void Factory::addingOldWorker(const QString& s)
+{
+    int i = 0;
+    for(i = 0; i < this->firedEmps.size(); i ++){
+        if(s.toStdString() == firedEmps.at(i)->getName()){
+            break;
+        }
+    }
+    Worker* w = firedEmps.at(i);
+    addNewHire(w);
+
+}
+
+void Factory::addNewHire(Worker* w)
 {
     addWorker(w);
     gameScreen->updateWorkers(workers);
@@ -208,9 +221,23 @@ void Factory::addNewHire(Worker *w)
 void Factory::hiringOldEmps()
 {
     rehireWindow = new ReHireWindow();
-    connect(rehireWindow,SIGNAL(rehiring(Worker*)),this, SLOT(addNewHire(Worker*)));
+    connect(rehireWindow,SIGNAL(rehiring(const QString&)),this, SLOT(addingOldWorker(const QString&)));
     rehireWindow->updateWorkers(firedEmps);
+    connect(rehireWindow,SIGNAL(checkFiredWorkerDetails(const QString&)), this, SLOT(findFiredWorker(const QString&)));
+
     rehireWindow->exec();
+}
+
+void Factory::findFiredWorker(const QString& s)
+{
+    int i = 0;
+    for(i = 0; i < this->firedEmps.size(); i ++){
+        if(s.toStdString() == firedEmps.at(i)->getName()){
+            break;
+        }
+    }
+    Worker* w = firedEmps.at(i);
+    rehireWindow->updateDetailsView(w);
 }
 
 

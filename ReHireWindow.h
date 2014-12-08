@@ -22,9 +22,10 @@ public:
 
     void updateWorkers(vector<Worker *> firedWorkers);
 
+    void updateDetailsView(Worker* w);
 signals:
     void checkFiredWorkerDetails(const QString& s);
-    void rehiring(Worker* w);
+    void rehiring(const QString& s);
 
 private slots:
     void on_rehireButton_clicked();
