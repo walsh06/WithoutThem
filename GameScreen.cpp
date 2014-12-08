@@ -59,7 +59,6 @@ void GameScreen::updateWorkers(std::vector<Worker*> workers)
         new QListWidgetItem(QString::fromStdString(worker->getName()), ui->workerList);
         ui->hireList->addItem(QString::fromStdString(worker->getName()));
     }
-
 }
 
 
@@ -267,4 +266,39 @@ void GameScreen::on_rehireWorkerButton_clicked()
 {
     ui->workerDetails->clear();
     emit rehireOldEmps();
+}
+
+
+void GameScreen::displayUpgrade(bool success, int level, double money, double upgradeCost)
+{
+    if(success)
+    {
+        ui->money->setText(QString::number(money));
+        ui->upgradeAmount->setText(QString::number(upgradeCost));
+        QMessageBox::information(
+        this,
+        tr("Succesful Upgrade"),
+        QString::fromStdString("Upgraded Factory to level ") + QString::number(level)
+                );
+
+    }
+    else
+    {
+        QMessageBox::information(
+            this,
+            tr("Failed Upgrade"),
+            QString::fromStdString("Failed to upgrade Factory to next level") +
+            QString::fromStdString("\n Money: ") + QString::number(money) +
+            QString::fromStdString("\n Required: ") + QString::number(upgradeCost));
+    }
+}
+
+void GameScreen::setUpgradeCost(double cost)
+{
+    ui->upgradeAmount->setText(QString::number(cost));
+}
+
+void GameScreen::on_upgradeFactory_clicked()
+{
+    emit factoryUpgrade();
 }
