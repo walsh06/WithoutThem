@@ -19,13 +19,14 @@ class ReHireWindow : public QDialog
 public:
     explicit ReHireWindow(QWidget *parent = 0);
     ~ReHireWindow();
-
-    void updateWorkers(vector<Worker *> firedWorkers);
-
+    void updateFiredWorkers(vector<Worker *> firedWorkers);
     void updateDetailsView(Worker* w);
+    void updateEmployees(vector<Worker *> emps);
+    void updateComparedWorkersWindow(QString s);
 signals:
     void checkFiredWorkerDetails(const QString& s);
     void rehiring(const QString& s);
+    void compareWorkers(const QString& s1, const QString& s2);
 
 private slots:
     void on_rehireButton_clicked();
