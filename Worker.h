@@ -5,6 +5,7 @@
 #include <time.h>
 #include <string>
 #include "StatsList.h"
+#include "WorkerBackground.h"
 #include "SkillTypeEnums.h"
 
 using namespace skills;
@@ -13,26 +14,28 @@ using namespace std;
 class Worker
 {
 public:
-    Worker(string name,skillsType type);
+    Worker(string name);
 
     double getWagePerDay();
     void setWagePerDay(double wage);
     string getName();
     StatsList getStats();
+    void setStatsList(StatsList stats);
     int getMoral();
     void setMoral(int m);
-    //int getAge();
     void levelUp();
     void gainXP(int xp);
 
     int getSkill(skillsType type);
     bool isWorking();
     void setWorking(bool working);
+    string printWorker();
+    WorkerBackground getBackground();
+    void setBackground(WorkerBackground background);
 private:
-    void printWorker();
+    WorkerBackground background;
     bool working;
     int moral;
-    skillsType type;
     string name;
     //TO DO: int age; Age may need to factor in time and birthdays,
     StatsList stats;

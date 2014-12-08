@@ -31,8 +31,12 @@ SOURCES += main.cpp\
     pugixml.cpp \
     DayStrategy.cpp \
     Printer.cpp \
+    GenerateWorker.cpp \
+    WorkerBackground.cpp \
     GameScreen.cpp \
-    WorkStation.cpp
+    WorkStation.cpp \
+    Popup.cpp \
+    ReHireWindow.cpp
 
 HEADERS  += mainwindow.h \
     Factory.h \
@@ -52,14 +56,20 @@ HEADERS  += mainwindow.h \
     EventStrategy.h \
     DayStrategy.h \
     Printer.h \
+    GenerateWorker.h \
+    WorkerBackground.h \
     GameScreen.h \
-    WorkStation.h
+    WorkStation.h \
+    Popup.h \
+    ReHireWindow.h
 
 CONFIG += c++11
 
 
 FORMS    += mainwindow.ui \
-    GameScreen.ui
+    GameScreen.ui \
+    popup.ui \
+    ReHireWindow.ui
 
 
 RESOURCES += \
