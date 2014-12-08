@@ -48,6 +48,7 @@ public:
     void stopWorkstation();
     void killWorker();
     GameScreen* getGameScreen();
+
 private:
     //TO DO:
     //Add Current Product
@@ -58,15 +59,15 @@ private:
     //Add Worker List
     Popup* popup;
     ReHireWindow* rehireWindow;
-    vector<Worker *> workers;
-    vector<Worker *> nw;
-    vector<Worker *> firedEmps;
+    vector<Worker *> workers, firedEmps, nw;
     double money;
     vector<WorkStation *> stations;
     QTimer *timer;
     EventSystem* eventSystem;
     int dayCount;
     int findWorkerByName(vector<Worker*> list, const QString& s);
+    int factoryLevel;
+    double factoryUpgradeCost;
 
 
     GameScreen* gameScreen;
@@ -81,6 +82,8 @@ public slots:
     void setWage(double wage);
     void addNewHire(Worker* w);
     void addingOldWorker(const QString& s);
+
+    void upgradeFactory();
 private slots:
 
     void endDay();

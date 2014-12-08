@@ -10,7 +10,8 @@ Factory::Factory(GameScreen* gameScreen)
 {
 
     this->money = 1000.00;
-
+    this->factoryLevel = 1;
+    this->factoryUpgradeCost = 200;
 
     this->timer = new QTimer(this);
 
@@ -26,9 +27,10 @@ Factory::Factory(GameScreen* gameScreen)
     connect(gameScreen, SIGNAL(checkExistingWorkerDetails(const QString&)), this, SLOT(checkWorkerDetails(const QString&)));
     connect(gameScreen, SIGNAL(fireWorker(const QString&)), this, SLOT(firingWorker(const QString&)));
     connect(gameScreen, SIGNAL(rehireOldEmps()), this, SLOT(hiringOldEmps()));
-
+    connect(gameScreen, SIGNAL(factoryUpgrade()), this, SLOT(upgradeFactory()));
     //TEMP
-    this->gameScreen->updateProductList(Factory::db.getProductNames());
+    this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
+    gameScreen->setUpgradeCost(factoryUpgradeCost);
 }
 
 void Factory::startDay()
@@ -47,7 +49,8 @@ void Factory::startDay()
         station->start();
     }
 
-    timer->start(60000);
+    timer->start(6000);
+    void upgradeFactory();
 }
 
 void Factory::endDay()
@@ -278,4 +281,20 @@ int Factory::findWorkerByName(vector<Worker*> list, const QString& s)
 GameScreen* Factory::getGameScreen()
 {
     return gameScreen;
+}
+
+void Factory::upgradeFactory()
+{
+    if(money > factoryUpgradeCost)
+    {
+        factoryLevel++;
+        money -= factoryUpgradeCost;
+        factoryUpgradeCost = factoryUpgradeCost * 2;
+        gameScreen->displayUpgrade(true, factoryLevel, money, factoryUpgradeCost);
+        this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
+    }
+    else
+    {
+        gameScreen->displayUpgrade(false, factoryLevel, money, factoryUpgradeCost);
+    }
 }
