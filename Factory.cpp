@@ -1,5 +1,9 @@
 #include "Factory.h"
+#include "iostream"
+#include "GenerateWorker.h"
 #include "EventSystem.h"
+#include "Popup.h"
+
 
 DatabaseManipulator Factory::db;
 Factory::Factory(GameScreen* gameScreen)
@@ -18,7 +22,10 @@ Factory::Factory(GameScreen* gameScreen)
     this->gameScreen = gameScreen;
     this->gameScreen->setStations(stations);
     connect(gameScreen, SIGNAL(updateWage(double)), this, SLOT(setWage(double)));
-
+    connect(gameScreen, SIGNAL(hireEmps()), this, SLOT(hireNewEmps()));
+    connect(gameScreen, SIGNAL(checkExistingWorkerDetails(const QString&)), this, SLOT(checkWorkerDetails(const QString&)));
+    connect(gameScreen, SIGNAL(fireWorker(const QString&)), this, SLOT(firingWorker(const QString&)));
+    connect(gameScreen, SIGNAL(rehireOldEmps()), this, SLOT(hiringOldEmps()));
 
     //TEMP
     this->gameScreen->updateProductList(Factory::db.getProductNames());
@@ -173,6 +180,64 @@ void Factory::setWage(double wage)
     {
         worker->setWagePerDay(wage);
     }
+}
+
+void Factory::hireNewEmps()
+{
+    int i, num = (rand() % 3) + 2;
+    vector<Worker* > nw;
+    for(vector<Worker*>::size_type i = 0; i < num; i++){
+        nw.push_back(generateW::generateWorker());
+    }
+
+    popup = new Popup();
+
+    connect(popup,SIGNAL(addNewWorker(Worker*)),this, SLOT(addNewHire(Worker*)));
+    popup->addWorkers(nw, num);
+    popup->exec();
+}
+
+void Factory::addNewHire(Worker *w)
+{
+    addWorker(w);
+    gameScreen->updateWorkers(workers);
+    gameScreen->displayWorkerDetails(w);
+
+}
+
+void Factory::hiringOldEmps()
+{
+    rehireWindow = new ReHireWindow();
+    connect(rehireWindow,SIGNAL(rehiring(Worker*)),this, SLOT(addNewHire(Worker*)));
+    rehireWindow->updateWorkers(firedEmps);
+    rehireWindow->exec();
+}
+
+
+void Factory::checkWorkerDetails(const QString& s)
+{
+    int i = 0;
+    for(i = 0; i < this->workers.size(); i ++){
+        if(s.toStdString() == workers.at(i)->getName()){
+            break;
+        }
+    }
+    Worker* w = workers.at(i);
+    gameScreen->displayWorkerDetails(w);
+
+}
+
+void Factory::firingWorker(const QString& s)
+{
+    int i = 0;
+    for(i = 0; i < this->workers.size(); i ++){
+        if(s.toStdString() == workers.at(i)->getName()){
+            break;
+        }
+    }
+    firedEmps.push_back(workers.at(i));
+    removeWorker(workers.at(i));
+    gameScreen->updateWorkers(workers);
 }
 
 GameScreen* Factory::getGameScreen()

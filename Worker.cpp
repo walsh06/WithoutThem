@@ -1,17 +1,16 @@
 #include "Worker.h"
+#include "WorkerBackground.h"
 #include "SkillTypeEnums.h"
 
 #include <iostream>
 
 using namespace skills;
 
-Worker::Worker(string name, skillsType type)
+Worker::Worker(string name)
 {
     this->name = name;
-    this->type = type;
     nextLevel = 5;
     xp = 0;
-    srand(time(0));
     wagePerDay = 6.50;
     moral = 1;
     working = true;
@@ -25,6 +24,11 @@ string Worker::getName()
 StatsList Worker::getStats()
 {
     return this->stats;
+}
+
+void Worker::setStatsList(StatsList stats)
+{
+    this->stats = stats;
 }
 
 double Worker::getWagePerDay()
@@ -60,6 +64,16 @@ void Worker::setMoral(int m)
     {
         this->moral = m;
     }
+}
+
+void Worker::setBackground(WorkerBackground background)
+{
+    this->background = background;
+}
+
+WorkerBackground Worker::getBackground()
+{
+    return this->background;
 }
 
 void Worker::levelUp()
@@ -106,6 +120,7 @@ int Worker::getSkill(skillsType type)
         return this->stats.getFarmingSkill();
 
     }
+    return -1;
 }
 
 bool Worker::isWorking()
@@ -118,9 +133,24 @@ void Worker::setWorking(bool working)
     this->working=working;
 }
 
-void Worker::printWorker()
+string Worker::printWorker()
 {
-    cout << "Name: " << name << " XP:" << xp<< " Mec:" << stats.getMachinerySkill();;
-    cout << " Farm:" << stats.getFarmingSkill() <<" Seam:" << stats.getTextileSkill();
-    cout << " Build:" << stats.getBuildingSkill() << " Car: "<< stats.getCarpentrySkill() << endl;
+    string emp;
+    string names = "Name: " + name + "\n Age: " + to_string(background.getAge()) + "\n";
+    string child = " Number of children:" + to_string(background.getNumChildren()) + "\n";
+    string hus;
+    if(background.hasHusband()){
+        hus = " Spouse: true\n";
+    }else{
+        hus = " Spouse: false\n";
+    }
+    string sibs = " Number of siblings:" + to_string(background.getNumSiblings()) + "\n";
+    string exp = " XP:" + to_string(xp) + "\n" + " Wage per day: "
+                 + to_string(getWagePerDay()) + "\n";
+    string mec = " Mec:" + to_string(stats.getMachinerySkill()) + "\n";
+    string farm = " Farm:" + to_string(stats.getFarmingSkill()) + "\n"
+                + " Seam:" + to_string(stats.getTextileSkill()) + "\n";
+    string build = " Build:" + to_string(stats.getBuildingSkill()) + "\n"
+                   + " Car: " + to_string(stats.getCarpentrySkill()) + "\n";
+    return emp = names + child + hus + sibs + exp + mec + farm + build;
 }
