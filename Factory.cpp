@@ -211,14 +211,12 @@ void Factory::hireNewEmps()
 
 void Factory::addingOldWorker(const QString& s)
 {
-    int i = 0;
-    for(i = 0; i < this->firedEmps.size(); i ++){
-        if(s.toStdString() == firedEmps.at(i)->getName()){
-            break;
-        }
-    }
+    int i = findWorkerByName(firedEmps, s);
     Worker* w = firedEmps.at(i);
+    firedEmps.erase(std::remove(firedEmps.begin(), firedEmps.end(), w), firedEmps.end());
+    rehireWindow->updateFiredWorkers(firedEmps);
     addNewHire(w);
+    rehireWindow->updateEmployees(workers);
 
 }
 
@@ -234,20 +232,27 @@ void Factory::hiringOldEmps()
 {
     rehireWindow = new ReHireWindow();
     connect(rehireWindow,SIGNAL(rehiring(const QString&)),this, SLOT(addingOldWorker(const QString&)));
-    rehireWindow->updateWorkers(firedEmps);
     connect(rehireWindow,SIGNAL(checkFiredWorkerDetails(const QString&)), this, SLOT(findFiredWorker(const QString&)));
-
+    connect(rehireWindow,SIGNAL(compareWorkers(const QString&, const QString&)), this, SLOT(comparingWorkers(const QString&, const QString&)));
+    rehireWindow->updateFiredWorkers(firedEmps);
+    rehireWindow->updateEmployees(workers);
     rehireWindow->exec();
 }
 
+void Factory::comparingWorkers(const QString& s1, const QString& s2)
+{
+    int i = findWorkerByName(firedEmps, s1);
+    int j = findWorkerByName(workers, s2);
+    Worker* w1 = firedEmps.at(i);
+    Worker* w2 = workers.at(j);
+    string compared = w1->compareWorkers(w2);
+    rehireWindow->updateComparedWorkersWindow(QString::fromStdString(compared));
+}
+
+
 void Factory::findFiredWorker(const QString& s)
 {
-    int i = 0;
-    for(i = 0; i < this->firedEmps.size(); i ++){
-        if(s.toStdString() == firedEmps.at(i)->getName()){
-            break;
-        }
-    }
+    int i = findWorkerByName(firedEmps, s);
     Worker* w = firedEmps.at(i);
     rehireWindow->updateDetailsView(w);
 }
@@ -255,12 +260,7 @@ void Factory::findFiredWorker(const QString& s)
 
 void Factory::checkWorkerDetails(const QString& s)
 {
-    int i = 0;
-    for(i = 0; i < this->workers.size(); i ++){
-        if(s.toStdString() == workers.at(i)->getName()){
-            break;
-        }
-    }
+    int i = findWorkerByName(workers, s);
     Worker* w = workers.at(i);
     gameScreen->displayWorkerDetails(w);
 
@@ -268,15 +268,23 @@ void Factory::checkWorkerDetails(const QString& s)
 
 void Factory::firingWorker(const QString& s)
 {
-    int i = 0;
-    for(i = 0; i < this->workers.size(); i ++){
-        if(s.toStdString() == workers.at(i)->getName()){
-            break;
-        }
-    }
+    int i = findWorkerByName(workers,s);
+
+    workers.at(i)->setMoral(-3);
     firedEmps.push_back(workers.at(i));
     removeWorker(workers.at(i));
     gameScreen->updateWorkers(workers);
+}
+
+int Factory::findWorkerByName(vector<Worker*> list, const QString& s)
+{
+    int i = 0;
+    for(i = 0; i < list.size(); i ++){
+        if(s.toStdString() == list.at(i)->getName()){
+            break;
+        }
+    }
+    return i;
 }
 
 GameScreen* Factory::getGameScreen()

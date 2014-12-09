@@ -32,6 +32,7 @@ public:
     string printWorker();
     WorkerBackground getBackground();
     void setBackground(WorkerBackground background);
+    string compareWorkers(Worker* w);
 private:
     WorkerBackground background;
     bool working;
