@@ -68,8 +68,6 @@ private:
     int findWorkerByName(vector<Worker*> list, const QString& s);
     int factoryLevel;
     double factoryUpgradeCost;
-
-
     GameScreen* gameScreen;
 public slots:
     void comparingWorkers(const QString& s1, const QString& s2);
