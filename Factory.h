@@ -68,6 +68,7 @@ private:
     int factoryLevel;
     double factoryUpgradeCost;
 
+    void addFloor();
 
     GameScreen* gameScreen;
 public slots:

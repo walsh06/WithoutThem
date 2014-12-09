@@ -40,16 +40,13 @@ void MainWindow::startGame()
     std::cout<< worker2->printWorker() << std::endl;
     std::cout<< worker3->printWorker() << std::endl;
 
-    WorkStation *ws = new WorkStation("Helmet");
 
-    ws->assignWorker(worker1);
 
 
     factory->addWorker(worker1);
     factory->addWorker(worker2);
     factory->addWorker(worker3);
 
-    factory->addStation(ws);
 
     factory->startDay();
 }

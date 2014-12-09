@@ -22,6 +22,8 @@ Factory::Factory(GameScreen* gameScreen)
     srand(time(0));
     this->gameScreen = gameScreen;
     this->gameScreen->setStations(stations);
+
+    this->addFloor();
     connect(gameScreen, SIGNAL(updateWage(double)), this, SLOT(setWage(double)));
     connect(gameScreen, SIGNAL(hireEmps()), this, SLOT(hireNewEmps()));
     connect(gameScreen, SIGNAL(checkExistingWorkerDetails(const QString&)), this, SLOT(checkWorkerDetails(const QString&)));
@@ -49,7 +51,7 @@ void Factory::startDay()
         station->start();
     }
 
-    timer->start(6000);    void upgradeFactory();
+    timer->start(60000);
 
 }
 
@@ -113,6 +115,13 @@ double Factory::calcNetIncome()
     double net = calcGrossIncome() - calcWages();
 
     return net;
+}
+
+void Factory::addFloor()
+{
+    addStation(new WorkStation());
+    addStation(new WorkStation());
+    addStation(new WorkStation());
 }
 
 void Factory::addStation(WorkStation* station)
@@ -282,8 +291,13 @@ void Factory::upgradeFactory()
         factoryLevel++;
         money -= factoryUpgradeCost;
         factoryUpgradeCost = factoryUpgradeCost * 2;
-        gameScreen->displayUpgrade(true, factoryLevel, money, factoryUpgradeCost);
+        gameScreen->displayUpgrade(true, factoryLevel, money, factoryUpgradeCost) ;
         this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
+
+        if(factoryLevel % 5 == 0 && factoryLevel < 21)
+        {
+            addFloor();
+        }
     }
     else
     {

@@ -38,9 +38,9 @@ public:
     void setUpgradeCost(double cost);
 
 private slots:
-    void on_pushButton_2_clicked();
+    void on_upButton_clicked();
 
-    void on_pushButton_clicked();
+    void on_downButton_clicked();
 
     void updateWSView();
 
@@ -78,9 +78,6 @@ private slots:
 
     void on_rehireWorkerButton_clicked();
 
-
-    void on_pushButton_3_clicked();
-
     void on_upgradeFactory_clicked();
 
 private:
@@ -88,6 +85,7 @@ private:
     QButtonGroup* wsButtons;
     void initWSButtons();
     int currentWS = 0;
+    int currentFloor = 0;
 
     vector<WorkStation*> stations;
 

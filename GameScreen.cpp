@@ -9,6 +9,8 @@ GameScreen::GameScreen(QWidget *parent) :
     ui->setupUi(this);
     initWSButtons();
 
+    currentFloor = 1;
+
 
 
 }
@@ -62,16 +64,26 @@ void GameScreen::updateWorkers(std::vector<Worker*> workers)
 }
 
 
-void GameScreen::on_pushButton_2_clicked()
+void GameScreen::on_upButton_clicked()
 {
-
-    ui->stackedWidget->setCurrentIndex(ui->stackedWidget->currentIndex() + 1);
+    if (currentFloor + 1 <= stations.size() / 3) {
+        currentFloor++;
+        ui->stackedWidget->setCurrentIndex(ui->stackedWidget->currentIndex() + 1);
+        ui->floorlabel->setText(QString::fromStdString("FLOOR - " +
+                                                       to_string(currentFloor)));
+    }
 }
 
 
-void GameScreen::on_pushButton_clicked()
+void GameScreen::on_downButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(ui->stackedWidget->currentIndex() - 1);
+    if(currentFloor - 1 > 0) {
+
+        currentFloor--;
+        ui->stackedWidget->setCurrentIndex(ui->stackedWidget->currentIndex() - 1);
+        ui->floorlabel->setText(QString::fromStdString("FLOOR - " +
+                                                       to_string(currentFloor)));
+    }
 }
 
 void GameScreen::initWSButtons()
@@ -114,6 +126,7 @@ void GameScreen::updateWSView()
         int daily = stations[currentWS]->getDailyCount();
         this->ui->prodcount->setText(QString::fromStdString("Products Generated Today: " +
                                                               to_string(daily)));
+
 
         string item = "Manufacturing : " + stations[currentWS]->getProduct()->getName();
         ui->manufactureLabel->setText(QString::fromStdString(item));
@@ -195,6 +208,7 @@ void GameScreen::on_manufactureButton_clicked()
 {
     if(ui->productList->currentIndex() > 0)
         stations[currentWS]->setProduct(ui->productList->currentText().toStdString());
+    updateWSView();
 }
 
 void GameScreen::on_hireButton_clicked()

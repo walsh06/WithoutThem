@@ -23,6 +23,9 @@ class WorkStation : public QObject
     Q_OBJECT
 
 public:
+
+    WorkStation();
+
     WorkStation(Product* p);
 
     WorkStation(string s);
