@@ -21,7 +21,7 @@ public:
     ~ReHireWindow();
     void updateFiredWorkers(vector<Worker *> firedWorkers);
     void updateDetailsView(Worker* w);
-    void updateEmployees(vector<Worker *> emps);
+    void updateEmployees(map<string, Worker *> emps);
     void updateComparedWorkersWindow(QString s);
 signals:
     void checkFiredWorkerDetails(const QString& s);

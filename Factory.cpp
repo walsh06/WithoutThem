@@ -69,9 +69,9 @@ void Factory::endDay()
     timer->stop();
     gameScreen->endDayPopup(calcWages(), calcGrossIncome(), money);
     // Possibly move to startDay()
-    for(auto &worker : workers)
+    for(auto &value : workers)
     {
-        worker->setWorking(true);
+        value.second->setWorking(true);
     }
 
     startDay();
@@ -102,9 +102,9 @@ double Factory::calcGrossIncome()
 double Factory::calcWages()
 {
     double dailyWages = 0.00;
-    for(auto &worker : workers)
+    for(auto &value : workers)
     {
-        dailyWages += worker->getWagePerDay();
+        dailyWages += value.second->getWagePerDay();
     }
 
     return dailyWages;
@@ -143,12 +143,26 @@ void Factory::removeStation(WorkStation* station)
 
 void Factory::addWorker(Worker* worker)
 {
-    workers.push_back(worker);
+    workers[worker->getName()]=worker;
 }
 
 void Factory::removeWorker(Worker* worker)
 {
-    workers.erase(std::remove(workers.begin(), workers.end(), worker), workers.end());
+    for(auto &station: stations)
+    {
+        station->removeWorker(worker);
+    }
+
+    workers.erase(worker->getName());
+}
+
+void Factory::removeWorker(string workerName)
+{
+    for(auto &station: stations)
+    {
+        station->removeWorker(workerName);
+    }
+    workers.erase(workerName);
 }
 
 int Factory::getDayCount()
@@ -160,9 +174,12 @@ void Factory::changeWorkerMoral(int moral)
 {
     if(workers.size())
     {
-        int randWorker = rand() % workers.size();
 
-        workers[randWorker]->setMoral(moral);
+        auto it = workers.begin();
+        std::advance(it, rand() % workers.size());
+        Worker* randomWorker = it->second;
+
+        randomWorker->setMoral(moral);
     }
 }
 
@@ -178,10 +195,14 @@ void Factory::stopWorkstation()
 
 void Factory::killWorker()
 {
-    if(workers.size())
+    if(workers.size() > 0)
     {
-    int randWorker = rand() % workers.size();
-    workers.erase(std::remove(workers.begin(), workers.end(),  workers[randWorker]), workers.end());
+
+        auto it = workers.begin();
+        std::advance(it, rand() % workers.size());
+        string randomWorker = it->first;
+
+        removeWorker(randomWorker);
     }
 
 }
@@ -190,7 +211,7 @@ void Factory::setWage(double wage)
 {
     for(auto &worker : workers)
     {
-        worker->setWagePerDay(wage);
+        worker.second->setWagePerDay(wage);
     }
 }
 
@@ -242,9 +263,9 @@ void Factory::hiringOldEmps()
 void Factory::comparingWorkers(const QString& s1, const QString& s2)
 {
     int i = findWorkerByName(firedEmps, s1);
-    int j = findWorkerByName(workers, s2);
+    //int j = findWorkerByName(workers, s2);
     Worker* w1 = firedEmps.at(i);
-    Worker* w2 = workers.at(j);
+    Worker* w2 = workers[s2.toStdString()];
     string compared = w1->compareWorkers(w2);
     rehireWindow->updateComparedWorkersWindow(QString::fromStdString(compared));
 }
@@ -260,19 +281,19 @@ void Factory::findFiredWorker(const QString& s)
 
 void Factory::checkWorkerDetails(const QString& s)
 {
-    int i = findWorkerByName(workers, s);
-    Worker* w = workers.at(i);
+    //int i = findWorkerByName(workers, s);
+    Worker* w = workers[s.toStdString()];
     gameScreen->displayWorkerDetails(w);
 
 }
 
 void Factory::firingWorker(const QString& s)
 {
-    int i = findWorkerByName(workers,s);
+    //int i = findWorkerByName(workers,s);
 
-    workers.at(i)->setMoral(-3);
-    firedEmps.push_back(workers.at(i));
-    removeWorker(workers.at(i));
+    workers[s.toStdString()]->setMoral(-3);
+    firedEmps.push_back(workers[s.toStdString()]);
+    removeWorker(s.toStdString());
     gameScreen->updateWorkers(workers);
 }
 

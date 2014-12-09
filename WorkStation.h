@@ -33,6 +33,7 @@ public:
 
     void assignWorker(Worker* worker);
     void removeWorker(Worker* worker);
+    void removeWorker(string workerName);
     int getDailyCount();
     int getNumWorkers();
 
@@ -50,7 +51,7 @@ public:
     QTimer *timer;
 
 private:
-    vector<Worker*> workers;
+    map<string, Worker*> workers;
     Product *product;
 
     int dailyCount;

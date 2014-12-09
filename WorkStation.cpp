@@ -62,7 +62,7 @@ void WorkStation::assignWorker(Worker* worker)
 {
     if(numWorkers + 1 <= maxWorkers)
     {
-        workers.push_back(worker);
+       workers[worker->getName()] = worker;
         numWorkers++;
     }
 
@@ -75,14 +75,21 @@ void WorkStation::assignWorker(Worker* worker)
 
 void WorkStation::removeWorker(Worker* worker)
 {
-    for(int i =0; i < numWorkers; i++)
+    workers.erase(worker->getName());
+    numWorkers--;
+
+
+    if(numWorkers < 1)
     {
-        if(workers[i] == worker)
-        {
-            workers.erase(workers.begin() + i);
-            numWorkers--;
-        }
+        working = false;
     }
+}
+
+void WorkStation::removeWorker(string workerName)
+{
+    workers.erase(workerName);
+    numWorkers--;
+
 
     if(numWorkers < 1)
     {
@@ -96,11 +103,12 @@ int WorkStation::calcTime()
 
     skillsType type = product->getSkillType();
     int workerSkill = 0;
-    for(auto &worker : workers)
+
+    for(auto &value : workers)
     {
-        if(worker->isWorking())
+        if(value.second->isWorking())
         {
-            workerSkill += (worker->getSkill(type) * worker->getMoral());
+            workerSkill += (value.second->getSkill(type) * value.second->getMoral());
         }
     }
 
@@ -144,9 +152,9 @@ void WorkStation::addProduct()
     dailyCount++;
     emit updateWS();
 
-    for(auto &worker: workers)
+    for(auto &value: workers)
     {
-        worker->gainXP(product->getXP());
+        value.second->gainXP(product->getXP());
     }
 
     //TO DO: Factor in materials etc.
