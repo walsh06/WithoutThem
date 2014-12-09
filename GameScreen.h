@@ -50,7 +50,7 @@ private slots:
 
 public slots:
     void updateFactory(int dayCount, double money, int workerCount);
-    void updateWorkers(std::vector<Worker*> workers);
+    void updateWorkers(std::map<string, Worker*> workers);
     void updateProductList(vector<string> list);
 
     void updateTimer();
@@ -77,9 +77,6 @@ private slots:
     void on_fireWorker_clicked();
 
     void on_rehireWorkerButton_clicked();
-
-
-    void on_pushButton_3_clicked();
 
     void on_upgradeFactory_clicked();
 

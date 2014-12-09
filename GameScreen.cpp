@@ -41,7 +41,7 @@ void GameScreen::on_setWageBox_valueChanged(double arg1)
     emit updateWage(arg1);
 }
 
-void GameScreen::updateWorkers(std::vector<Worker*> workers)
+void GameScreen::updateWorkers(std::map<string, Worker*> workers)
 {
 
 
@@ -56,8 +56,8 @@ void GameScreen::updateWorkers(std::vector<Worker*> workers)
     ui->hireList->addItem("Choose Worker");
     for(auto &worker: workers)
     {
-        new QListWidgetItem(QString::fromStdString(worker->getName()), ui->workerList);
-        ui->hireList->addItem(QString::fromStdString(worker->getName()));
+        new QListWidgetItem(QString::fromStdString(worker.second->getName()), ui->workerList);
+        ui->hireList->addItem(QString::fromStdString(worker.second->getName()));
     }
 }
 

@@ -110,7 +110,7 @@ void ReHireWindow::updateFiredWorkers(vector<Worker *> firedWorkers)
     }
 }
 
-void ReHireWindow::updateEmployees(vector<Worker*> emps)
+void ReHireWindow::updateEmployees(map<string, Worker*> emps)
 {
     while(ui->employeesList->count()>0)
     {
@@ -120,6 +120,6 @@ void ReHireWindow::updateEmployees(vector<Worker*> emps)
 
     for(auto &worker: emps)
     {
-        new QListWidgetItem(QString::fromStdString(worker->getName()), ui->employeesList);
+        new QListWidgetItem(QString::fromStdString(worker.second->getName()), ui->employeesList);
     }
 }

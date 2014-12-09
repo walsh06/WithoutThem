@@ -35,6 +35,8 @@ public:
     void removeStation(WorkStation* station);
     void addWorker(Worker* worker);
     void removeWorker(Worker* worker);
+    void removeWorker(string workerName);
+
 
     double getMoney();
     void setMoney(double money);
@@ -59,7 +61,8 @@ private:
     //Add Worker List
     Popup* popup;
     ReHireWindow* rehireWindow;
-    vector<Worker *> workers, firedEmps, nw;
+    vector<Worker *> firedEmps, nw;
+    map<string, Worker*> workers;
     double money;
     vector<WorkStation *> stations;
     QTimer *timer;
