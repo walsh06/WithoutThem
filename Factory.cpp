@@ -30,6 +30,8 @@ Factory::Factory(GameScreen* gameScreen)
     connect(gameScreen, SIGNAL(fireWorker(const QString&)), this, SLOT(firingWorker(const QString&)));
     connect(gameScreen, SIGNAL(rehireOldEmps()), this, SLOT(hiringOldEmps()));
     connect(gameScreen, SIGNAL(factoryUpgrade()), this, SLOT(upgradeFactory()));
+
+    connect(gameScreen, SIGNAL(hireButton(int, string)), this, SLOT(addWorkerToStation(int, string)));
     //TEMP
     this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
     gameScreen->setUpgradeCost(factoryUpgradeCost);
@@ -65,7 +67,6 @@ void Factory::endDay()
     money += calcNetIncome();
 
 
-   //"TEMP - Testing - restart day - should be done on button click or something" << endl;
     timer->stop();
     gameScreen->endDayPopup(calcWages(), calcGrossIncome(), money);
     // Possibly move to startDay()
@@ -146,6 +147,19 @@ void Factory::addWorker(Worker* worker)
     workers[worker->getName()]=worker;
 }
 
+void Factory::addWorkerToStation(int currentWS, string worker)
+{
+    stations[currentWS]->assignWorker(workers[worker]);
+}
+
+void Factory::removeWorkerFromAnyStation(string workername)
+{
+    for(auto &station: stations)
+    {
+        station->removeWorker(workername);
+    }
+}
+
 void Factory::removeWorker(Worker* worker)
 {
     for(auto &station: stations)
@@ -158,10 +172,7 @@ void Factory::removeWorker(Worker* worker)
 
 void Factory::removeWorker(string workerName)
 {
-    for(auto &station: stations)
-    {
-        station->removeWorker(workerName);
-    }
+    removeWorkerFromAnyStation(workerName);
     workers.erase(workerName);
 }
 

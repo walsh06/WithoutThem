@@ -35,6 +35,8 @@ public:
     void eventPopup(string event);
     void displayUpgrade(bool success, int level, double money, double upgradeCost);
 
+    int getCurrentWS();
+    string getCurrentHire();
     void setUpgradeCost(double cost);
 
 private slots:
@@ -62,6 +64,7 @@ signals:
    void checkExistingWorkerDetails(const QString& s);
    void fireWorker(const QString& s);
    void factoryUpgrade();
+   void hireButton(int currentWS, string workerName);
 
 private slots:
     void on_setWageBox_valueChanged(double arg1);

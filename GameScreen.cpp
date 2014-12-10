@@ -213,7 +213,7 @@ void GameScreen::on_manufactureButton_clicked()
 
 void GameScreen::on_hireButton_clicked()
 {
-
+    emit hireButton(currentWS, ui->hireList->currentText().toStdString());
 }
 
 void GameScreen::on_generateWorker_clicked()

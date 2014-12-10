@@ -32,6 +32,7 @@ public:
 
 
     void assignWorker(Worker* worker);
+    void assignWorker(string workerName);
     void removeWorker(Worker* worker);
     void removeWorker(string workerName);
     int getDailyCount();

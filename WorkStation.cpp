@@ -119,7 +119,7 @@ int WorkStation::calcTime()
 
 void WorkStation::makeProduct()
 {
-    if(working)
+    if(working && product->getSkillType() != skillsType::NONE)
     {
         int time = 0;
         if(remainingTime > 0){
@@ -172,6 +172,8 @@ void WorkStation::setWorking(bool working)
 {
     this->working=working;
 }
+
+
 
 
 
