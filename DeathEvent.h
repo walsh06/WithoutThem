@@ -5,6 +5,7 @@
 #include "GameEvent.h"
 class DeathEvent : public GameEvent
 {
+    //Event class that causes a worker to die
 public:
     DeathEvent(string description, int triggerFactor);
     void update(Factory* factory);

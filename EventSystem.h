@@ -15,6 +15,10 @@
 using namespace std;
 class EventSystem
 {
+    /*Event System class
+     * Maintains list of events
+     * Manages all events by updating and triggering events at random intervals
+    */
 public:
     EventSystem();
 

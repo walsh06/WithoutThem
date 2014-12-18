@@ -81,13 +81,18 @@ void WorkStation::removeWorker(string workerName)
     }
 }
 
+/** Calculates the time to produce a product */
 int WorkStation::calcTime()
 {
+    //get the base time of the product
     int time = product->getTimeCost();
 
+    //get the skill type needed for the product
     skillsType type = product->getSkillType();
     int workerSkill = 0;
 
+    //for each worker in the worker station
+    //Get their skill and their morale
     for(auto &value : workers)
     {
         if(value.second->isWorking())
@@ -96,6 +101,7 @@ int WorkStation::calcTime()
         }
     }
 
+    //get the final time by adding some random noise
     time = time - workerSkill + (rand() % 10);
     return time < 1? 1 : time ;
 

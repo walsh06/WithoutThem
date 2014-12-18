@@ -161,6 +161,7 @@ int Factory::getDayCount()
     return dayCount;
 }
 
+/** Change the morale of a random worker */
 void Factory::changeWorkerMoral(int moral)
 {
     if(workers.size())
@@ -174,6 +175,7 @@ void Factory::changeWorkerMoral(int moral)
     }
 }
 
+/** Temporarily stop a work station */
 void Factory::stopWorkstation()
 {
     if(stations.size())
@@ -184,6 +186,7 @@ void Factory::stopWorkstation()
     }
 }
 
+/** Kill a worker and remove from the game */
 void Factory::killWorker()
 {
     if(workers.size() > 0)
@@ -198,6 +201,7 @@ void Factory::killWorker()
 
 }
 
+/** Update the wage of employees */
 void Factory::setWage(double wage)
 {
     for(auto &worker : workers)
@@ -299,19 +303,24 @@ int Factory::findWorkerByName(vector<Worker*> list, const QString& s)
     return i;
 }
 
+/** Return the game Screen */
 GameScreen* Factory::getGameScreen()
 {
     return gameScreen;
 }
 
+/** Upgrade the factory level */
 void Factory::upgradeFactory()
 {
+    //check if the upgrade is possible
     if(money > factoryUpgradeCost)
     {
         factoryLevel++;
         money -= factoryUpgradeCost;
         factoryUpgradeCost = factoryUpgradeCost * 2;
+        //trigger a pop up of the upgrade
         gameScreen->displayUpgrade(true, factoryLevel, money, factoryUpgradeCost);
+        //update the available products
         this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
     }
     else

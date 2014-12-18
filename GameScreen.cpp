@@ -18,6 +18,7 @@ GameScreen::~GameScreen()
     delete ui;
 }
 
+/** Update the factor statistics */
 void GameScreen::updateFactory(int dayCount, double money, int workerCount)
 {
     ui->days->setText(QString::number(dayCount));
@@ -35,7 +36,7 @@ void GameScreen::updateProductList(vector<string> list)
     }
 }
 
-
+/** Signal that the wage was changed */
 void GameScreen::on_setWageBox_valueChanged(double arg1)
 {
     emit updateWage(arg1);
@@ -150,6 +151,7 @@ void GameScreen::setStations(vector<WorkStation*>  &stations)
     this->stations = stations;
 }
 
+/** Open a pop up when an event occurs */
 void GameScreen::eventPopup(string event)
 {
     QMessageBox::information(
@@ -158,6 +160,7 @@ void GameScreen::eventPopup(string event)
         QString::fromStdString(event));
 }
 
+/** Open a pop up at the end of the day and update finances*/
 void GameScreen::endDayPopup(double wages, double gross, double money)
 {
     this->wages = wages;
@@ -268,7 +271,7 @@ void GameScreen::on_rehireWorkerButton_clicked()
     emit rehireOldEmps();
 }
 
-
+/** Open a pop up that informs the user of their upgrade outcome */
 void GameScreen::displayUpgrade(bool success, int level, double money, double upgradeCost)
 {
     if(success)
@@ -298,6 +301,7 @@ void GameScreen::setUpgradeCost(double cost)
     ui->upgradeAmount->setText(QString::number(cost));
 }
 
+/** Signal that the factory upgrade button was clicked */
 void GameScreen::on_upgradeFactory_clicked()
 {
     emit factoryUpgrade();

@@ -6,7 +6,7 @@
 
 class MoralEvent: public GameEvent
 {
-
+    //Event class that causes a change in morale in workers
 public:
     MoralEvent(string description, int triggerFactor, int moralChange);
     void update(Factory* factory);
