@@ -52,6 +52,7 @@ public slots:
     void updateFactory(int dayCount, double money, int workerCount);
     void updateWorkers(std::map<string, Worker*> workers);
     void updateProductList(vector<string> list);
+    void updateUpdateProductList(vector<string> list);
 
     void updateTimer();
 
@@ -62,6 +63,7 @@ signals:
    void checkExistingWorkerDetails(const QString& s);
    void fireWorker(const QString& s);
    void factoryUpgrade();
+   void productUpgrade(string product);
 
 private slots:
     void on_setWageBox_valueChanged(double arg1);
@@ -79,6 +81,8 @@ private slots:
     void on_rehireWorkerButton_clicked();
 
     void on_upgradeFactory_clicked();
+
+    void on_updateProductsButton_clicked();
 
 private:
     Ui::GameScreen *ui;

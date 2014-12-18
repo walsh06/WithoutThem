@@ -83,6 +83,7 @@ public slots:
     void setWage(double wage);
     void addNewHire(Worker* w);
     void addingOldWorker(const QString& s);
+    void upgradeProduct(string name);
 
     void upgradeFactory();
 private slots:

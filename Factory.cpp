@@ -28,8 +28,10 @@ Factory::Factory(GameScreen* gameScreen)
     connect(gameScreen, SIGNAL(fireWorker(const QString&)), this, SLOT(firingWorker(const QString&)));
     connect(gameScreen, SIGNAL(rehireOldEmps()), this, SLOT(hiringOldEmps()));
     connect(gameScreen, SIGNAL(factoryUpgrade()), this, SLOT(upgradeFactory()));
+    connect(gameScreen, SIGNAL(productUpgrade(string)), this, SLOT(upgradeProduct(string)));
     //TEMP
     this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
+    this->gameScreen->updateUpdateProductList(Factory::db.getProductNames(factoryLevel));
     gameScreen->setUpgradeCost(factoryUpgradeCost);
 }
 
@@ -313,9 +315,14 @@ void Factory::upgradeFactory()
         factoryUpgradeCost = factoryUpgradeCost * 2;
         gameScreen->displayUpgrade(true, factoryLevel, money, factoryUpgradeCost);
         this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
+        this->gameScreen->updateUpdateProductList(Factory::db.getProductNames(factoryLevel));
     }
     else
     {
         gameScreen->displayUpgrade(false, factoryLevel, money, factoryUpgradeCost);
     }
+}
+
+void Factory::upgradeProduct(string name){
+    Factory::db.upgradeProduct(name);
 }
