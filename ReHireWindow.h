@@ -30,17 +30,12 @@ signals:
 
 private slots:
     void on_rehireButton_clicked();
-
     void on_compareWorkers_clicked();
-
     void on_workerDetailsButton_clicked();
 
 private:
-
     vector<Worker*> firedWorkers;
     void displayWorker(Worker* w);
-
-private:
     Ui::ReHireWindow *ui;
 };
 

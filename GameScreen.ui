@@ -297,6 +297,35 @@
       <string>0</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="updateProductsButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>510</y>
+       <width>161</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Update Products</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="productListUpdateBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>480</y>
+       <width>161</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="maxVisibleItems">
+      <number>50</number>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="WorkerTab">
     <attribute name="title">

@@ -26,10 +26,9 @@ class Factory : public QObject
     Q_OBJECT
 
 public:
-    Factory(GameScreen* gameScreen); //TO DO find out why this won't work as not pointer
-
-
+    Factory(GameScreen* gameScreen);
     static DatabaseManipulator db;
+    GameScreen* getGameScreen();
 
     void addStation(WorkStation* station);
     void removeStation(WorkStation* station);
@@ -38,8 +37,6 @@ public:
     void removeWorkerFromAnyStation(string workername);
     void removeWorker(Worker* worker);
     void removeWorker(string workerName);
-
-
     double getMoney();
     void setMoney(double money);
     double calcGrossIncome();
@@ -47,20 +44,11 @@ public:
     double calcNetIncome();
     int getDayCount();
     void changeWorkerMoral();
-
     void changeWorkerMoral(int moral);
     void stopWorkstation();
     void killWorker();
-    GameScreen* getGameScreen();
 
 private:
-    //TO DO:
-    //Add Current Product
-    //Extra:
-    //multiple products/product list
-
-    //TO DO:
-    //Add Worker List
     Popup* popup;
     ReHireWindow* rehireWindow;
     vector<Worker *> firedEmps, nw;
@@ -88,12 +76,16 @@ public slots:
     void setWage(double wage);
     void addNewHire(Worker* w);
     void addingOldWorker(const QString& s);
+<<<<<<< HEAD
 
     void addWorkerToStation(int currentWS, string name);
 
+=======
+    void upgradeProduct(string name);
+>>>>>>> e694275795f2b88fd369ca2ea63cb7a2f89fc905
     void upgradeFactory();
-private slots:
 
+private slots:
     void endDay();
 
 };

@@ -4,6 +4,7 @@
 #include "QListWidgetItem"
 #include "iostream"
 
+/**Creates a new hire pop up window*/
 Popup::Popup(QDialog *parent) :
     QDialog(parent),
     ui(new Ui::Popup)
@@ -21,11 +22,13 @@ Popup::Popup(QDialog *parent) :
     ui->pushButton_4->hide();
 }
 
+/**Destructor*/
 Popup::~Popup()
 {
     delete ui;
 }
 
+/**Adds a list of workers up to the value of 'num'*/
 void Popup::addWorkers(vector<Worker*> nw, int num)
 {
     this->nw = nw;
@@ -59,6 +62,7 @@ void Popup::addWorkers(vector<Worker*> nw, int num)
     }
 }
 
+/**Activates the extra slots if 'num' is greater then 2*/
 void Popup::activateSlots(int num)
 {
     ui->listWidget_3->show();
@@ -69,30 +73,34 @@ void Popup::activateSlots(int num)
     }
 }
 
+/**Populates the windows with new worker's details*/
 void Popup::populateCells(Worker* w, QListWidget* lWidget)
 {
     new QListWidgetItem(QString::fromStdString(w->printWorker()), lWidget);
 }
 
-
+/**Button to hire new worker 1*/
 void Popup::on_pushButton_clicked()
 {
     this->close();
     emit addNewWorker(nw[0]);
 }
 
+/**Button to hire new worker 2*/
 void Popup::on_pushButton_2_clicked()
 {
     this->close();
     emit addNewWorker(nw[1]);
 }
 
+/**Button to hire new worker 3*/
 void Popup::on_pushButton_3_clicked()
 {
     this->close();
     emit addNewWorker(nw[2]);
 }
 
+/**Button to hire new worker 4*/
 void Popup::on_pushButton_4_clicked()
 {
     this->close();

@@ -14,6 +14,7 @@
 using namespace std;
 using namespace skills;
 
+/**Helper class to generate between 2 and 4 random workers*/
 namespace generateW
 {
     Worker* generateWorker()
@@ -61,6 +62,7 @@ namespace generateW
         return worker;
     }
 
+    /**Reads for the 'filename' and selects a random string from the file to return*/
     string generateAttribute(string filename)
     {
         ifstream readFile;
