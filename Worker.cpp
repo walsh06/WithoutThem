@@ -6,6 +6,7 @@
 
 using namespace skills;
 
+/**Creates a worker with a name*/
 Worker::Worker(string name)
 {
     this->name = name;
@@ -16,36 +17,43 @@ Worker::Worker(string name)
     working = true;
 }
 
+/**Returns the worker's name*/
 string Worker::getName()
 {
     return this->name;
 }
 
+/**Returns a pointer to the workers statslist*/
 StatsList Worker::getStats()
 {
     return this->stats;
 }
 
+/**Replaces the old statslist with the new one*/
 void Worker::setStatsList(StatsList stats)
 {
     this->stats = stats;
 }
 
+/**Returns the worker's wage per day*/
 double Worker::getWagePerDay()
 {
     return wagePerDay;
 }
 
+/**Sets the workers wage per day*/
 void Worker::setWagePerDay(double wage)
 {
     wagePerDay = wage;
 }
 
+/**Returns a numerical representation of the workers moral*/
 int Worker::getMoral()
 {
     return moral;
 }
 
+/**Sets the workers moral based on the parameter passed in*/
 void Worker::setMoral(int m)
 {
     if(m = 0)
@@ -66,16 +74,19 @@ void Worker::setMoral(int m)
     }
 }
 
+/**Sets the background of the worker to the object passed in*/
 void Worker::setBackground(WorkerBackground background)
 {
     this->background = background;
 }
 
+/**Returns the workers background object*/
 WorkerBackground Worker::getBackground()
 {
     return this->background;
 }
 
+/**Levels up the workers skills in their statslist*/
 void Worker::levelUp()
 {
     stats.setMachinerySkill(stats.getMachinerySkill() + rand() % 3);
@@ -88,6 +99,7 @@ void Worker::levelUp()
 
 }
 
+/**Adds the xp gained from working to a workers xp*/
 void Worker::gainXP(int xp)
 {
     this->xp += xp;
@@ -97,6 +109,7 @@ void Worker::gainXP(int xp)
     }
 }
 
+/**Returns the enum of the workers skill type.*/
 int Worker::getSkill(skillsType type)
 {
     if(type == skillsType::MECHANIC){
@@ -123,16 +136,19 @@ int Worker::getSkill(skillsType type)
     return -1;
 }
 
+/**Check if the worker is working at a work station*/
 bool Worker::isWorking()
 {
     return working;
 }
 
+/**Set the worker to work at a work station.*/
 void Worker::setWorking(bool working)
 {
     this->working=working;
 }
 
+/**Compares two workers and their stats*/
 string Worker::compareWorkers(Worker* w)
 {
    string compared;
@@ -151,6 +167,7 @@ string Worker::compareWorkers(Worker* w)
 
 }
 
+/**Prints the worker details to a string and returns it*/
 string Worker::printWorker()
 {
     string emp;

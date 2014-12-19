@@ -87,6 +87,23 @@ void DatabaseManipulator::upgradeProduct(string productName)
     query.exec(QString::fromStdString(query_string));
 }
 
+int DatabaseManipulator::getProductCost(string name)
+{
+    QSqlQuery query(*db);
+    string query_string =
+            "SELECT cost FROM products WHERE name = '" + name + "'" ;
+    query.exec(QString::fromStdString(query_string));
+
+    int cost;
+
+    while(query.next())
+    {
+        cost = std::stoi(query.value(0).toString().toStdString());
+    }
+
+    return cost;
+}
+
 
 DatabaseManipulator::~DatabaseManipulator()
 {
