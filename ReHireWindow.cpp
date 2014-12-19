@@ -2,6 +2,7 @@
 #include "ui_ReHireWindow.h"
 #include <iostream>
 
+/**Creates a re-hire pop up window*/
 ReHireWindow::ReHireWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ReHireWindow)
@@ -9,11 +10,13 @@ ReHireWindow::ReHireWindow(QWidget *parent) :
     ui->setupUi(this);
 }
 
+/**Destructor*/
 ReHireWindow::~ReHireWindow()
 {
     delete ui;
 }
 
+/**Hire button is clicked the selected worker is re hired*/
 void ReHireWindow::on_rehireButton_clicked()
 {
     ui->compareWindow->clear();
@@ -27,6 +30,7 @@ void ReHireWindow::on_rehireButton_clicked()
     }
 }
 
+/**Compare button is clicked the selected workers are compared*/
 void ReHireWindow::on_compareWorkers_clicked()
 {
     QString s1, s2;
@@ -49,6 +53,7 @@ void ReHireWindow::on_compareWorkers_clicked()
     emit compareWorkers(str1, str2);
 }
 
+/**Details button is clicked the selected worker's details are shown*/
 void ReHireWindow::on_workerDetailsButton_clicked()
 {
     ui->compareWindow->clear();
@@ -61,6 +66,7 @@ void ReHireWindow::on_workerDetailsButton_clicked()
     }
 }
 
+/**Takes a worker and updates the details window with the workers details*/
 void ReHireWindow::updateDetailsView(Worker* w)
 {
     ui->compareWindow->addItem(QString::fromStdString("Name: " + w->getName()));
@@ -91,11 +97,13 @@ void ReHireWindow::updateDetailsView(Worker* w)
                                + std::to_string(w->getBackground().getNumSiblings())));
 }
 
+/**Adds a string to the compare window*/
 void ReHireWindow::updateComparedWorkersWindow(QString s)
 {
     ui->compareWindow->addItem(s);
 }
 
+/**Populates the fired window with a list of fired workers*/
 void ReHireWindow::updateFiredWorkers(vector<Worker *> firedWorkers)
 {
     while(ui->firedList->count()>0)
@@ -110,6 +118,7 @@ void ReHireWindow::updateFiredWorkers(vector<Worker *> firedWorkers)
     }
 }
 
+/**Populates the employees window with the list of employees*/
 void ReHireWindow::updateEmployees(map<string, Worker*> emps)
 {
     while(ui->employeesList->count()>0)

@@ -1,5 +1,7 @@
 #include "WorkerBackground.h"
 
+
+/**Creates a background object for the worker*/
 WorkerBackground::WorkerBackground()
 {
     this->numChildren = rand() % 6;
@@ -12,21 +14,25 @@ WorkerBackground::WorkerBackground()
     }
 }
 
+/**Returns an int representing the workers age*/
 int WorkerBackground::getAge()
 {
     return this->age;
 }
 
+/**Returns an int representing the number of children*/
 int WorkerBackground::getNumChildren()
 {
     return this->numChildren;
 }
 
+/**Returns an int representing the number of siblings*/
 int WorkerBackground::getNumSiblings()
 {
     return this->numSiblings;
 }
 
+/**Returns if the worker has a spouse or not.*/
 bool WorkerBackground::hasHusband()
 {
     return this->husband;
