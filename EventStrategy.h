@@ -4,6 +4,10 @@
 #include "Factory.h"
 class EventStrategy
 {
+    /*Event Strategy interface
+     * Each event would hold a reference to this interface
+     * unused currently
+    */
 public:
     virtual int update(Factory* factory) = 0;
 };

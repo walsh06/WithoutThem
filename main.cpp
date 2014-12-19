@@ -24,12 +24,6 @@ int main(int argc, char *argv[])
     w.setFixedSize(w.width(),w.height());
     w.show();
 
-    /*DatabaseManipulator *db = new DatabaseManipulator();
-    //
-    db->getProduct("Uniform");
-    db->getProductNames();
-    db->upgradeProduct("Uniform");
-    */
 
     return a.exec();
 

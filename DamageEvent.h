@@ -6,6 +6,7 @@
 
 class DamageEvent : public GameEvent
 {
+    //Event class that causes damage to the factory
 public:
     DamageEvent(string description, int triggerFactor);
     void update(Factory* factory);

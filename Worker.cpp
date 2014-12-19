@@ -89,11 +89,15 @@ WorkerBackground Worker::getBackground()
 /**Levels up the workers skills in their statslist*/
 void Worker::levelUp()
 {
-    stats.setMachinerySkill(stats.getMachinerySkill() + rand() % 3);
-    stats.setTextileSkill(stats.getTextileSkill() + rand() % 3);
-    stats.setFarmingSkill(stats.getFarmingSkill() + rand() % 3);
-    stats.setCarpentrySkill(stats.getCarpentrySkill() + rand() % 3);
-    stats.setBuildingSkill(stats.getFarmingSkill() + rand() % 3);
+    //update a workers stats by a random amount
+    int upgradeAmount = 3;
+    stats.setMachinerySkill(stats.getMachinerySkill() + rand() % upgradeAmount);
+    stats.setTextileSkill(stats.getTextileSkill() + rand() % upgradeAmount);
+    stats.setFarmingSkill(stats.getFarmingSkill() + rand() % upgradeAmount);
+    stats.setCarpentrySkill(stats.getCarpentrySkill() + rand() % upgradeAmount);
+    stats.setBuildingSkill(stats.getFarmingSkill() + rand() % upgradeAmount);
+
+    //update the xp needed for the next level
     xp = xp - nextLevel;
     nextLevel = nextLevel * 2;
 

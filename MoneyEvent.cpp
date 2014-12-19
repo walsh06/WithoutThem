@@ -16,18 +16,24 @@ MoneyEvent::MoneyEvent(string description, int triggerFactor, string triggerChan
     }
 }
 
+/** update the events trigger factor*/
 void MoneyEvent::update(Factory* factory)
 {
     //updateStrategy->update(factory);
 }
 
+/** triggers the event and causes effects */
 void MoneyEvent::trigger(Factory* factory)
 {
+    //print the event to console
     Printer::printEvent(description);
+    //cause pop up
     factory->getGameScreen()->eventPopup(description);
+    //update the money
     factory->setMoney(factory->getMoney() + moneyChange);
 }
 
+/** returns the trigger factor */
 int MoneyEvent::getTriggerFactor()
 {
     return triggerFactor;

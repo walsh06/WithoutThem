@@ -26,26 +26,20 @@ Factory::Factory(GameScreen* gameScreen)
     this->gameScreen = gameScreen;
     this->gameScreen->setStations(stations);
 
-<<<<<<< HEAD
     this->addFloor();
-=======
     /**Connection various buttons to methods*/
->>>>>>> e694275795f2b88fd369ca2ea63cb7a2f89fc905
     connect(gameScreen, SIGNAL(updateWage(double)), this, SLOT(setWage(double)));
     connect(gameScreen, SIGNAL(hireEmps()), this, SLOT(hireNewEmps()));
     connect(gameScreen, SIGNAL(checkExistingWorkerDetails(const QString&)), this, SLOT(checkWorkerDetails(const QString&)));
     connect(gameScreen, SIGNAL(fireWorker(const QString&)), this, SLOT(firingWorker(const QString&)));
     connect(gameScreen, SIGNAL(rehireOldEmps()), this, SLOT(hiringOldEmps()));
     connect(gameScreen, SIGNAL(factoryUpgrade()), this, SLOT(upgradeFactory()));
-<<<<<<< HEAD
 
     connect(gameScreen, SIGNAL(hireButton(int, string)), this, SLOT(addWorkerToStation(int, string)));
     //TEMP
-=======
     connect(gameScreen, SIGNAL(productUpgrade(string)), this, SLOT(upgradeProduct(string)));
 
     /**Updating the gameScreen product lists*/
->>>>>>> e694275795f2b88fd369ca2ea63cb7a2f89fc905
     this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
     this->gameScreen->updateUpdateProductList(Factory::db.getProductNames(factoryLevel));
     gameScreen->setUpgradeCost(factoryUpgradeCost);
@@ -68,14 +62,9 @@ void Factory::startDay()
         station->start();
     }
 
-<<<<<<< HEAD
-    timer->start(60000);
-
-=======
     /**length of the day*/
     timer->start(60000);
     void upgradeFactory();
->>>>>>> e694275795f2b88fd369ca2ea63cb7a2f89fc905
 }
 
 /**Starts the end of the day*/
@@ -224,7 +213,7 @@ void Factory::changeWorkerMoral(int moral)
     }
 }
 
-/**Stops a random work station*/
+/** Temporarily stop a work station */
 void Factory::stopWorkstation()
 {
     if(stations.size())
@@ -235,7 +224,7 @@ void Factory::stopWorkstation()
     }
 }
 
-/**Kills a worker*/
+/** Kill a worker and remove from the game */
 void Factory::killWorker()
 {
     if(workers.size() > 0)
@@ -366,12 +355,15 @@ GameScreen* Factory::getGameScreen()
 /**Upgrades the Factory level*/
 void Factory::upgradeFactory()
 {
+    //check if the upgrade is possible
     if(money > factoryUpgradeCost)
     {
         factoryLevel++;
         money -= factoryUpgradeCost;
         factoryUpgradeCost = factoryUpgradeCost * 2;
-        gameScreen->displayUpgrade(true, factoryLevel, money, factoryUpgradeCost) ;
+        //trigger a pop up of the upgrade
+        gameScreen->displayUpgrade(true, factoryLevel, money, factoryUpgradeCost);
+        //update the available products
         this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
         if(factoryLevel % 5 == 0 && factoryLevel < 21)
         {

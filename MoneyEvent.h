@@ -6,6 +6,7 @@
 
 class MoneyEvent: public GameEvent
 {
+    //Event class that causes a change in money in the factory
 public:
     static const int DAYCHANGE = 1, MORALCHANGE = 2;
     MoneyEvent(string description, int triggerFactor, string triggerChange, double moneyChange);

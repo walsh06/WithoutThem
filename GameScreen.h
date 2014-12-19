@@ -65,11 +65,8 @@ signals:
    void checkExistingWorkerDetails(const QString& s);
    void fireWorker(const QString& s);
    void factoryUpgrade();
-<<<<<<< HEAD
    void hireButton(int currentWS, string workerName);
-=======
    void productUpgrade(string product);
->>>>>>> e694275795f2b88fd369ca2ea63cb7a2f89fc905
 
 private slots:
     void on_setWageBox_valueChanged(double arg1);

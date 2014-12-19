@@ -20,6 +20,7 @@ GameScreen::~GameScreen()
     delete ui;
 }
 
+/** Update the factor statistics */
 void GameScreen::updateFactory(int dayCount, double money, int workerCount)
 {
     ui->days->setText(QString::number(dayCount));
@@ -37,6 +38,7 @@ void GameScreen::updateProductList(vector<string> list)
     }
 }
 
+/** Signal that the wage was changed */
 void GameScreen::updateUpdateProductList(vector<string> list)
 {
     ui->productListUpdateBox->clear();
@@ -46,7 +48,6 @@ void GameScreen::updateUpdateProductList(vector<string> list)
         ui->productListUpdateBox->addItem(QString::fromStdString(s));
     }
 }
-
 
 void GameScreen::on_setWageBox_valueChanged(double arg1)
 {
@@ -173,6 +174,7 @@ void GameScreen::setStations(vector<WorkStation*>  &stations)
     this->stations = stations;
 }
 
+/** Open a pop up when an event occurs */
 void GameScreen::eventPopup(string event)
 {
     QMessageBox::information(
@@ -181,6 +183,7 @@ void GameScreen::eventPopup(string event)
         QString::fromStdString(event));
 }
 
+/** Open a pop up at the end of the day and update finances*/
 void GameScreen::endDayPopup(double wages, double gross, double money)
 {
     this->wages = wages;
@@ -201,18 +204,8 @@ void GameScreen::endDayPopup(double wages, double gross, double money)
         QString::fromStdString("\n Net Income: ") + QString::number(income) +
         QString::fromStdString("\n Money: ") + QString::number(money)
                 );
-    /*QMessageBox box;
-    box.setText(QString::fromStdString("Gross Income: ") + QString::number(gross) +
-                QString::fromStdString("\n Wages: ") + QString::number(wages) +
-                QString::fromStdString("\n-----------------") +
-                QString::fromStdString("\n Net Income: ") + QString::number(income) +
-                QString::fromStdString("\n Money: ") + QString::number(money));
-    box.setWindowTitle("End Of Day");
-    box.exec();*/
 }
 
-    //Breaks.
-    //stations[currentWS]->setProduct(ui->productList->currentText().toStdString());
 
 void GameScreen::on_manufactureButton_clicked()
 {
@@ -292,7 +285,7 @@ void GameScreen::on_rehireWorkerButton_clicked()
     emit rehireOldEmps();
 }
 
-
+/** Open a pop up that informs the user of their upgrade outcome */
 void GameScreen::displayUpgrade(bool success, int level, double money, double upgradeCost)
 {
     if(success)
@@ -322,6 +315,7 @@ void GameScreen::setUpgradeCost(double cost)
     ui->upgradeAmount->setText(QString::number(cost));
 }
 
+/** Signal that the factory upgrade button was clicked */
 void GameScreen::on_upgradeFactory_clicked()
 {
     emit factoryUpgrade();
