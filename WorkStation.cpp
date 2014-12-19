@@ -21,16 +21,8 @@ WorkStation::WorkStation()
 
 WorkStation::WorkStation(string s)
 {
-    this->product = Factory::db.getProduct(s);
-    numWorkers = 0;
-    maxWorkers = 4;
-    dailyCount = 0;
-    srand(time(0));
-    remainingTime = 0;
-
-    this->timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(addProduct()));
-    working = false;
+    WorkStation();
+    this->setProduct(s);
 }
 
 

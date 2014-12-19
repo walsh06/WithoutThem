@@ -65,5 +65,8 @@ StatsList StatsList::operator+(const StatsList& stats)
     StatsList newstats;
     newstats.machinery = this->machinery + stats.machinery;
     newstats.textile = this->textile + stats.textile;
+    newstats.farming = this->farming + stats.farming;
+    newstats.carpentry = this->carpentry + stats.carpentry;
+    newstats.building = this->building + stats.building;
     return newstats;
 }

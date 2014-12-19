@@ -32,6 +32,8 @@ private:
      int building;
      int carpentry;
      int farming;
+
+
 };
 
 #endif // STATSLIST_H
