@@ -1,5 +1,6 @@
 #include "DatabaseManipulator.h"
 
+/* Opens the database */
 DatabaseManipulator::DatabaseManipulator()
 {
     db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
@@ -8,6 +9,7 @@ DatabaseManipulator::DatabaseManipulator()
 
 }
 
+/* Query to get the product given the name */
 Product* DatabaseManipulator::getProduct(string name)
 {
     QSqlQuery query(*db);
@@ -20,7 +22,7 @@ Product* DatabaseManipulator::getProduct(string name)
     return getProduct(query.value(0).toString().toStdString(), query.value(1).toInt()) ;
 }
 
-
+/* Query to get the product given the table and level*/
 Product* DatabaseManipulator::getProduct(string table, int level)
 {
 
@@ -44,6 +46,7 @@ Product* DatabaseManipulator::getProduct(string table, int level)
     return p;
 }
 
+/*Query to get the name of every product*/
 vector<string> DatabaseManipulator::getProductNames()
 {
     QSqlQuery query(*db);
@@ -61,6 +64,8 @@ vector<string> DatabaseManipulator::getProductNames()
     return list;
 }
 
+
+/*Query to get the name of every product under a given level*/
 vector<string> DatabaseManipulator::getProductNames(int level)
 {
     QSqlQuery query(*db);
@@ -78,6 +83,8 @@ vector<string> DatabaseManipulator::getProductNames(int level)
     return list;
 }
 
+
+/*Query to upgrade a product*/
 void DatabaseManipulator::upgradeProduct(string productName)
 {
     QSqlQuery query(*db);
@@ -87,6 +94,8 @@ void DatabaseManipulator::upgradeProduct(string productName)
     query.exec(QString::fromStdString(query_string));
 }
 
+
+/*Query to get the  cost of a product given the name*/
 int DatabaseManipulator::getProductCost(string name)
 {
     QSqlQuery query(*db);
@@ -104,7 +113,7 @@ int DatabaseManipulator::getProductCost(string name)
     return cost;
 }
 
-
+/*Destructor closes db*/
 DatabaseManipulator::~DatabaseManipulator()
 {
     db->close();
