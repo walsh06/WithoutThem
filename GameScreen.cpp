@@ -35,6 +35,16 @@ void GameScreen::updateProductList(vector<string> list)
     }
 }
 
+void GameScreen::updateUpdateProductList(vector<string> list)
+{
+    ui->productListUpdateBox->clear();
+    ui->productListUpdateBox->addItem("Choose Product");
+    for(auto &s : list)
+    {
+        ui->productListUpdateBox->addItem(QString::fromStdString(s));
+    }
+}
+
 
 void GameScreen::on_setWageBox_valueChanged(double arg1)
 {
@@ -301,4 +311,11 @@ void GameScreen::setUpgradeCost(double cost)
 void GameScreen::on_upgradeFactory_clicked()
 {
     emit factoryUpgrade();
+}
+
+void GameScreen::on_updateProductsButton_clicked()
+{
+    string product = ui->productListUpdateBox->currentText().toStdString();
+    emit productUpgrade(product);
+    std::cout<< product << std::endl;
 }
