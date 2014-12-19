@@ -76,13 +76,8 @@ public slots:
     void setWage(double wage);
     void addNewHire(Worker* w);
     void addingOldWorker(const QString& s);
-<<<<<<< HEAD
-
     void addWorkerToStation(int currentWS, string name);
-
-=======
     void upgradeProduct(string name);
->>>>>>> e694275795f2b88fd369ca2ea63cb7a2f89fc905
     void upgradeFactory();
 
 private slots:

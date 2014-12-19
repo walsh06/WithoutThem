@@ -26,26 +26,20 @@ Factory::Factory(GameScreen* gameScreen)
     this->gameScreen = gameScreen;
     this->gameScreen->setStations(stations);
 
-<<<<<<< HEAD
     this->addFloor();
-=======
     /**Connection various buttons to methods*/
->>>>>>> e694275795f2b88fd369ca2ea63cb7a2f89fc905
     connect(gameScreen, SIGNAL(updateWage(double)), this, SLOT(setWage(double)));
     connect(gameScreen, SIGNAL(hireEmps()), this, SLOT(hireNewEmps()));
     connect(gameScreen, SIGNAL(checkExistingWorkerDetails(const QString&)), this, SLOT(checkWorkerDetails(const QString&)));
     connect(gameScreen, SIGNAL(fireWorker(const QString&)), this, SLOT(firingWorker(const QString&)));
     connect(gameScreen, SIGNAL(rehireOldEmps()), this, SLOT(hiringOldEmps()));
     connect(gameScreen, SIGNAL(factoryUpgrade()), this, SLOT(upgradeFactory()));
-<<<<<<< HEAD
 
     connect(gameScreen, SIGNAL(hireButton(int, string)), this, SLOT(addWorkerToStation(int, string)));
     //TEMP
-=======
     connect(gameScreen, SIGNAL(productUpgrade(string)), this, SLOT(upgradeProduct(string)));
 
     /**Updating the gameScreen product lists*/
->>>>>>> e694275795f2b88fd369ca2ea63cb7a2f89fc905
     this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
     this->gameScreen->updateUpdateProductList(Factory::db.getProductNames(factoryLevel));
     gameScreen->setUpgradeCost(factoryUpgradeCost);
@@ -68,14 +62,9 @@ void Factory::startDay()
         station->start();
     }
 
-<<<<<<< HEAD
-    timer->start(60000);
-
-=======
     /**length of the day*/
     timer->start(60000);
     void upgradeFactory();
->>>>>>> e694275795f2b88fd369ca2ea63cb7a2f89fc905
 }
 
 /**Starts the end of the day*/
