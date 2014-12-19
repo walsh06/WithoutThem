@@ -35,12 +35,14 @@ public:
     void eventPopup(string event);
     void displayUpgrade(bool success, int level, double money, double upgradeCost);
 
+    int getCurrentWS();
+    string getCurrentHire();
     void setUpgradeCost(double cost);
 
 private slots:
-    void on_pushButton_2_clicked();
+    void on_upButton_clicked();
 
-    void on_pushButton_clicked();
+    void on_downButton_clicked();
 
     void updateWSView();
 
@@ -52,6 +54,7 @@ public slots:
     void updateFactory(int dayCount, double money, int workerCount);
     void updateWorkers(std::map<string, Worker*> workers);
     void updateProductList(vector<string> list);
+    void updateUpdateProductList(vector<string> list);
 
     void updateTimer();
 
@@ -62,6 +65,8 @@ signals:
    void checkExistingWorkerDetails(const QString& s);
    void fireWorker(const QString& s);
    void factoryUpgrade();
+   void hireButton(int currentWS, string workerName);
+   void productUpgrade(string product);
 
 private slots:
     void on_setWageBox_valueChanged(double arg1);
@@ -80,11 +85,14 @@ private slots:
 
     void on_upgradeFactory_clicked();
 
+    void on_updateProductsButton_clicked();
+
 private:
     Ui::GameScreen *ui;
     QButtonGroup* wsButtons;
     void initWSButtons();
     int currentWS = 0;
+    int currentFloor = 0;
 
     vector<WorkStation*> stations;
 

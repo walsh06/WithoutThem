@@ -23,12 +23,16 @@ class WorkStation : public QObject
     Q_OBJECT
 
 public:
+
+    WorkStation();
+
     WorkStation(Product* p);
 
     WorkStation(string s);
 
 
     void assignWorker(Worker* worker);
+    void assignWorker(string workerName);
     void removeWorker(Worker* worker);
     void removeWorker(string workerName);
     int getDailyCount();

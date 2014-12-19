@@ -4,7 +4,8 @@
 namespace skills
 {
     enum skillsType {
-        SEAMSTRESS = 0,
+        NONE = 0,
+        SEAMSTRESS ,
         MECHANIC,
         FARMER,
         BUILDER,
@@ -12,7 +13,7 @@ namespace skills
         SIZE_OF_SKILLS
     };
     static const char* skillNames[SIZE_OF_SKILLS] = {
-        "Seamstress", "Mechanic", "Farmer",
+        "None", "Seamstress", "Mechanic", "Farmer",
         "Builder", "Carpenter"
     };
 }

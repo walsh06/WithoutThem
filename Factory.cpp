@@ -5,7 +5,10 @@
 #include "Popup.h"
 
 
+/**The Database helper class*/
 DatabaseManipulator Factory::db;
+
+/**creates a new Factory object with a gameScreen pointer*/
 Factory::Factory(GameScreen* gameScreen)
 {
 
@@ -22,17 +25,27 @@ Factory::Factory(GameScreen* gameScreen)
     srand(time(0));
     this->gameScreen = gameScreen;
     this->gameScreen->setStations(stations);
+
+    this->addFloor();
+    /**Connection various buttons to methods*/
     connect(gameScreen, SIGNAL(updateWage(double)), this, SLOT(setWage(double)));
     connect(gameScreen, SIGNAL(hireEmps()), this, SLOT(hireNewEmps()));
     connect(gameScreen, SIGNAL(checkExistingWorkerDetails(const QString&)), this, SLOT(checkWorkerDetails(const QString&)));
     connect(gameScreen, SIGNAL(fireWorker(const QString&)), this, SLOT(firingWorker(const QString&)));
     connect(gameScreen, SIGNAL(rehireOldEmps()), this, SLOT(hiringOldEmps()));
     connect(gameScreen, SIGNAL(factoryUpgrade()), this, SLOT(upgradeFactory()));
+
+    connect(gameScreen, SIGNAL(hireButton(int, string)), this, SLOT(addWorkerToStation(int, string)));
     //TEMP
+    connect(gameScreen, SIGNAL(productUpgrade(string)), this, SLOT(upgradeProduct(string)));
+
+    /**Updating the gameScreen product lists*/
     this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
+    this->gameScreen->updateUpdateProductList(Factory::db.getProductNames(factoryLevel));
     gameScreen->setUpgradeCost(factoryUpgradeCost);
 }
 
+/**Stats a day in the factory*/
 void Factory::startDay()
 {
     dayCount++;
@@ -49,10 +62,12 @@ void Factory::startDay()
         station->start();
     }
 
-    timer->start(6000);
+    /**length of the day*/
+    timer->start(60000);
     void upgradeFactory();
 }
 
+/**Starts the end of the day*/
 void Factory::endDay()
 {
     for(auto &station : stations)
@@ -63,7 +78,6 @@ void Factory::endDay()
     money += calcNetIncome();
 
 
-   //"TEMP - Testing - restart day - should be done on button click or something" << endl;
     timer->stop();
     gameScreen->endDayPopup(calcWages(), calcGrossIncome(), money);
     // Possibly move to startDay()
@@ -75,16 +89,19 @@ void Factory::endDay()
     startDay();
 }
 
+/**Returns the money in the Factory*/
 double Factory::getMoney()
 {
     return money;
 }
 
+/**Set the amount of money in the factory*/
 void Factory::setMoney(double money)
 {
     this->money = money;
 }
 
+/**Calculate the Gross Income of the factory*/
 double Factory::calcGrossIncome()
 {
     double dailyIncome = 0.00;
@@ -97,6 +114,7 @@ double Factory::calcGrossIncome()
     return dailyIncome;
 }
 
+/**Calculate the wages of all the employees*/
 double Factory::calcWages()
 {
     double dailyWages = 0.00;
@@ -108,6 +126,7 @@ double Factory::calcWages()
     return dailyWages;
 }
 
+/**Calculate the Net income of the factory*/
 double Factory::calcNetIncome()
 {
     double net = calcGrossIncome() - calcWages();
@@ -115,6 +134,14 @@ double Factory::calcNetIncome()
     return net;
 }
 
+void Factory::addFloor()
+{
+    addStation(new WorkStation());
+    addStation(new WorkStation());
+    addStation(new WorkStation());
+}
+
+/**Add a new work station to the factory*/
 void Factory::addStation(WorkStation* station)
 {
     connect(station, SIGNAL(updateWS()), gameScreen, SLOT(updateWSView()));
@@ -124,6 +151,7 @@ void Factory::addStation(WorkStation* station)
     this->gameScreen->setStations(stations);
 }
 
+/**Removes the last station in the list of work stations*/
 void Factory::removeStation(WorkStation* station)
 {
     //Moves station to the end, erases last station
@@ -132,36 +160,46 @@ void Factory::removeStation(WorkStation* station)
     this->gameScreen->setStations(stations);
 }
 
+/**Add a new worker to the factory's worker list*/
 void Factory::addWorker(Worker* worker)
 {
     workers[worker->getName()]=worker;
 }
 
-void Factory::removeWorker(Worker* worker)
+void Factory::addWorkerToStation(int currentWS, string worker)
 {
-    for(auto &station: stations)
-    {
-        station->removeWorker(worker);
-    }
-
-    workers.erase(worker->getName());
+    stations[currentWS]->assignWorker(workers[worker]);
 }
 
-void Factory::removeWorker(string workerName)
+void Factory::removeWorkerFromAnyStation(string workername)
 {
     for(auto &station: stations)
     {
-        station->removeWorker(workerName);
+        station->removeWorker(workername);
     }
+}
+
+/**Remove a worker for the Factory's worker list given the worker.*/
+void Factory::removeWorker(Worker* worker)
+{
+    removeWorker(worker->getName());
+
+}
+
+/**Remove a worker from the Factory's worker list given a worker name*/
+void Factory::removeWorker(string workerName)
+{
+    removeWorkerFromAnyStation(workerName);
     workers.erase(workerName);
 }
 
+/**Returns the day count*/
 int Factory::getDayCount()
 {
     return dayCount;
 }
 
-/** Change the morale of a random worker */
+/**Changes the worker moral to 'moral'*/
 void Factory::changeWorkerMoral(int moral)
 {
     if(workers.size())
@@ -201,7 +239,7 @@ void Factory::killWorker()
 
 }
 
-/** Update the wage of employees */
+/**Sets the wage of all employees*/
 void Factory::setWage(double wage)
 {
     for(auto &worker : workers)
@@ -210,6 +248,7 @@ void Factory::setWage(double wage)
     }
 }
 
+/**Creates new employees in a pop up*/
 void Factory::hireNewEmps()
 {
     int i, num = (rand() % 3) + 2;
@@ -225,6 +264,7 @@ void Factory::hireNewEmps()
     popup->exec();
 }
 
+/**Creates a pop up with fired employees( to re-hire them)*/
 void Factory::addingOldWorker(const QString& s)
 {
     int i = findWorkerByName(firedEmps, s);
@@ -236,6 +276,7 @@ void Factory::addingOldWorker(const QString& s)
 
 }
 
+/**Adds a new employee to the Factory's worker list*/
 void Factory::addNewHire(Worker* w)
 {
     addWorker(w);
@@ -244,9 +285,11 @@ void Factory::addNewHire(Worker* w)
 
 }
 
+/**Re-hires a fired employee*/
 void Factory::hiringOldEmps()
 {
     rehireWindow = new ReHireWindow();
+    /**Connecting various buttons to methods*/
     connect(rehireWindow,SIGNAL(rehiring(const QString&)),this, SLOT(addingOldWorker(const QString&)));
     connect(rehireWindow,SIGNAL(checkFiredWorkerDetails(const QString&)), this, SLOT(findFiredWorker(const QString&)));
     connect(rehireWindow,SIGNAL(compareWorkers(const QString&, const QString&)), this, SLOT(comparingWorkers(const QString&, const QString&)));
@@ -255,6 +298,7 @@ void Factory::hiringOldEmps()
     rehireWindow->exec();
 }
 
+/**Compares two workers to each other*/
 void Factory::comparingWorkers(const QString& s1, const QString& s2)
 {
     int i = findWorkerByName(firedEmps, s1);
@@ -265,7 +309,7 @@ void Factory::comparingWorkers(const QString& s1, const QString& s2)
     rehireWindow->updateComparedWorkersWindow(QString::fromStdString(compared));
 }
 
-
+/**Finds a fired worker by a name given 's'*/
 void Factory::findFiredWorker(const QString& s)
 {
     int i = findWorkerByName(firedEmps, s);
@@ -273,25 +317,24 @@ void Factory::findFiredWorker(const QString& s)
     rehireWindow->updateDetailsView(w);
 }
 
-
+/**Displays the details of a worker*/
 void Factory::checkWorkerDetails(const QString& s)
 {
-    //int i = findWorkerByName(workers, s);
     Worker* w = workers[s.toStdString()];
     gameScreen->displayWorkerDetails(w);
 
 }
 
+/**Fires an unwanted worker*/
 void Factory::firingWorker(const QString& s)
 {
-    //int i = findWorkerByName(workers,s);
-
     workers[s.toStdString()]->setMoral(-3);
     firedEmps.push_back(workers[s.toStdString()]);
     removeWorker(s.toStdString());
     gameScreen->updateWorkers(workers);
 }
 
+/**Finds a worker in 'list' given a name 's'*/
 int Factory::findWorkerByName(vector<Worker*> list, const QString& s)
 {
     int i = 0;
@@ -303,13 +346,13 @@ int Factory::findWorkerByName(vector<Worker*> list, const QString& s)
     return i;
 }
 
-/** Return the game Screen */
+/**Returns the pointer to the game Screen*/
 GameScreen* Factory::getGameScreen()
 {
     return gameScreen;
 }
 
-/** Upgrade the factory level */
+/**Upgrades the Factory level*/
 void Factory::upgradeFactory()
 {
     //check if the upgrade is possible
@@ -322,9 +365,18 @@ void Factory::upgradeFactory()
         gameScreen->displayUpgrade(true, factoryLevel, money, factoryUpgradeCost);
         //update the available products
         this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
+        if(factoryLevel % 5 == 0 && factoryLevel < 21)
+        {
+            addFloor();
+        }
     }
     else
     {
         gameScreen->displayUpgrade(false, factoryLevel, money, factoryUpgradeCost);
     }
+}
+
+/**updates the level of a selected product*/
+void Factory::upgradeProduct(string name){
+        Factory::db.upgradeProduct(name);
 }

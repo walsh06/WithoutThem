@@ -9,6 +9,8 @@ GameScreen::GameScreen(QWidget *parent) :
     ui->setupUi(this);
     initWSButtons();
 
+    currentFloor = 1;
+
 
 
 }
@@ -37,6 +39,16 @@ void GameScreen::updateProductList(vector<string> list)
 }
 
 /** Signal that the wage was changed */
+void GameScreen::updateUpdateProductList(vector<string> list)
+{
+    ui->productListUpdateBox->clear();
+    ui->productListUpdateBox->addItem("Choose Product");
+    for(auto &s : list)
+    {
+        ui->productListUpdateBox->addItem(QString::fromStdString(s));
+    }
+}
+
 void GameScreen::on_setWageBox_valueChanged(double arg1)
 {
     emit updateWage(arg1);
@@ -63,16 +75,26 @@ void GameScreen::updateWorkers(std::map<string, Worker*> workers)
 }
 
 
-void GameScreen::on_pushButton_2_clicked()
+void GameScreen::on_upButton_clicked()
 {
-
-    ui->stackedWidget->setCurrentIndex(ui->stackedWidget->currentIndex() + 1);
+    if (currentFloor + 1 <= stations.size() / 3) {
+        currentFloor++;
+        ui->stackedWidget->setCurrentIndex(ui->stackedWidget->currentIndex() + 1);
+        ui->floorlabel->setText(QString::fromStdString("FLOOR - " +
+                                                       to_string(currentFloor)));
+    }
 }
 
 
-void GameScreen::on_pushButton_clicked()
+void GameScreen::on_downButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(ui->stackedWidget->currentIndex() - 1);
+    if(currentFloor - 1 > 0) {
+
+        currentFloor--;
+        ui->stackedWidget->setCurrentIndex(ui->stackedWidget->currentIndex() - 1);
+        ui->floorlabel->setText(QString::fromStdString("FLOOR - " +
+                                                       to_string(currentFloor)));
+    }
 }
 
 void GameScreen::initWSButtons()
@@ -115,6 +137,7 @@ void GameScreen::updateWSView()
         int daily = stations[currentWS]->getDailyCount();
         this->ui->prodcount->setText(QString::fromStdString("Products Generated Today: " +
                                                               to_string(daily)));
+
 
         string item = "Manufacturing : " + stations[currentWS]->getProduct()->getName();
         ui->manufactureLabel->setText(QString::fromStdString(item));
@@ -181,28 +204,19 @@ void GameScreen::endDayPopup(double wages, double gross, double money)
         QString::fromStdString("\n Net Income: ") + QString::number(income) +
         QString::fromStdString("\n Money: ") + QString::number(money)
                 );
-    /*QMessageBox box;
-    box.setText(QString::fromStdString("Gross Income: ") + QString::number(gross) +
-                QString::fromStdString("\n Wages: ") + QString::number(wages) +
-                QString::fromStdString("\n-----------------") +
-                QString::fromStdString("\n Net Income: ") + QString::number(income) +
-                QString::fromStdString("\n Money: ") + QString::number(money));
-    box.setWindowTitle("End Of Day");
-    box.exec();*/
 }
 
-    //Breaks.
-    //stations[currentWS]->setProduct(ui->productList->currentText().toStdString());
 
 void GameScreen::on_manufactureButton_clicked()
 {
     if(ui->productList->currentIndex() > 0)
         stations[currentWS]->setProduct(ui->productList->currentText().toStdString());
+    updateWSView();
 }
 
 void GameScreen::on_hireButton_clicked()
 {
-
+    emit hireButton(currentWS, ui->hireList->currentText().toStdString());
 }
 
 void GameScreen::on_generateWorker_clicked()
@@ -305,4 +319,11 @@ void GameScreen::setUpgradeCost(double cost)
 void GameScreen::on_upgradeFactory_clicked()
 {
     emit factoryUpgrade();
+}
+
+void GameScreen::on_updateProductsButton_clicked()
+{
+    string product = ui->productListUpdateBox->currentText().toStdString();
+    emit productUpgrade(product);
+    std::cout<< product << std::endl;
 }

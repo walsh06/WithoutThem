@@ -20,7 +20,6 @@ MoneyEvent::MoneyEvent(string description, int triggerFactor, string triggerChan
 void MoneyEvent::update(Factory* factory)
 {
     //updateStrategy->update(factory);
-    //cout << "UPDATE" << endl;
 }
 
 /** triggers the event and causes effects */

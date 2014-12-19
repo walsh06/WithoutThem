@@ -297,6 +297,35 @@
       <string>0</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="updateProductsButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>510</y>
+       <width>161</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Update Products</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="productListUpdateBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>480</y>
+       <width>161</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="maxVisibleItems">
+      <number>50</number>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="WorkerTab">
     <attribute name="title">
@@ -411,7 +440,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -443,7 +472,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -469,7 +498,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -497,7 +526,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -523,7 +552,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -549,7 +578,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -577,7 +606,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -603,7 +632,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -629,7 +658,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -657,7 +686,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -683,7 +712,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -709,7 +738,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -737,7 +766,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -763,7 +792,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -789,7 +818,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/ws/ws_empty.png</normaloff>:/ws/ws_empty.png</iconset>
      </property>
      <property name="iconSize">
@@ -801,7 +830,7 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="upButton">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -811,20 +840,20 @@
     </rect>
    </property>
    <property name="text">
-    <string>up</string>
+    <string>UP</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="downButton">
    <property name="geometry">
     <rect>
-     <x>490</x>
+     <x>480</x>
      <y>0</y>
      <width>99</width>
      <height>27</height>
     </rect>
    </property>
    <property name="text">
-    <string>down</string>
+    <string>DOWN</string>
    </property>
   </widget>
   <widget class="QWidget" name="horizontalLayoutWidget">
@@ -1137,7 +1166,22 @@
     </item>
    </layout>
   </widget>
+  <widget class="QLabel" name="floorlabel">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>6</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>FLOOR - 1</string>
+   </property>
+  </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>
