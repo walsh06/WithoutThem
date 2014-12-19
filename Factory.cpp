@@ -373,15 +373,10 @@ void Factory::upgradeFactory()
         factoryUpgradeCost = factoryUpgradeCost * 2;
         gameScreen->displayUpgrade(true, factoryLevel, money, factoryUpgradeCost) ;
         this->gameScreen->updateProductList(Factory::db.getProductNames(factoryLevel));
-<<<<<<< HEAD
-
         if(factoryLevel % 5 == 0 && factoryLevel < 21)
         {
             addFloor();
         }
-=======
-        this->gameScreen->updateUpdateProductList(Factory::db.getProductNames(factoryLevel));
->>>>>>> e694275795f2b88fd369ca2ea63cb7a2f89fc905
     }
     else
     {
