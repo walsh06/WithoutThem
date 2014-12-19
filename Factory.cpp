@@ -324,5 +324,12 @@ void Factory::upgradeFactory()
 }
 
 void Factory::upgradeProduct(string name){
-    Factory::db.upgradeProduct(name);
+    if(name != "Choose Product"){
+        int cost = Factory::db.getProductCost(name);
+        std::cout<< name;
+        std::cout<< " costs ";
+        std::cout<< cost << std::endl;
+        this->money = money - (double)cost;
+        Factory::db.upgradeProduct(name);
+    }
 }
